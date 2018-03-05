@@ -18,7 +18,7 @@ exports.isStudent = function(req, res, next){
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
     model.User.findOne({
-        where: { unikey: req.user.unikey }
+        where: { username: req.user.username }
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: user not found in database")); }
 
@@ -34,7 +34,7 @@ exports.isAdmin = function(req, res, next){
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
     model.User.findOne({
-        where: { unikey: req.user.unikey }
+        where: { username: req.user.username }
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: admin not found in database")); }
 

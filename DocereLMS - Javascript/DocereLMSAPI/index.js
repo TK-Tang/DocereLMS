@@ -9,18 +9,14 @@ const App = express();
 const Models = require("./models");
 const AuthenticationService = require("./middleware/authentication-service.js");
 
-app.use(session({ secret: "secret_seed", 
-    resave: true,
-    saveUninitialized: false,
-    secure: false,
-    rolling: true }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(session({ secret: "secret_seed", resave: true, saveUninitialized: false, secure: false, rolling: true }));
+app.use(Passport.initialize());
+app.use(Passport.session());
+app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.json());
 app.use(AuthenticationService.isStudent);
 
-const AuthenticationRoute = require("./routes/authentication-router.js")(app, passport);
-
+const AuthenticationRouter = require("./routes/authentication-router.js")(App, Passport);
+require('./passport/passport.js')(Passport, Models.Users);
 
