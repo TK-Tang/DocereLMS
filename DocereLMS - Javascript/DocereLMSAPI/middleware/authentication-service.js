@@ -9,6 +9,11 @@ exports.isAuthenticated = function (req, res, next){
     res.status(200).send(Responses.success("Redirect request as it has no token."));
 }
 
+exports.isNotAuthenticated = function (req, res, next){
+    if(!req.isAuthenticated()){ return next(); }
+    res.status(200).send(Responses.success("Redirect request as it has a token."));
+}
+
 exports.isStudent = function(req, res, next){
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
