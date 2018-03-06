@@ -15,6 +15,9 @@ exports.isNotAuthenticated = function (req, res, next){
 }
 
 exports.isStudent = function(req, res, next){
+    if(req.path === '/auth/signin' || req.path === '/auth/signup') {
+        return next();
+    }
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
     model.User.findOne({

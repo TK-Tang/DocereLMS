@@ -1,5 +1,5 @@
 const AuthenticationController = require("../controllers/authentication-controller.js");
-const AuthenticationService = require("../middlewares/authentication-service");
+const AuthenticationService = require("../middleware/authentication-service");
 const Responses = require("../helpers/response");
 
 module.exports = function(app, passport){
@@ -9,7 +9,7 @@ module.exports = function(app, passport){
     });
 
     app.get("/auth/signin", AuthenticationService.isNotAuthenticated, AuthenticationController.signIn);
-    app.post("/auth/signin", AuthenticationService.isAuthenticated, passport.authenticate("local-sign"), (req, res) => {
+    app.post("/auth/signin", AuthenticationService.isAuthenticated, passport.authenticate("local-signin"), (req, res) => {
         res.status(200).send(Responses.success("success"));
     })
 
