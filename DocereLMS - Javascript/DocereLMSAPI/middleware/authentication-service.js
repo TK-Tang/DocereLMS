@@ -15,17 +15,30 @@ exports.isNotAuthenticated = function (req, res, next){
 }
 
 exports.isStudent = function(req, res, next){
-    if(req.path === '/auth/signin' || req.path === '/auth/signup') {
-        return next();
+
+    if (!req.isAuthenticated()){
+        switch(req.path){
+            case "/auth/signin":
+                return next();
+                break;
+            case "/auth/signup":
+                return next();
+                break;
+    
+            if (req.path.substring(0,6) === "/invite"){
+                return next();
+            }
+        }
     }
+
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
-    model.User.findOne({
-        where: { username: req.user.username }
+    Models.Users.findOne({
+        where: { email: req.body.email }
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: user not found in database")); }
 
-        if(user.status === "student"){
+        if(user.status === ""){
             return next();
         } else {
             res.status(400).send(Responses.fail("Authentication failure: User not a student role"));
@@ -36,8 +49,8 @@ exports.isStudent = function(req, res, next){
 exports.isAdmin = function(req, res, next){
     if(!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
-    model.User.findOne({
-        where: { username: req.user.username }
+    Models.Users.findOne({
+        where: { email: req.user.username }
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: admin not found in database")); }
 

@@ -9,7 +9,7 @@ module.exports = function(app, passport){
     });
 
     app.get("/auth/signin", AuthenticationService.isNotAuthenticated, AuthenticationController.signIn);
-    app.post("/auth/signin", AuthenticationService.isAuthenticated, passport.authenticate("local-signin"), (req, res) => {
+    app.post("/auth/signin", AuthenticationService.isNotAuthenticated, passport.authenticate("local-signin"), (req, res) => {
         res.status(200).send(Responses.success("success"));
     })
 
