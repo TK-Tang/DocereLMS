@@ -27,5 +27,11 @@ fs.readdirSync(__dirname).filter(function(file){
 db.sequelizeCredentials = sequelizeCredentials;
 db.Sequelize = Sequelize;
 db.Users = require("./users")(sequelizeCredentials, Sequelize);
+db.Roles = require("./roles")(sequelizeCredentials, Sequelize);
+db.Courses = require("./courses")(sequelizeCredentials, Sequelize);
+
+db.Roles.belongsTo(db.Users, { foreignKey: 'role_id' });
+db.Users.belongsToMany(db.Courses, { through: 'UserCourses', foreighKey: 'user_id'});
+db.Courses.belongsToMany(db.Users, { through: 'UserCourses', foreignKey: "course_id"});
 
 module.exports = db;

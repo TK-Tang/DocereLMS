@@ -1,0 +1,47 @@
+module.exports = function(sequelize, Sequelize) {
+    const Courses = sequelize.define("Courses", {
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER,
+            field: "course_id"
+        },
+
+        name: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+
+        coordinator: {
+            type: Sequelize.STRING
+        },
+
+        pictureLink: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+
+        allowInvitations: {
+            type: Sequelize.BOOLEAN,
+        }
+
+    });
+
+    Courses.insert = async function(
+        name,
+        coordinator,
+        pictureLink,
+        allowInvitations
+    ){
+        const course = {
+            name : name,
+            coordinator: coordinator,
+            pictureLink: pictureLink,
+            allowInvitations: allowInvitations
+        };
+
+        return await this.create(course);
+    }
+
+    return Courses;
+};

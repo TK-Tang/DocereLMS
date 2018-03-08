@@ -21,8 +21,8 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: false
         },
 
-        last_login: {
-            type: Sequelize.DATE
+        profileLinkn: {
+            type: Sequelize.STRING
         },
 
         status: {
@@ -35,6 +35,24 @@ module.exports = function(sequelize, Sequelize) {
             defaultValue: "active"
         }
     });
+
+    Users.insert = async function(
+        email,
+        username,
+        password,
+        status,
+        activation
+    ){
+        const user = {
+            email: email,
+            username: username,
+            password: password,
+            status: status,
+            activation
+        };
+
+        return await this.create(user);
+    }
 
     return Users;
 };
