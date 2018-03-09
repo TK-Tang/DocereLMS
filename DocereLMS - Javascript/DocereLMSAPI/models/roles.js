@@ -1,31 +1,21 @@
+
+
 module.exports = function(sequelize, Sequelize) {
     const Roles = sequelize.define("Roles", {
         id: {
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
-            field: "course_id"
-        }
+            field: "role_id"
+        },
 
+        rank: {
+            type: Sequelize.STRING
+        }
     });
 
-    name: {
-        Sequelize.STRING
-    }
-
-    Roles.insert = async function(
-        name,
-        coordinator,
-        pictureLink,
-        allowInvitations
-    ){
-        const user = {
-            name : name,
-            coordinator: coordinator,
-            pictureLink: pictureLink,
-            allowInvitations: allowInvitations
-        };
-
+    Roles.insert = async function(rank){
+        const role = { rank : rank};
         return await this.create(role);
     }
 

@@ -1,4 +1,4 @@
-var bCrypt = require("bcrypt-nodejs");
+const bCrypt = require("bcrypt-nodejs");
 
 module.exports = function(passportApp, userModel){
     var LocalStrategy = require('passport-local').Strategy;
@@ -88,6 +88,9 @@ module.exports = function(passportApp, userModel){
                         message: "Incorrect password"
                     });
                 }
+
+                var userinfo = user.get();
+                return done(null, userinfo);
             }).catch(function(err){
                 console.log("Error: ", err);
                 return done(null, false, {message: "Error with signing in"});

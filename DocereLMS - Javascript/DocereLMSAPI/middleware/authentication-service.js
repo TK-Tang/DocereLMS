@@ -19,9 +19,8 @@ exports.isStudent = function(req, res, next){
     if (!req.isAuthenticated()){
         switch(req.path){
             case "/auth/signin":
-                return next();
-                break;
             case "/auth/signup":
+            case "/auth/signout":
                 return next();
                 break;
     
@@ -38,11 +37,11 @@ exports.isStudent = function(req, res, next){
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: user not found in database")); }
 
-        if(user.status === ""){
-            return next();
-        } else {
-            res.status(400).send(Responses.fail("Authentication failure: User not a student role"));
-        }
+        // if(user.status === ""){
+        //     return next();
+        // } else {
+        //     res.status(400).send(Responses.fail("Authentication failure: User not a student role"));
+        // }
     });
 }
 
@@ -54,11 +53,11 @@ exports.isAdmin = function(req, res, next){
     }).then(function(user){
         if(!user){ res.status(400).send(Responses.fail("Authentication failure: admin not found in database")); }
 
-        if(user.status === "admin"){
-            return next();
-        } else {
-            res.status(400).send(Responses.fail("Authentication failure: Request not an admin role"));
-        }
+        // if(user.status === "admin"){
+        //     return next();
+        // } else {
+        //     res.status(400).send(Responses.fail("Authentication failure: Request not an admin role"));
+        // }
     });
 }
 

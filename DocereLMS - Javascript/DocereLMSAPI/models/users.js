@@ -21,7 +21,7 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: false
         },
 
-        profileLinkn: {
+        profilePictureLink: {
             type: Sequelize.STRING
         },
 
@@ -36,13 +36,8 @@ module.exports = function(sequelize, Sequelize) {
         }
     });
 
-    Users.insert = async function(
-        email,
-        username,
-        password,
-        status,
-        activation
-    ){
+    Users.insert = async function(email, username, password, status, activation)
+    {
         const user = {
             email: email,
             username: username,

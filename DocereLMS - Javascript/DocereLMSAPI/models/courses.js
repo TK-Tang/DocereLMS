@@ -12,6 +12,10 @@ module.exports = function(sequelize, Sequelize) {
             notEmpty: true
         },
 
+        description: {
+            type: Sequelize.STRING
+        },
+
         coordinator: {
             type: Sequelize.STRING
         },
