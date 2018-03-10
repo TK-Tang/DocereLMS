@@ -93,7 +93,7 @@ module.exports = function(passportApp, userModel){
                 return done(null, userinfo);
             }).catch(function(err){
                 console.log("Error: ", err);
-                return done(null, false, {message: "Error with signing in"});
+                return done(null, false, { message: "Error with signing in" });
             });
         }
     ));

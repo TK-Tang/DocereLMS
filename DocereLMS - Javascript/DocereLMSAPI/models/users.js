@@ -49,13 +49,13 @@ module.exports = function(sequelize, Sequelize) {
         return await this.create(user);
     }
 
-    Users.get = async function(email){
+    Users.get = async function(email, models){
         return await this.findOne({
             where: {
                 email: email
             },
             include: [
-                { model: Role }
+                { model: models.Roles, required: true }
             ]
         });
     }
