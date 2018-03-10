@@ -7,10 +7,8 @@ const Session = require("express-session")
 const App = Express();
 
 
-const userScript = require("./scripts/user-startscript.js");
-const courseScript = require("./scripts/course-startscript.js");
-const userCourseScript = require("./scripts/usercourse-startscript.js");
-const roleScript = require("./scripts/role-startscript.js");
+const startScript = require("./scripts/master-startscript.js");
+
 const Models = require("./models");
 const AuthenticationService = require("./middleware/authentication-service.js");
 
@@ -24,15 +22,12 @@ App.use(AuthenticationService.isStudent);
 require("./routes/authentication-router.js")(App, Passport);
 require('./passport/passport.js')(Passport, Models.Users);
 
-Models.sequelizeCredentials.sync({force: true}).then(() => {
-    userScript.userScript();
-    roleScript.roleScript();
-    courseScript.courseScript();
-    userCourseScript.userCourseScript();
-    
+Models.sequelizeCredentials.sync({ force: true }).then(() => {
+    startScript.startScript();
+
     App.listen(11000, () => {
         console.log("Docere LMS API active on port 11000!");
-    })
+    });
 }).catch(e => {
     console.error(e);
 });

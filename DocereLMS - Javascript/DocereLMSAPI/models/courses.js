@@ -29,7 +29,7 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.BOOLEAN,
         }
 
-    });
+    }, { underscored: true });
 
     Courses.insert = async function(
         name,

@@ -34,7 +34,7 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.ENUM("inactive", "active"),
             defaultValue: "active"
         }
-    });
+    }, { underscored: true });
 
     Users.insert = async function(email, username, password, status, activation)
     {
@@ -47,6 +47,17 @@ module.exports = function(sequelize, Sequelize) {
         };
 
         return await this.create(user);
+    }
+
+    Users.get = async function(email){
+        return await this.findOne({
+            where: {
+                email: email
+            },
+            include: [
+                { model: Role }
+            ]
+        });
     }
 
     return Users;

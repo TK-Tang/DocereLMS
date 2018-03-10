@@ -1,10 +1,18 @@
 const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
 
-module.exports.userScript = function (){
+module.exports.startScript = function (){
     var userList = {};
 
     userList.user001 = {
+        email: "yuan@gmail.com",
+        username: "Dong",
+        password: generateHash("24157817"),
+        status: "offline",
+        activation: "active"
+    };
+
+    userList.user002 = {
         email: "tk@gmail.com",
         username: "TKTang",
         password: generateHash("24157817"),
@@ -12,7 +20,7 @@ module.exports.userScript = function (){
         activation: "active"
     };
 
-    userList.user002 = {
+    userList.user003 = {
         email: "kitty@gmail.com",
         username: "Kitty",
         password: generateHash("24157817"),
@@ -20,7 +28,7 @@ module.exports.userScript = function (){
         activation: "active"
     }
 
-    userList.user003 = {
+    userList.user004 = {
         email: "simon@gmail.com",
         username: "Simon",
         password: generateHash("24157817"),
@@ -28,10 +36,7 @@ module.exports.userScript = function (){
         activation: "active"
     }
 
-    for (var key in userList){
-        var user = userList[key];
-        Models.Users.create(user);
-    };
+    return userList;
 };
 
 function generateHash(password){

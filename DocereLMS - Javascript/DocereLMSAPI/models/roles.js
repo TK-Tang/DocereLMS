@@ -12,11 +12,23 @@ module.exports = function(sequelize, Sequelize) {
         rank: {
             type: Sequelize.STRING
         }
-    });
+    }, { underscored: true });
 
-    Roles.insert = async function(rank){
-        const role = { rank : rank};
+    Roles.insert = async function(course_id, user_id, rank){
+        const role = { 
+            course_id: course_id,
+            user_id: user_id,
+            rank : rank
+        };
         return await this.create(role);
+    }
+
+    Roles.get = async function(user_id){
+        return await this.findOne({
+            where: {
+                user_id: user_id
+            }
+        });
     }
 
     return Roles;

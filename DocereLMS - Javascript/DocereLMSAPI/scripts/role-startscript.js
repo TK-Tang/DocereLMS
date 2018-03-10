@@ -1,25 +1,37 @@
 const Models = require("../Models");
 
-module.exports.roleScript = function(){
+module.exports.startScript = function(){
     var roleList = {};
 
-    roleList.role001 = {
-        rank: "admin",
-        user_id: 1
+    roleList.user001course001 = {
+        user_id: 1,
+        course_id: 1,
+        rank: "admin"
     };
 
-    roleList.role002 = {
+    roleList.user001course002 = {
+        user_id: 1,
+        course_id: 2,
+        rank: "admin"
+    };
+
+    roleList.user002course001 = {
         user_id: 2,
+        course_id: 1,
         rank: "student"
     };
 
-    roleList.role003 = {
+    roleList.user003course002 = {
         user_id: 3,
+        course_id: 2,
         rank: "student"
     };
 
-    for (var key in roleList){
-        var role = roleList[key]
-        Models.Roles.create(role);
+    roleList.user004course002 = {
+        user_id: 4,
+        course_id: 2,
+        rank: "student"
     };
+
+    return roleList;
 }
