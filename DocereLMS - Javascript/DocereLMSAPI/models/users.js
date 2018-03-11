@@ -36,6 +36,7 @@ module.exports = function(sequelize, Sequelize) {
         }
     }, { underscored: true });
 
+    // CREATE
     Users.insert = async function(email, username, password, status, activation)
     {
         const user = {
@@ -49,7 +50,21 @@ module.exports = function(sequelize, Sequelize) {
         return await this.create(user);
     }
 
-    Users.get = async function(email, models){
+    // READ - returning a single user
+
+
+    Users.getUserById = async function(id, models){
+        return await this.findOne({
+            where: {
+                user_id: id
+            },
+            include: [
+                { model: models.Roles, require: true }
+            ]
+        });
+    }
+
+    Users.getUserByEmail = async function(email, models){
         return await this.findOne({
             where: {
                 email: email
@@ -58,6 +73,49 @@ module.exports = function(sequelize, Sequelize) {
                 { model: models.Roles, required: true }
             ]
         });
+    }
+
+    Users.getUserByIdIncludingCourses = async function(id, models){
+        return await this.findOne({
+            where: {
+                user_id: id
+            },
+            include: [
+                { model: models.Courses, required: false }
+            ]
+        })
+    }
+
+    Users.getUserByEmailIncludingCourses = async function(email, models){
+        return await this.findOne({
+            where: {
+                email: email
+            },
+            include: [
+                { model: models.Courses, required: false }
+            ]
+        })
+    }
+
+    // READ - returning a list of users
+
+    Users.getAll = async function(models){
+        return await this.findAll({
+            include: [
+                { model: models.Roles, required: false }
+            ]
+        })
+    }
+
+    Users.getUsersByUsername = async function(username, models){
+        return await this.findAll({
+            where: {
+                email: email
+            },
+            include: [
+                { model: models.Roles, required: false }
+            ]
+        })
     }
 
     return Users;

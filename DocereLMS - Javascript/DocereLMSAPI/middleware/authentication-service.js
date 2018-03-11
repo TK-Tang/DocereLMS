@@ -31,9 +31,10 @@ exports.isStudent = function(req, res, next){
         }
     }
 
+    if (req.user == null){ res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
     if (!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
-
-    Models.Users.get(req.user.email, Models).then(function(user){
+    
+    Models.Users.getUserByEmail(req.user.email, Models).then(function(user){
         if (!user){ 
             console.log("Email not found in database for user logging in");
             return res.status(400).send(Responses.fail("Authentication failure"));
@@ -51,10 +52,10 @@ exports.isStudent = function(req, res, next){
     });
 }
 
-exports.isStudent = function(req, res, next){
+exports.isAdmin = function(req, res, next){
     if (!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
 
-    Models.Users.get(req.user.email, Models).then(function(user){
+    Models.Users.getUserByEmail(req.user.email, Models).then(function(user){
         if (!user){ 
             console.log("Email not found in database for user logging in");
             return res.status(400).send(Responses.fail("Authentication failure"));

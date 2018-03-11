@@ -6,9 +6,7 @@ const Session = require("express-session")
 
 const App = Express();
 
-
 const startScript = require("./scripts/master-startscript.js");
-
 const Models = require("./models");
 const AuthenticationService = require("./middleware/authentication-service.js");
 
@@ -21,6 +19,9 @@ App.use(AuthenticationService.isStudent);
 
 require("./routes/authentication-router.js")(App, Passport);
 require('./passport/passport.js')(Passport, Models.Users);
+
+require("./routes/user-router.js")(App);
+require("./routes/users-router.js")(App);
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();
