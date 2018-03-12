@@ -31,12 +31,8 @@ module.exports = function(sequelize, Sequelize) {
 
     }, { underscored: true });
 
-    Courses.insert = async function(
-        name,
-        coordinator,
-        pictureLink,
-        allowInvitations
-    ){
+    // CREATE
+    Courses.insert = async function(name, coordinator, pictureLink, allowInvitations){
         const course = {
             name : name,
             coordinator: coordinator,
@@ -45,6 +41,49 @@ module.exports = function(sequelize, Sequelize) {
         };
 
         return await this.create(course);
+    }
+
+    // READ
+    Courses.getCourse = async function(course_id, models){
+        return await this.findOne({
+            where: { course_id: course_id},
+        })
+    }
+
+    Courses.getCourseIncludingUsers = async function(course_id, models){
+        return await this.findAll({
+            where: { course_id: course_id },
+            include: [
+                { 
+                    model: models.Users, 
+                    attributes: ["user_id", "username", "email", "profilePictureLink", "status"],
+                    required: false,
+                    through: { 
+                        attributes: ["id", "rank", "user_id", "course_id"]
+                    }
+                }
+            ]
+        });
+     }
+
+    Courses.getCourseIncludingUsersWithRank = async function(course_id, rank, models){
+       return await this.findAll({
+           where: { course_id: course_id },
+           include: [
+                { 
+                    model: models.Users, 
+                    attributes: ["user_id", "username", "email", "profilePictureLink", "status"],
+                    required: false,
+                    order: [
+                        [ "username", "DESC"]
+                    ],
+                    through: { 
+                        attributes: ["id", "rank", "user_id", "course_id"],
+                        where: { rank: rank }
+                    }
+                }
+            ]
+       });
     }
 
     return Courses;

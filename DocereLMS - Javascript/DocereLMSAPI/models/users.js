@@ -51,54 +51,40 @@ module.exports = function(sequelize, Sequelize) {
     }
 
     // READ - returning a single user
-
-
-    Users.getUserById = async function(id, models){
+    Users.getUser = async function(user_id, email, models){
         return await this.findOne({
-            where: {
-                user_id: id
-            },
+            where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
                 { model: models.Roles, require: true }
             ]
         });
     }
 
-    Users.getUserByEmail = async function(email, models){
+    Users.getUserIncludingCourses = async function(user_id, email, models){
         return await this.findOne({
-            where: {
-                email: email
-            },
+            where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles, required: true }
+                { model: models.Roles, require: true },
+                { model: models.Courses, required: false }
+            ]
+        })
+    }
+
+    Users.getUserIncludingCourse = async function(user_id, email, course_id, models){
+        return await this.findOne({
+            where: Sequelize.or({ user_id: user_id }, { email: email }),
+            include: [
+                { model: models.Roles, require: true },
+                { 
+                    model: models.Courses, 
+                    required: false, 
+                    where: { course_id: course_id }
+                }
             ]
         });
     }
 
-    Users.getUserByIdIncludingCourses = async function(id, models){
-        return await this.findOne({
-            where: {
-                user_id: id
-            },
-            include: [
-                { model: models.Courses, required: false }
-            ]
-        })
-    }
-
-    Users.getUserByEmailIncludingCourses = async function(email, models){
-        return await this.findOne({
-            where: {
-                email: email
-            },
-            include: [
-                { model: models.Courses, required: false }
-            ]
-        })
-    }
-
     // READ - returning a list of users
-
     Users.getAll = async function(models){
         return await this.findAll({
             include: [
@@ -110,7 +96,7 @@ module.exports = function(sequelize, Sequelize) {
     Users.getUsersByUsername = async function(username, models){
         return await this.findAll({
             where: {
-                email: email
+                username: username
             },
             include: [
                 { model: models.Roles, required: false }

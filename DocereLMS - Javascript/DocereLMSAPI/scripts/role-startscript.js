@@ -33,5 +33,17 @@ module.exports.startScript = function(){
         rank: "student"
     };
 
+    roleList.user005course002 = {
+        user_id: 5,
+        course_id: 2,
+        rank: "student"
+    }
+
+    roleList.user006course002 = {
+        user_id: 6,
+        course_id: 2,
+        rank: "admin"
+    }
+
     return roleList;
 }

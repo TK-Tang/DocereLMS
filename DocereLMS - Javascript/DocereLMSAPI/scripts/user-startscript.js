@@ -36,6 +36,22 @@ module.exports.startScript = function (){
         activation: "active"
     }
 
+    userList.user005 = {
+        email: "tk.gq.tang@gmail.com",
+        username: "TKTang",
+        password: generateHash("24157817"),
+        status: "offline",
+        activation: "active",
+    }
+
+    userList.user006 = {
+        email: "darren@gmail.com",
+        username: "Darren",
+        password: generateHash("24157817"),
+        status: "offline",
+        activation: "active"
+    }
+
     return userList;
 };
 

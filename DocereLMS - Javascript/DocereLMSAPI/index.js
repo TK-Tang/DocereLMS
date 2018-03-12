@@ -22,6 +22,7 @@ require('./passport/passport.js')(Passport, Models.Users);
 
 require("./routes/user-router.js")(App);
 require("./routes/users-router.js")(App);
+require("./routes/course-router.js")(App);
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();
