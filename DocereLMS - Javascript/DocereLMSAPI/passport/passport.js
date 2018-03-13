@@ -1,4 +1,5 @@
 const bCrypt = require("bcrypt-nodejs");
+const Models = require("../models");
 
 module.exports = function(passportApp, userModel){
     var LocalStrategy = require('passport-local').Strategy;
@@ -25,28 +26,20 @@ module.exports = function(passportApp, userModel){
         }, 
         function(req, email, password, done){
 
-            var generateHash = function(password){
-                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-            };
-
-            userModel.findOne({
-                where: {
-                    email: email
+            Promise.all([Models.Invitations.getByLink(req.params.link), userModel.getUser(email)]).then(([link, user]) => {
+                var generateHash = function(password){ return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); };
+                
+                if (!link){
+                    console.log("Registration error - Invalid invitation link");
+                    return done(null, false, { message: "Invalid invitation link"}); 
                 }
-            }).then(function(user){
+
                 if (user){
-                    return done(null, false, {
-                        message: "That email is already taken"
-                    });
+                    console.log("Registration error - Email already in use")
+                    return done(null, false, { message: "That email is already taken" });
                 } else {
                     var userPassword = generateHash(password);
-
-                    var data = {
-                        email: email,
-                        password: userPassword,
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname,
-                    };
+                    var data = { email: email, password: userPassword };
 
                     userModel.create(data).then(function(newUser, created){
                         if (!newUser){

@@ -24,10 +24,10 @@ exports.isStudent = function(req, res, next){
             case "/auth/signout":
                 return next();
                 break;
-    
-            if (req.path.substring(0,6) === "/invite"){
-                return next();
-            }
+        }
+
+        if (req.path.substring(0,13) === "/auth/signup/"){
+            return next();
         }
     }
 

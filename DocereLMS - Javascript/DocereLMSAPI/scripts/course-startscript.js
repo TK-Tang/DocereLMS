@@ -1,5 +1,3 @@
-const Models = require("../models");
-
 module.exports.startScript = function(){
     var courseList = {};
 

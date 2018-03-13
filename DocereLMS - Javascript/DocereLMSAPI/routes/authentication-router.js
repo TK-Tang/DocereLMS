@@ -3,8 +3,8 @@ const AuthenticationService = require("../middleware/authentication-service");
 const Responses = require("../helpers/response");
 
 module.exports = function(app, passport){
-    app.get("/auth/signup", AuthenticationService.isNotLoggedIn, AuthenticationController.signUp);
-    app.post("/auth/signup", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
+    app.get("/auth/signup/:link", AuthenticationService.isNotLoggedIn, AuthenticationController.signUp);
+    app.post("/auth/signup/:link", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
         res.status(200).send(Responses.success("success"));
     });
 

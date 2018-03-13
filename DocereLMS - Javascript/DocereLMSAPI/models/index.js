@@ -35,4 +35,7 @@ db.Courses.hasOne(db.Roles, {foreignKey: "course_id"});
 db.Courses.belongsToMany(db.Users, { through: "Roles" });
 db.Users.belongsToMany(db.Courses, { through: "Roles" });
 
+db.Courses.hasMany(db.Invitations);
+db.Invitations.belongsTo(db.Courses, { foreignKey: "course_id" });
+
 module.exports = db;

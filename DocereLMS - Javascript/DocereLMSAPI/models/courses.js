@@ -1,4 +1,4 @@
-module.exports = function(sequelize, Sequelize) {
+module.exports = function(sequelize, Sequelize){
     const Courses = sequelize.define("Courses", {
         id: {
             autoIncrement: true,
@@ -46,7 +46,7 @@ module.exports = function(sequelize, Sequelize) {
     // READ
     Courses.getCourse = async function(course_id, models){
         return await this.findOne({
-            where: { course_id: course_id},
+            where: { course_id: course_id}
         })
     }
 

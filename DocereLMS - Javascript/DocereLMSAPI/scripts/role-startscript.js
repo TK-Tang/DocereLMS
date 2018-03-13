@@ -1,5 +1,3 @@
-const Models = require("../Models");
-
 module.exports.startScript = function(){
     var roleList = {};
 

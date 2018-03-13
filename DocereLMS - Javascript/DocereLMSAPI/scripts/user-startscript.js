@@ -1,4 +1,3 @@
-const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
 
 module.exports.startScript = function (){

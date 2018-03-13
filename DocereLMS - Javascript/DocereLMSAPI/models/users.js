@@ -55,8 +55,16 @@ module.exports = function(sequelize, Sequelize) {
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles, require: true }
+                { model: models.Roles }
             ]
+        });
+    }
+
+    Users.getUser = async function(email) {
+        return await this.findOne({
+            where: {
+                email: email
+            }
         });
     }
 
@@ -64,8 +72,8 @@ module.exports = function(sequelize, Sequelize) {
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles, require: true },
-                { model: models.Courses, required: false }
+                { model: models.Roles },
+                { model: models.Courses }
             ]
         })
     }
@@ -74,7 +82,7 @@ module.exports = function(sequelize, Sequelize) {
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles, require: true },
+                { model: models.Roles },
                 { 
                     model: models.Courses, 
                     required: false, 
