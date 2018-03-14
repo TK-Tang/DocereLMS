@@ -43,12 +43,22 @@ module.exports = function(passportApp, userModel){
 
                     userModel.create(data).then(function(newUser, created){
                         if (!newUser){
-                            return done(null, false)
-                        } else {
-                            return done(null, newUser);
+                            console.log("Error creating new user");
+                            return done(null, false, { message: "Error creating new user" });
                         }
-                    });
+
+                        Models.Roles.insert(link.course_id, newUser.user_id, "student").then(function(role){
+                            if (!role){
+                                console.log("Error registering user to course");
+                                return done(null, false, { message: "Error registering user to course "});
+                            } else {
+                                return done(null , newUser);
+                            }
+                        })
+                    })
                 }
+
+                
             });
         })
     );
