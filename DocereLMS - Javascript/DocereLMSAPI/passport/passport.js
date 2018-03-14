@@ -26,7 +26,7 @@ module.exports = function(passportApp, userModel){
         }, 
         function(req, email, password, done){
 
-            Promise.all([Models.Invitations.getByLink(req.params.link), userModel.getUser(email)]).then(([link, user]) => {
+            Promise.all([Models.Invitations.getByLink(req.params.link), userModel.getUserExcludeRoles(email)]).then(([link, user]) => {
                 var generateHash = function(password){ return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); };
                 
                 if (!link){
@@ -35,7 +35,7 @@ module.exports = function(passportApp, userModel){
                 }
 
                 if (user){
-                    console.log("Registration error - Email already in use")
+                    console.log("Registrataion error - Email already in use")
                     return done(null, false, { message: "That email is already taken" });
                 } else {
                     var userPassword = generateHash(password);
@@ -47,7 +47,7 @@ module.exports = function(passportApp, userModel){
                             return done(null, false, { message: "Error creating new user" });
                         }
 
-                        Models.Roles.insert(link.course_id, newUser.user_id, "student").then(function(role){
+                        Models.Roles.insert(link.course_id, newUser.id, "student").then(function(role){
                             if (!role){
                                 console.log("Error registering user to course");
                                 return done(null, false, { message: "Error registering user to course "});
@@ -57,8 +57,6 @@ module.exports = function(passportApp, userModel){
                         })
                     })
                 }
-
-                
             });
         })
     );
@@ -75,11 +73,7 @@ module.exports = function(passportApp, userModel){
                 return bCrypt.compareSync(password, userpass);
             }
 
-            userModel.findOne({
-                where: {
-                    email: email
-                }
-            }).then(function(user){
+            userModel.getUserExcludeRoles(email).then(function(user){
                 if (!user){
                     return done(null, false, {
                         message: "Email does not exist"

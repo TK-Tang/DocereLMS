@@ -1,6 +1,11 @@
 module.exports.startScript = function(){
     var invitationList = {};
 
+    invitationList.invitation000 = {
+        link: "aaaaaaaaa",
+        course_id: 1,
+    }
+
     invitationList.invitation001 = {
         link: generateInviteLink(),
         course_id: 1
@@ -10,7 +15,7 @@ module.exports.startScript = function(){
         link: generateInviteLink(),
         course_id: 2
     }
-
+    
     return invitationList;
 }
 

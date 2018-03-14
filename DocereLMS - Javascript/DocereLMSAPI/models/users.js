@@ -60,7 +60,7 @@ module.exports = function(sequelize, Sequelize) {
         });
     }
 
-    Users.getUser = async function(email) {
+    Users.getUserExcludeRoles = async function(email) {
         return await this.findOne({
             where: {
                 email: email

@@ -29,6 +29,12 @@ exports.isStudent = function(req, res, next){
         if (req.path.substring(0,13) === "/auth/signup/"){
             return next();
         }
+    } else {
+        switch(req.path){
+            case "/auth/signout":
+                return next();
+                break;
+        }
     }
 
     if (req.user == null){ return res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
@@ -72,5 +78,3 @@ exports.isAdmin = function(req, res, next){
         return next();
     });
 }
-
-
