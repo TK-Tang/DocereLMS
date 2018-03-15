@@ -112,5 +112,21 @@ module.exports = function(sequelize, Sequelize) {
         })
     }
 
+    // UPDATE
+    Users.update = async function(email, username, profilePictureLink){
+        const updateUserValues = {
+            email: email,
+            username: username,
+            profilePictureLink: profilePictureLink
+        }
+
+        const transaction = await sequelize.transaction();
+        const currentUser = await Users.findOne( { where: { email: email }}, { transaction: transaction });
+
+        const updatedUser = await currentUser.updateAttributes(updateUserValues, { transaction: transaction });
+        transaction.commit();
+        return updatedUser;
+    }
+
     return Users;
 };

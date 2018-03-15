@@ -7,9 +7,15 @@ module.exports = function(app, passport){
     app.post("/auth/signup/:link", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
         res.status(200).send(Responses.success("success"));
     });
+    app.put("/auth/signup/:link", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
+        res.status(200).send(Responses.success("success"));
+    });
 
     app.get("/auth/signin", AuthenticationService.isNotLoggedIn, AuthenticationController.signIn);
     app.post("/auth/signin", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signin"), (req, res) => {
+        res.status(200).send(Responses.success("success"));
+    });
+    app.put("/auth/signin", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signin"), (req, res) => {
         res.status(200).send(Responses.success("success"));
     })
 

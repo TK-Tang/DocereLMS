@@ -3,7 +3,7 @@ module.exports.startScript = function(){
 
     invitationList.invitation000 = {
         link: "aaaaaaaaa",
-        course_id: 1,
+        course_id: 1
     }
 
     invitationList.invitation001 = {
@@ -18,7 +18,6 @@ module.exports.startScript = function(){
     
     return invitationList;
 }
-
 
 function generateInviteLink(){
     return Math.random().toString(36).substring(3,12);

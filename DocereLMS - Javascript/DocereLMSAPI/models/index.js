@@ -26,9 +26,12 @@ fs.readdirSync(__dirname).filter(function(file){
 
 db.sequelizeCredentials = sequelizeCredentials;
 db.Sequelize = Sequelize;
+
 db.Users = require("./users")(sequelizeCredentials, Sequelize);
 db.Roles = require("./roles")(sequelizeCredentials, Sequelize);
 db.Courses = require("./courses")(sequelizeCredentials, Sequelize);
+db.Invitations = require("./invitations")(sequelizeCredentials, Sequelize);
+db.Forums = require("./forums")(sequelizeCredentials, Sequelize);
 
 db.Users.hasOne(db.Roles, {foreignKey: "user_id"});
 db.Courses.hasOne(db.Roles, {foreignKey: "course_id"});
@@ -37,5 +40,8 @@ db.Users.belongsToMany(db.Courses, { through: "Roles" });
 
 db.Courses.hasMany(db.Invitations);
 db.Invitations.belongsTo(db.Courses, { foreignKey: "course_id" });
+
+db.Courses.hasMany(db.Forums);
+db.Forums.belongsTo(db.Courses, { foreignKey: "course_id" });
 
 module.exports = db;

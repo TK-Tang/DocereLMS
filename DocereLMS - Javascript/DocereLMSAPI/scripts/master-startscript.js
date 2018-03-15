@@ -2,6 +2,7 @@ const courseScript = require("./course-startscript.js");
 const roleScript = require("./role-startscript.js");
 const userScript = require("./user-startScript.js");
 const invitationScript = require("./invitation-startscript.js");
+const forumScript = require("./forum-startscript.js");
 
 const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
@@ -11,6 +12,7 @@ module.exports.startScript = function (){
     var roleList = roleScript.startScript();
     var courseList = courseScript.startScript();
     var invitationList = invitationScript.startScript();
+    var forumList = forumScript.startScript();
 
     for (var key in courseList){
         var course = courseList[key];
@@ -30,5 +32,10 @@ module.exports.startScript = function (){
     for (var key in invitationList){
         var invitation = invitationList[key];
         Models.Invitations.create(invitation);
+    };
+
+    for(var key in forumList){
+        var forum = forumList[key];
+        Models.Forums.create(forum);
     };
 };

@@ -17,6 +17,10 @@ exports.isNotLoggedIn = function (req, res, next){
 }
 
 exports.isStudent = function(req, res, next){
+
+    var x = req.method;
+    var y = req.user;
+
     if (!req.isAuthenticated()){
         switch(req.path){
             case "/auth/signin":
@@ -59,7 +63,18 @@ exports.isStudent = function(req, res, next){
 }
 
 exports.isAdmin = function(req, res, next){
-    if (!req.isAuthenticated()) { res.status(400).send(Responses.fail("Authentication failure: Not authenticated")); }
+    
+    if (!req.isAuthenticated()){
+        switch(req.path){
+            case "/auth/signin":
+            case "/auth/signup":
+            case "/auth/signout":
+                return next();
+                break;
+        }
+    } else {
+
+    }
 
     Models.Users.getUser(null, req.user.email, Models).then(function(user){
         if (!user){ 

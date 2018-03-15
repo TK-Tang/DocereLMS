@@ -53,7 +53,27 @@ module.exports = function(app){
             } else {
                 return res.status(400).send(Responses.fail("No users found"));
             }
-        })
+        });
+    });
+
+    app.post("/users/:term", (req, res) => {
+        const email = req.body.email;
+        const username = req.body.username;
+        const profilePictureLink = req.body.profilePictureLink;
+
+        if (!email){
+            return res.status(400).send(Responses.fail("Email cannot be empty"));
+        } else if (!username){
+            return res.status(400).send(Responses.fail("Username cannot be empty"));
+        }
+
+        Models.Users.update(email, username, profilePictureLink).then(function(user){
+            if (!user){
+                return res.status(400).send(Responses.fail("Error updating user"));
+            } else {
+                return res.status(400).send(Responses.success("User updated successfully"));
+            }
+        });
     });
 }
 
