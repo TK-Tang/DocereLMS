@@ -1,22 +1,13 @@
-function success(data){
-    return {
-        status: "success",
-        payload: data
-    };
+function success(res, message, data){
+    return res.status(200).send({ status: "success", message: message, payload: data });
 }
 
-function error(data){
-    return {
-        status: "error",
-        payload: data
-    };
+function error(res, message, data){
+    return res.status(400).send({ status: "error", message: message, payload: data });
 }
 
-function fail(data){
-    return {
-        status: "fail",
-        payload: data
-    };
+function fail(res, message, data){
+    return res.status(400).send({ status: "fail", message: message, payload: data });
 }
 
 module.exports = {

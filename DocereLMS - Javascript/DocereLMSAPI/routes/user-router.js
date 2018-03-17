@@ -8,10 +8,10 @@ module.exports = function(app){
         user_id = isNaN(user_id) ? null : user_id;
 
         Models.Users.getUser(user_id, email, Models).then(function(user){
-            if (user){
-                return res.status(200).send(Responses.success(user));
+            if (!user){
+                Responses.fail(res, "No user found", null);
             } else {
-                return res.status(400).send(Responses.fail("No user found"));
+                Responses.success(res, "User found", user);
             }
         });
     });
@@ -22,10 +22,10 @@ module.exports = function(app){
         user_id = isNaN(user_id) ? null : user_id;
 
         Models.Users.getUserIncludingCourses(user_id, email, Models).then(function(user){
-            if (user){
-                return res.status(200).send(Responses.success(user));
+            if (!user){
+                Responses.fail(res, "No user found", null);
             } else {
-                return res.status(400).send(Responses.fail("No user found"));
+                Responses.success(res, "User found", user);
             }
         });
     });
@@ -36,42 +36,30 @@ module.exports = function(app){
         user_id = isNaN(user_id) ? null : user_id;
 
         Models.Users.getUserIncludingCourse(user_id, email, course_id, Models).then(function(user){
-            if (user){
-                return res.status(200).send(Responses.success(user));
+            if (!user){
+                Responses.fail(res, "No user found", null);
             } else {
-                return res.status(400).send(Responses.fail("No user found"));
+                Responses.success(res, "No user found", user);
             }
         });
     });
 
-    app.get("/users/:term", (req, res) => {
-        const username = req.params.term;
-
-        Models.Users.getUsersByUsername(username, Models).then(function(users){
-            if (users){
-                return res.status(200).send(Responses.success(users));
-            } else {
-                return res.status(400).send(Responses.fail("No users found"));
-            }
-        });
-    });
-
-    app.post("/users/:term", (req, res) => {
+    app.post("/user/:term", (req, res) => {
         const email = req.body.email;
         const username = req.body.username;
         const profilePictureLink = req.body.profilePictureLink;
 
         if (!email){
-            return res.status(400).send(Responses.fail("Email cannot be empty"));
+            Responses.fail(res, "Email cannot be empty", null);
         } else if (!username){
-            return res.status(400).send(Responses.fail("Username cannot be empty"));
+            Responses.fail(res, "Username cannot be empty", null);
         }
 
         Models.Users.update(email, username, profilePictureLink).then(function(user){
             if (!user){
-                return res.status(400).send(Responses.fail("Error updating user"));
+                Responses.fail(res, "Error updating user", null);
             } else {
-                return res.status(400).send(Responses.success("User updated successfully"));
+                Responses.success(res, "User updated successfully", user);
             }
         });
     });

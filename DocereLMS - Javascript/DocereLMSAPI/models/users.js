@@ -104,7 +104,7 @@ module.exports = function(sequelize, Sequelize) {
     Users.getUsersByUsername = async function(username, models){
         return await this.findAll({
             where: {
-                username: username
+                username: { $like: "%" + username + "%" }
             },
             include: [
                 { model: models.Roles, required: false }

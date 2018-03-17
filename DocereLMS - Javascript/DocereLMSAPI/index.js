@@ -20,9 +20,11 @@ App.use(AuthenticationService.isStudent);
 require("./routes/authentication-router.js")(App, Passport);
 require('./passport/passport.js')(Passport, Models.Users);
 
+require("./routes/course-router.js")(App);
 require("./routes/user-router.js")(App);
 require("./routes/users-router.js")(App);
-require("./routes/course-router.js")(App);
+require("./routes/invitations-router.js")(App);
+require("./routes/invitation-router.js")(App);
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();

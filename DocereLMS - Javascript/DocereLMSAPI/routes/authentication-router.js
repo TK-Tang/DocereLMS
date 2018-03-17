@@ -5,19 +5,19 @@ const Responses = require("../helpers/response");
 module.exports = function(app, passport){
     app.get("/auth/signup/:link", AuthenticationService.isNotLoggedIn, AuthenticationController.signUp);
     app.post("/auth/signup/:link", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
-        res.status(200).send(Responses.success("success"));
+        Responses.success(res, "success", null);
     });
     app.put("/auth/signup/:link", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signup"), (req, res) => {
-        res.status(200).send(Responses.success("success"));
+        Responses.success(res, "success", null);
     });
 
     app.get("/auth/signin", AuthenticationService.isNotLoggedIn, AuthenticationController.signIn);
     app.post("/auth/signin", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signin"), (req, res) => {
-        res.status(200).send(Responses.success("success"));
+        Responses.success(res, "success", null);
     });
     app.put("/auth/signin", AuthenticationService.isNotLoggedIn, passport.authenticate("local-signin"), (req, res) => {
-        res.status(200).send(Responses.success("success"));
-    })
+        Responses.success(res, "success", null);
+    });
 
     app.get("/auth/signout", AuthenticationService.isLoggedIn, AuthenticationController.signOut);
 }

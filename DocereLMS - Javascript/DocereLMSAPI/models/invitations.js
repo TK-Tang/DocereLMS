@@ -13,26 +13,30 @@ module.exports = function(sequelize, Sequelize){
     }, { underscored: true });
 
     // CREATE
-    Invitations.insert = async function(invitation_id){
-        const inv = { invitation_id: invitation_id }
+    Invitations.insert = async function(course_id){
+        var link = Math.random().toString(36).substring(3,12);
+        const inv = { link: link, course_id: course_id };
         return await this.create(inv);
     }
 
     // READ
-    Invitations.get = async function(invitation_id){
-        return await this.findById(invitation_id);
-    }
-
     Invitations.getByLink = async function(link){
         return await this.findOne({
             where: { link: link }
-        })
+        });
+    }
+
+    Invitations.getAllLinksForCourse = async function(course_id){
+        return await this.findAll({
+            where: { course_id: course_id}
+        });
     }
 
     // DELETE 
-    Invitations.delete = async function(invitation_id){
+    Invitations.delete = async function(course_id, invitation_id){
         return await this.destroy({
             where: {
+                course_id, course_id,
                 invitation_id: invitation_id
             }
         });
