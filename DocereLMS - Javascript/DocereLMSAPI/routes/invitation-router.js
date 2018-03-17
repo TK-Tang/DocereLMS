@@ -2,7 +2,7 @@ const Responses = require("../helpers/response");
 const Models = require("../models");
 
 module.exports = function(app){
-    app.post("/course/:course_id/invitation", (req, res) => {
+    app.put("/course/:course_id/invitation",  AuthService.isAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
 
         if (isNaN(course_id)){ Response.error(res, "Input id is not a number", null); }
@@ -16,7 +16,7 @@ module.exports = function(app){
         });
     });
 
-    app.delete("/course/:course_id/invitation/:invitation_id", (req, res) => {
+    app.delete("/course/:course_id/invitation/:invitation_id", AuthService.isAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
         const invitation_id = parseInt(req.params.invitation_id, 10);
 

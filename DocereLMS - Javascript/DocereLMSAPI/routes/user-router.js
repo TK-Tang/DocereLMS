@@ -1,8 +1,9 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
+const AuthServices = require("../middleware/authentication-service");
 
 module.exports = function(app){
-    app.get("/user/:term", (req, res) => {
+    app.get("/user/:term", AuthServices.isLoggedIn, (req, res) => {
         const email = req.params.term;
         var user_id = parseInt(req.params.term, 10);
         user_id = isNaN(user_id) ? null : user_id;
@@ -16,7 +17,7 @@ module.exports = function(app){
         });
     });
 
-    app.get("/user/:term/courses", (req, res) => {
+    app.get("/user/:term/courses", AuthServices.isLoggedIn, (req, res) => {
         const email = req.params.term;
         var user_id = parseInt(req.params.term, 10);
         user_id = isNaN(user_id) ? null : user_id;
@@ -30,7 +31,7 @@ module.exports = function(app){
         });
     });
 
-    app.get("/user/:term/course/:course_id", (req, res) => {
+    app.get("/user/:term/course/:course_id", AuthServices.isLoggedIn, (req, res) => {
         const email = req.params.term;
         var user_id = parseInt(req.params.term, 10);
         user_id = isNaN(user_id) ? null : user_id;
@@ -44,7 +45,7 @@ module.exports = function(app){
         });
     });
 
-    app.post("/user/:term", (req, res) => {
+    app.post("/user/:term", AuthServices.IsCurrentUser, (req, res) => {
         const email = req.body.email;
         const username = req.body.username;
         const profilePictureLink = req.body.profilePictureLink;

@@ -1,8 +1,9 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
+const AuthService = require("../middleware/authentication-service");
 
 module.exports = function(app){
-    app.get("/course/:course_id/invitations", (req, res) => {
+    app.get("/course/:course_id/invitations", AuthService.isAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10)
 
         if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }

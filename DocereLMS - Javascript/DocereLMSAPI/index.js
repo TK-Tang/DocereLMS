@@ -15,7 +15,7 @@ App.use(Passport.initialize());
 App.use(Passport.session());
 App.use(BodyParser.urlencoded({ extended: true }));
 App.use(BodyParser.json());
-App.use(AuthenticationService.isStudent);
+App.use(AuthenticationService.isPublicPage);
 
 require("./routes/authentication-router.js")(App, Passport);
 require('./passport/passport.js')(Passport, Models.Users);

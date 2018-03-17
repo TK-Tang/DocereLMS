@@ -11,8 +11,16 @@ exports.signUp = function(req, res){
     });
 }
 
+exports.signedUp =  function(req, res){
+    Responses.success(res, "Successfully signed up", null);
+}
+
 exports.signIn = function(req, res){
     Responses.success(res, "Sign-in");
+}
+
+exports.signedIn = function(req, res){
+    Responses.success(res, "Successfully signed in");
 }
 
 exports.signOut = function(req, res){

@@ -1,8 +1,9 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
+const AuthService = require("../middleware/authentication-service");
 
 module.exports = function(app){
-    app.get("/course/:course_id", (req, res) => {
+    app.get("/course/:course_id", AuthService.isStudentOrAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
         if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
 
@@ -15,7 +16,7 @@ module.exports = function(app){
         });
     });
 
-    app.get("/course/:course_id/users", (req, res) => {
+    app.get("/course/:course_id/users", AuthService.isStudentOrAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
         if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
 
@@ -28,7 +29,7 @@ module.exports = function(app){
         });
     });
 
-    app.get("/course/:course_id/students", (req, res) => {
+    app.get("/course/:course_id/students",  AuthService.isStudentOrAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
         if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
 
@@ -41,7 +42,7 @@ module.exports = function(app){
         });
     });
 
-    app.get("/course/:course_id/admins", (req, res) => {
+    app.get("/course/:course_id/admins",  AuthService.isStudentOrAdminForCourse, (req, res) => {
         const course_id = parseInt(req.params.course_id, 10);
         if (isNaN(course_id)){ Responses.fail(res, "Input Id is not a number", null); }
 
