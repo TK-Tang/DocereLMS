@@ -1,5 +1,6 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
+const AuthService = require("../middleware/authentication-service");
 
 module.exports = function(app){
     app.put("/course/:course_id/invitation",  AuthService.isAdminForCourse, (req, res) => {

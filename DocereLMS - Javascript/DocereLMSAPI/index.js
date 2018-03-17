@@ -17,14 +17,14 @@ App.use(BodyParser.urlencoded({ extended: true }));
 App.use(BodyParser.json());
 App.use(AuthenticationService.isPublicPage);
 
-require("./routes/authentication-router.js")(App, Passport);
+require("./routers/authentication-router.js")(App, Passport);
 require('./passport/passport.js')(Passport, Models.Users);
 
-require("./routes/course-router.js")(App);
-require("./routes/user-router.js")(App);
-require("./routes/users-router.js")(App);
-require("./routes/invitations-router.js")(App);
-require("./routes/invitation-router.js")(App);
+require("./routers/course-router.js")(App);
+require("./routers/user-router.js")(App);
+require("./routers/users-router.js")(App);
+require("./routers/invitations-router.js")(App);
+require("./routers/invitation-router.js")(App);
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();
