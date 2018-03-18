@@ -24,7 +24,7 @@ module.exports = function(sequelize, Sequelize) {
     }
 
     Roles.get = async function(user_id){
-        return await this.findOne({
+        return await this.findAll({
             where: {
                 user_id: user_id
             }

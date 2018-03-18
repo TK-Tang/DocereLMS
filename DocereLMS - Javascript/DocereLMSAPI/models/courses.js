@@ -50,6 +50,18 @@ module.exports = function(sequelize, Sequelize){
         })
     }
 
+    Courses.getCourseIncludeUser = async function(course_id, user_id, email, models){
+        return await this.findOne({
+            where: { course_id: course_id },
+            include: [
+                { 
+                    model: models.Users,
+                    where: Sequelize.or({ user_id: user_id}, { email: email }),
+                }
+            ]
+        });
+    }
+
     Courses.getCourseIncludingUsers = async function(course_id, models){
         return await this.findAll({
             where: { course_id: course_id },
@@ -66,7 +78,7 @@ module.exports = function(sequelize, Sequelize){
         });
      }
 
-    Courses.getCourseIncludingUsersWithRank = async function(course_id, rank, models){
+    Courses.getCourseIncludingUsersAndRank = async function(course_id, rank, models){
        return await this.findAll({
            where: { course_id: course_id },
            include: [

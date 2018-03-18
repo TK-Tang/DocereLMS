@@ -34,8 +34,8 @@ db.Invitations = require("./invitations")(sequelizeCredentials, Sequelize);
 db.Forums = require("./forums")(sequelizeCredentials, Sequelize);
 db.Topics = require("./topics")(sequelizeCredentials, Sequelize);
 
-db.Users.hasOne(db.Roles, {foreignKey: "user_id"});
-db.Courses.hasOne(db.Roles, {foreignKey: "course_id"});
+db.Roles.belongsTo(db.Users, {foreignKey: "user_id"});
+db.Roles.belongsTo(db.Courses, {foreignKey: "course_id"});
 db.Courses.belongsToMany(db.Users, { through: "Roles" });
 db.Users.belongsToMany(db.Courses, { through: "Roles" });
 

@@ -54,17 +54,6 @@ module.exports = function(sequelize, Sequelize) {
     Users.getUser = async function(user_id, email, models){
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
-            include: [
-                { model: models.Roles }
-            ]
-        });
-    }
-
-    Users.getUserExcludeRoles = async function(email) {
-        return await this.findOne({
-            where: {
-                email: email
-            }
         });
     }
 
@@ -72,17 +61,15 @@ module.exports = function(sequelize, Sequelize) {
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles },
                 { model: models.Courses }
             ]
-        })
+        });
     }
 
     Users.getUserIncludingCourse = async function(user_id, email, course_id, models){
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
-                { model: models.Roles },
                 { 
                     model: models.Courses, 
                     required: false, 
@@ -113,7 +100,7 @@ module.exports = function(sequelize, Sequelize) {
     }
 
     // UPDATE
-    Users.update = async function(email, username, profilePictureLink){
+    Users.update = async function(user_id, email, username, profilePictureLink){
         const updateUserValues = {
             email: email,
             username: username,
@@ -121,7 +108,7 @@ module.exports = function(sequelize, Sequelize) {
         }
 
         const transaction = await sequelize.transaction();
-        const currentUser = await Users.findOne( { where: { email: email }}, { transaction: transaction });
+        const currentUser = await Users.findOne( { where: { user_id: user_id }}, { transaction: transaction });
 
         const updatedUser = await currentUser.updateAttributes(updateUserValues, { transaction: transaction });
         transaction.commit();
