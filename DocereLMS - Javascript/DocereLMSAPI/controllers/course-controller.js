@@ -62,4 +62,22 @@ exports.getCourseIncludingAdmins = function(req, res){
         }
     });
 };
+
+exports.insertCourse = function(req, res){
+    const user_id = req.user.id;
+    const email = req.user.email;
+    const name = req.body.name;
+    const description = req.body.description;
+    const coordinator = req.body.coordinator;
+    const pictureLink = req.body.pictureLink;
+    const allowInvitations = req.body.allowInvitations;
+
+    Models.Courses.insertCourse(user_id, email, name, description, coordinator, pictureLink, allowInvitations, Models).then(function(course){
+        if (!course){
+            Responses.fail(res, "Course could not be created", null);
+        } else {
+            Responses.success(res, "Courses created", course);
+        }
+    });
+}
     

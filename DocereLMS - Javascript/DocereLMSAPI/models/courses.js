@@ -98,5 +98,43 @@ module.exports = function(sequelize, Sequelize){
        });
     }
 
+    Courses.insertCourse = async function(user_id, email, name, description, coordinator, pictureLink, allowInvitations, models){
+
+        const courseDetails = {
+            name: name,
+            description: description,
+            coordinator: coordinator,
+            pictureLink: pictureLink,
+            allowInvitations: allowInvitations
+        };
+
+        const t = await sequelize.transaction();
+        const user = await models.Users.findOne({ where: Sequelize.or({ user_id: user_id }, { email: email }) });
+        if (!user){ 
+            t.rollback();
+            throw new Error("This user could not be found."); 
+        }
+
+        const course = await this.create(courseDetails, {transaction: t});
+        if (!course){ 
+            t.rollback();
+            throw new Error("Course could not be created."); 
+        }
+
+        const roleDetails = {
+            course_id: course.id,
+            user_id: user.id,
+            rank: "admin"
+        }
+        
+        const Role = await models.Roles.create(roleDetails, {transaction: t}).catch(e => {
+            console.log(e);
+            t.rollback();
+        });
+
+        if (Role){ t.commit(); }
+        return course;
+    }
+
     return Courses;
 };
