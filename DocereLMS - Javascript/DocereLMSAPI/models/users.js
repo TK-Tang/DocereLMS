@@ -107,10 +107,10 @@ module.exports = function(sequelize, Sequelize) {
             profilePictureLink: profilePictureLink
         }
 
-        const transaction = await sequelize.transaction();
-        const currentUser = await Users.findOne( { where: { user_id: user_id }}, { transaction: transaction });
+        const t = await sequelize.transaction();
+        const currentUser = await Users.findOne( { where: { user_id: user_id }}, { transaction: t });
 
-        const updatedUser = await currentUser.updateAttributes(updateUserValues, { transaction: transaction });
+        const updatedUser = await currentUser.updateAttributes(updateUserValues, { transaction: t });
         transaction.commit();
         return updatedUser;
     }

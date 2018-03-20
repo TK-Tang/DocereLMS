@@ -27,6 +27,11 @@ module.exports = function(sequelize, Sequelize){
 
         allowInvitations: {
             type: Sequelize.BOOLEAN,
+        },
+
+        isActive: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: true
         }
 
     }, { underscored: true });
@@ -99,7 +104,6 @@ module.exports = function(sequelize, Sequelize){
     }
 
     Courses.insertCourse = async function(user_id, email, name, description, coordinator, pictureLink, allowInvitations, models){
-
         const courseDetails = {
             name: name,
             description: description,
@@ -134,6 +138,42 @@ module.exports = function(sequelize, Sequelize){
 
         if (Role){ t.commit(); }
         return course;
+    }
+
+    Courses.deactivateCourse = async function(course_id, isActive){
+        const courseDetails = {
+            isActive: isActive
+        }
+
+        const t = await sequelize.transaction();
+        const currentCourse = await Courses.findOne({ 
+            where: { course_id: course_id }}, 
+            { transaction: t }
+        );
+
+        const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t });
+        t.commit();
+        return updatedCourse;
+    }
+
+    Courses.updateCourse = async function(course_id, name, description, coordinator, pictureLink, allowInvitations, models){
+        const courseDetails = {
+            name: name,
+            description: description,
+            coordinator: coordinator,
+            pictureLink: pictureLink,
+            allowInvitations: allowInvitations
+        }
+
+        const t = await sequelize.transaction();
+        const currentCourse = await Courses.findOne({
+            where: { course_id: course_id }},
+            { transaction: t }
+        );
+
+        const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t});
+        t.commit();
+        return updatedCourse;
     }
 
     return Courses;
