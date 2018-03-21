@@ -82,22 +82,18 @@ module.exports = function(passportApp, userModel){
 
             userModel.getUser(null, email, Models).then(function(user){
                 if (!user){
-                    return done(null, false, {
-                        message: "Email does not exist"
-                    });
+                    return done("Email does not exist", false);
                 }
 
                 if (!isValidPassword(user.password, password)){
-                    return done(null, false, {
-                        message: "Incorrect password"
-                    });
+                    return done("Incorrect password", false);
                 }
 
                 var userinfo = user.get();
                 return done(null, userinfo);
             }).catch(function(err){
                 console.log("Error: ", err);
-                return done(null, false, { message: "Error with signing in" });
+                return done("Error with signing in", false);
             });
         }
     ));

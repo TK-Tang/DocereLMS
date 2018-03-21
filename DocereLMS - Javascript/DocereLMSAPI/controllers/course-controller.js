@@ -82,7 +82,7 @@ exports.insertCourse = function(req, res){
 }
 
 exports.updateCourse = function(req, res){
-    const course_id = IsNaN(req.params.course_id, 10);
+    const course_id = parseInt(req.params.course_id, 10);
     const name = req.body.name;
     const description = req.body.name;
     const coordinator = req.body.coordinator;
@@ -99,7 +99,7 @@ exports.updateCourse = function(req, res){
 }
 
 exports.deactivateCourse = function(req, res){
-    const course_id = IsNaN(req.params.course_id, 10);
+    const course_id = parseInt(req.params.course_id, 10);
     const isActive = req.body.isActive;
 
     Models.Courses.deactivateCourse(course_id, isActive).then(function(course){
@@ -107,6 +107,32 @@ exports.deactivateCourse = function(req, res){
             Responses.fail(res, "Course could not be deactivated", null);
         } else {
             Responses.success(res, "Course deactivated", course);
+        }
+    });
+}
+
+exports.setUserAsAdmin = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    const user_id = parseInt(req.params.user_id, 10);
+
+    Models.Courses.setUserAsAdmin(course_id, user_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "User could not be set as course admin", null);
+        } else {
+            Responses.success(res, "User successfully set as admin of course " + course.name, course);
+        }
+    });
+}
+
+exports.kickUser = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    const user_id = parseInt(req.params.user_id);
+
+    Models.Courses.kickUser(course_id, user_id, Models).then(function(user){
+        if (!user){
+            Responses.fail(res, "Failed to kick user. The user does not exist or they may not be registered anymore.", null);
+        } else {
+            Responses.success(res, user.email + " kicked");
         }
     });
 }
