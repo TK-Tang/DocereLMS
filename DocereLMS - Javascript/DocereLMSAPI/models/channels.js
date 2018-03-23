@@ -1,10 +1,10 @@
 module.exports = function(sequelize, Sequelize){
-    const Forums = sequelize.define("Forums", {
+    const Channels = sequelize.define("Channels", {
         id: {
             primaryKey: true,
             autoIncrement: true,
             type: Sequelize.INTEGER,
-            field: "forum_id"
+            field: "channel_id"
         },
 
         name: {
@@ -13,8 +13,15 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+            type: Sequelize.STRING
+        },
+
+        adminChannelOnly: {
+            type: Sequelize.BOOLEAN
+        },
+
+        viewChannelOnly: {
+            type: Sequelize.BOOLEAN
         },
 
         order: {
@@ -22,5 +29,5 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    return Forums;
+    return Channels;
 }

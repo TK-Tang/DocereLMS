@@ -1,10 +1,10 @@
 module.exports = function(sequelize, Sequelize){
-    const Forums = sequelize.define("Forums", {
+    const Resources = sequelize.define("Resources", {
         id: {
             primaryKey: true,
             autoIncrement: true,
             type: Sequelize.INTEGER,
-            field: "forum_id"
+            field: "resource_id"
         },
 
         name: {
@@ -13,8 +13,15 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+            type: Sequelize.STRING
+        },
+
+        path: {
+            type: Sequelize.STRING(1024)
+        },
+
+        isPinned: {
+            type: Sequelize.BOOLEAN
         },
 
         order: {
@@ -22,5 +29,5 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    return Forums;
+    return Resources;
 }

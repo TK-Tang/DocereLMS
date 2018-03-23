@@ -1,10 +1,10 @@
 module.exports = function(sequelize, Sequelize){
-    const Forums = sequelize.define("Forums", {
+    const Categories = sequelize.define("Categories", {
         id: {
             primaryKey: true,
             autoIncrement: true,
             type: Sequelize.INTEGER,
-            field: "forum_id"
+            field: "category_id"
         },
 
         name: {
@@ -13,8 +13,11 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+            type: Sequelize.STRING
+        },
+
+        adminOnly: {
+            type: Sequelize.BOOLEAN
         },
 
         order: {
@@ -22,5 +25,5 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    return Forums;
+    return Categories;
 }
