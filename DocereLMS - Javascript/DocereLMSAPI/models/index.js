@@ -63,7 +63,7 @@ db.Channels.belongsTo(db.Courses, { foreignKey: "course_id"});
 db.Channels.hasMany(db.Chats);
 db.Users.hasMany(db.Chats);
 db.Chats.belongsTo(db.Channels, { foreignKey: "channel_id"});
-db.Chats.belongsTo(db.Users, { foreignKeys: "user_id"});
+db.Chats.belongsTo(db.Users, { foreignKey: "user_id"});
 
 db.Courses.hasMany(db.Categories);
 db.Categories.belongsTo(db.Courses, { foreignKey: "course_id"});

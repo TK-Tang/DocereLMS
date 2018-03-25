@@ -7,7 +7,7 @@ module.exports.startScript = function(){
         coordinator: "Dong Yuan",
         pictureLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/University_of_Sydney.svg/1200px-University_of_Sydney.svg.png",
         allowInvitations: true
-    }
+    };
 
     courseList.course002 = {
         name: "INFO1105",
@@ -15,7 +15,7 @@ module.exports.startScript = function(){
         coordinator: "Dong Yuan",
         pictureLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/University_of_Sydney.svg/1200px-University_of_Sydney.svg.png",
         allowInvitations: true
-    }
+    };
 
     return courseList;
 }

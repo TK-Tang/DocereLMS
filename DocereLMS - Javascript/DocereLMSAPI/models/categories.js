@@ -13,11 +13,12 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(1024)
         },
 
         adminOnly: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
 
         order: {

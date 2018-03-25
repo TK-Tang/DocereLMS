@@ -17,11 +17,13 @@ module.exports = function(sequelize, Sequelize){
         },
 
         adminChannelOnly: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
 
         viewChannelOnly: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
 
         order: {
