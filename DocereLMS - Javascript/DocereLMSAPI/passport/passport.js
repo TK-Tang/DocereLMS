@@ -29,41 +29,56 @@ module.exports = function(passportApp, userModel){
             Promise.all([Models.Invitations.getByLink(req.params.link), userModel.getUser(null, email, Models)]).then(([link, user]) => {
                 var generateHash = function(password){ return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); };
                 
-                if (!link){ return done({ message: "Invalid invitation link"}, false); }
+                if (!link){ return done("Invalid invitation link", false); }
 
-                Models.Courses.getCourseIncludeUser(link.course_id, null, email, Models).then(function(course){
-                    if (course && course.Users[0].email == email){
-                        return done("User already registered to this course", null);
-                    }
-
-                    if (user){
-                        console.log("Email exists. Registering user to course.");
-                        Models.Roles.insert(link.course_id, user.id, "student").then(function(role){
-                            if (!role){
-                                return done("Error registering user to course ", false);
-                            } else {
-                                return done(null, user);
-                            }
-                        });
-                    } else {
-                        var userPassword = generateHash(password);
-                        var data = { email: email, password: userPassword };
-    
-                        userModel.create(data).then(function(newUser){
-                            if (!newUser){
-                                return done({ message: "Error creating new user"}, false);
-                            }
-    
-                            Models.Roles.insert(link.course_id, newUser.id, "student").then(function(role){
+                if (req.user != null){
+                    Models.Courses.getCourseIncludeUser(link.course_id, null, req.user.email, Models).then(function(course){
+                        if (course && course.Users[0].email == req.user.email){
+                            return done("User already registered to this course", null);
+                        } else {
+                            Models.Roles.insert(link.course_id, req.user.id, "student").then(function(role){
                                 if (!role){
                                     return done("Error registering user to course", false);
                                 } else {
-                                    return done(null , newUser);
+                                    return done(null , req.user);
                                 }
                             });
-                        });
-                    }
-                });
+                        }
+                    });
+                } else {
+                    Models.Courses.getCourseIncludeUser(link.course_id, null, email, Models).then(function(course){
+                        if (course && course.Users[0].email == email){
+                            return done("User already registered to this course", null);
+                        }
+    
+                        if (user){
+                            Models.Roles.insert(link.course_id, user.id, "student").then(function(role){
+                                if (!role){
+                                    return done("Error registering user to course ", false);
+                                } else {
+                                    return done(null, user);
+                                }
+                            });
+                        } else {
+                            var userPassword = generateHash(password);
+                            var data = { email: email, password: userPassword };
+        
+                            userModel.create(data).then(function(newUser){
+                                if (!newUser){
+                                    return done("Error creating new user", false);
+                                }
+        
+                                Models.Roles.insert(link.course_id, newUser.id, "student").then(function(role){
+                                    if (!role){
+                                        return done("Error registering user to course", false);
+                                    } else {
+                                        return done(null , newUser);
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }
             });
         })
     );

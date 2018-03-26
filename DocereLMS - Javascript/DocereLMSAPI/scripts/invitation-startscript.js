@@ -1,18 +1,23 @@
 module.exports.startScript = function(){
     var invitationList = {};
 
-    invitationList.invitation000 = {
-        link: "aaaaaaaaa",
-        course_id: 1
-    }
-
     invitationList.invitation001 = {
-        link: generateInviteLink(),
+        link: "aaaaaaaaa",
         course_id: 1
     }
 
     invitationList.invitation002 = {
         link: generateInviteLink(),
+        course_id: 1
+    }
+
+    invitationList.invitation003 = {
+        link: generateInviteLink(),
+        course_id: 2
+    }
+
+    invitationList.invitation004 = {
+        link: "bbbbbbbbb",
         course_id: 2
     }
     
