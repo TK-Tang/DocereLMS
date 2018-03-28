@@ -63,6 +63,45 @@ exports.getCourseIncludingAdmins = function(req, res){
     });
 };
 
+exports.getCourseChannels = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(course_id)){ Responses.fail(res, "Input Id is not a number", null); }
+
+    Models.Courses.getCourseIncludesChannels(course_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "Course not found", null);
+        } else {
+            Responses.success(res, "Course with channels found", course);
+        }
+    });
+}
+
+exports.getCourseForums = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(course_id)){ Response.fail(res, "Input Id is not a number", null); }
+
+    Models.Courses.getCourseIncludesForums(course_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "Course not found", null);
+        } else {
+            Responses.success(res, "Course with forums found", course);
+        }
+    })
+}
+
+exports.getCourseCategories = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(course_id)){ Response.fail(res, "Input Id is not a number", null); }
+
+    Models.Courses.getCourseIncludesCategories(course_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "Course not found", null);
+        } else {
+            Responses.success(res, "Course with categories found", course);
+        }
+    });
+}
+
 exports.insertCourse = function(req, res){
     const user_id = req.user.id;
     const email = req.user.email;

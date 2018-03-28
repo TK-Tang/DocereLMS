@@ -103,6 +103,55 @@ module.exports = function(sequelize, Sequelize){
        });
     }
 
+    Courses.getCourseIncludesChannels = async function(course_id, models){
+        return await this.findOne({
+            where: { course_id: course_id },
+            include: [
+                {
+                    model: models.Channels,
+                    attributes: ["name", "description", "adminChannelOnly", "viewChannelOnly", "order"],
+                    required: false,
+                    order: [
+                        ["name", "DESC"]
+                    ]
+                }
+            ]
+        });
+    }
+
+    Courses.getCourseIncludesForums = async function(course_id, models){
+        return await this.findOne({
+            where: { course_id: course_id },
+            include: [
+                {
+                    model: models.Forums,
+                    attributes: ["name", "description", "order"],
+                    required: false,
+                    order: [
+                        "name", "DESC"
+                    ]
+                }
+            ]
+        });
+    }
+
+    Courses.getCourseIncludesCategories = async function(course_id, models){
+        return await this.findOne({
+            where: { course_id: course_id },
+            include: [
+                {
+                    model: models.Categories,
+                    attributes: ["name", "description", "adminOnly", "order"],
+                    required: false,
+                    order: [
+                        "name", "DESC"
+                    ]
+                }
+            ]
+        });
+    }
+
+
     Courses.insertCourse = async function(user_id, email, name, description, coordinator, pictureLink, allowInvitations, models){
         const courseDetails = {
             name: name,

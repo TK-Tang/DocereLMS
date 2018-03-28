@@ -9,6 +9,9 @@ module.exports = function(app){
     app.get("/course/:course_id/users", AuthService.isStudentOrAdminForCourse, CourseController.getCourseIncludingUsers);
     app.get("/course/:course_id/students",  AuthService.isStudentOrAdminForCourse, CourseController.getCourseIncludingStudents);
     app.get("/course/:course_id/admins",  AuthService.isStudentOrAdminForCourse, CourseController.getCourseIncludingAdmins);
+    app.get("/course/:course_id/channels", AuthService.isStudentOrAdminForCourse, CourseController.getCourseChannels);
+    app.get("/course/:course_id/forums", AuthService.isStudentOrAdminForCourse, CourseController.getCourseForums);
+    app.get("/course/:course_id/categories", AuthService.isStudentOrAdminForCourse, CourseController.getCourseCategories);
 
     app.put("/course", AuthService.isLoggedIn, CourseController.insertCourse);
 
