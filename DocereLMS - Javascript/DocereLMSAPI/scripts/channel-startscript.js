@@ -4,13 +4,13 @@ module.exports.startScript = function(){
     channelList.channel001 = {
         name: "General Discussion",
         description: "",
-        course_id: 1
+        course_id: 7
     };
 
     channelList.channel002 = {
         name: "Tutorial Discussion",
         description: "Tutorial related inquiries",
-        course_id: 1
+        course_id: 6
     };
 
     channelList.channel003 = {
@@ -23,7 +23,7 @@ module.exports.startScript = function(){
         name: "Staff",
         description: "",
         adminChannelOnly: true,
-        order: 2,
+        order: 10,
         course_id: 1
     };
 
@@ -31,16 +31,25 @@ module.exports.startScript = function(){
         name: "Announcements board",
         description: "",
         viewChannelOnly: true,
-        order: 1,
+        order: 9,
         course_id: 1
     };
 
     channelList.channel006 = {
-        name: "General",
+        name: "Introduce yourself",
         description: "",
-        order: 1,
-        course_id: 2
+        viewChannelOnly: true,
+        order: 8,
+        course_id: 1
     };
 
+    channelList.channel007 = {
+        name: "Assignments Discussion",
+        description: "",
+        viewChannelOnly: true,
+        order: 5,
+        course_id: 1
+    };
+    
     return channelList;
 }

@@ -29,5 +29,19 @@ module.exports.startScript = function(){
         course_id: 2
     }
 
+    categoryList.category005 = {
+        name: "Lecture slides",
+        description: "Lecture materials",
+        adminOnly: "false",
+        course_id: 2
+    }
+
+    categoryList.category006 = {
+        name: "Text book PDFs",
+        description: "Textbook materials",
+        adminOnly: "false",
+        course_id: 2
+    }
+
     return categoryList;
 }
