@@ -3,38 +3,45 @@ module.exports.startScript = function(){
 
     forumList.forum001 = {
         name: "Board",
+        order: 10,
         course_id: 1
-    }
+    };
 
     forumList.forum002 = {
-        name: "Assignment Materials",
+        name: "General Discussion",
+        order: 9,
         course_id: 1,
-    }
+    };
 
     forumList.forum003 = {
         name: "Tutorial Materials",
+        order: 8,
         course_id: 1,
-    }
+    };
 
     forumList.forum004 = {
-        name: "Board",
-        course_id: 2
-    }
+        name: "Assignment Materials",
+        order: 7,
+        course_id: 1,
+    };
 
     forumList.forum005 = {
-        name: "Assignment Materials",
-        course_id: 2
-    }
+        name: "Banter",
+        order: 1,
+        course_id: 1
+    };
 
     forumList.forum006 = {
-        name: "Tutorial Materials",
+        name: "Board",
+        order: 2,
         course_id: 2
-    }
+    };
 
     forumList.forum007 = {
-        name: "Banter",
+        name: "Discussion",
+        order: 1,
         course_id: 2
-    }
-
+    };
+    
     return forumList;
 }

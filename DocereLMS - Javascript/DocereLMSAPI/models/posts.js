@@ -1,23 +1,17 @@
 module.exports = function(sequelize, Sequelize){
-    const Topics = sequelize.define("Topics", {
+    const Posts = sequelize.define("Posts", {
         id: {
             primaryKey: true,
             autoIncrement: true,
             type: Sequelize.INTEGER,
-            field: "topic_id"
+            field: "post_id"
         },
 
-        title: {
-            type: Sequelize.STRING,
-            notEmpty: true
+        content: {
+            type: Sequelize.STRING(2048),
         },
 
-        isLocked: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        },
-
-        isPinned: {
+        wasEdited: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         },
@@ -28,5 +22,5 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    return Topics;
+    return Posts;
 }
