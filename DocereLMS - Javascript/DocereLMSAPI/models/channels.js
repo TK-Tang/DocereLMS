@@ -13,7 +13,7 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(512)
         },
 
         adminChannelOnly: {

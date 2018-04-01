@@ -165,6 +165,5 @@ module.exports.startScript = function(){
         user_id: 6
     };
     
-
     return chatList;
 }

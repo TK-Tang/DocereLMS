@@ -3,7 +3,7 @@ module.exports.startScript = function(){
     
     channelList.channel001 = {
         name: "Staff",
-        description: "",
+        description: "Discussion and planning amongst tutors and lectures for the course roadmap",
         adminChannelOnly: true,
         order: 10,
         course_id: 1
@@ -11,7 +11,7 @@ module.exports.startScript = function(){
 
     channelList.channel002 = {
         name: "Announcements board",
-        description: "",
+        description: "Important notices go here",
         viewChannelOnly: true,
         order: 9,
         course_id: 1
@@ -19,7 +19,7 @@ module.exports.startScript = function(){
 
     channelList.channel003 = {
         name: "Introduce yourself",
-        description: "",
+        description: "Tell us your name, the degree you study and anything interesting about yourself",
         viewChannelOnly: true,
         order: 8,
         course_id: 1
@@ -41,7 +41,7 @@ module.exports.startScript = function(){
 
     channelList.channel006 = {
         name: "Assignments Discussion",
-        description: "",
+        description: "Assignment related questions and clarifications",
         viewChannelOnly: true,
         order: 5,
         course_id: 1
