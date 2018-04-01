@@ -21,7 +21,8 @@ module.exports = function(sequelize, Sequelize){
         },
 
         isPinned: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
 
         order: {

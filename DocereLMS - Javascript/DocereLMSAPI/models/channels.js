@@ -27,7 +27,8 @@ module.exports = function(sequelize, Sequelize){
         },
 
         order: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 1
         }
     }, { underscored: true });
 

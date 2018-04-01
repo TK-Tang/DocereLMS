@@ -31,7 +31,7 @@ module.exports.startScript = function(){
         channel_id: 5,
         user_id: 1
     }
-    
+ 
     chatList.chat006 = {
         message: "G'day all",
         channel_id: 1,
@@ -164,6 +164,7 @@ module.exports.startScript = function(){
         channel_id: 6,
         user_id: 6
     };
+    
 
     return chatList;
 }
