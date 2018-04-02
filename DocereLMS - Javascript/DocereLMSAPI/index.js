@@ -26,6 +26,9 @@ require("./routers/users-router.js")(App);
 require("./routers/invitations-router.js")(App);
 require("./routers/invitation-router.js")(App);
 
+require("./routers/forum-router.js")(App);
+
+
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();
 

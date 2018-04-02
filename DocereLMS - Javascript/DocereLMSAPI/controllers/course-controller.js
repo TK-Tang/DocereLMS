@@ -5,7 +5,7 @@ exports.getCourse = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
     if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
 
-    Models.Courses.getCourse(course_id, Models).then(function(courses){
+    Models.Courses.getCourse(course_id).then(function(courses){
         if (!courses){
             Responses.fail(res, "Course not found", null);
         } else {
@@ -20,7 +20,11 @@ exports.getCourseIncludingUser = function(req, res){
     const course_id = parseInt(req.params.course_id)
 
     Models.Courses.getCourseIncludeUser(course_id, user_id, email, Models).then(function(course){
-        
+        if (!course){
+            Responses.fail(res, "Course with user not found", null);
+        } else {
+            Responses.success(res, "Course with user found", course);
+        }
     });
 };
 

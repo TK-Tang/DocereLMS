@@ -36,7 +36,6 @@ module.exports = function(sequelize, Sequelize){
 
     }, { underscored: true });
 
-    // CREATE
     Courses.insert = async function(name, coordinator, pictureLink, allowInvitations){
         const course = {
             name : name,
@@ -48,8 +47,7 @@ module.exports = function(sequelize, Sequelize){
         return await this.create(course);
     }
 
-    // READ
-    Courses.getCourse = async function(course_id, models){
+    Courses.getCourse = async function(course_id){
         return await this.findOne({
             where: { course_id: course_id}
         })
@@ -220,6 +218,7 @@ module.exports = function(sequelize, Sequelize){
             { transaction: t }
         );
 
+        if (!currentCourse){ return null; }
         const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t });
         t.commit();
         return updatedCourse;

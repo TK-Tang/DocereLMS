@@ -65,7 +65,7 @@ exports.isAdminForCourse = function(req, res, next){
     const course_id = parseInt(req.params.course_id, 10);
 
     Models.Users.getUserIncludingCourse(null, req.user.email, course_id, Models).then(function(user){
-        if (user.Courses[0].Roles.rank === "admin"){
+        if (user.Courses.length !== 0 && user.Courses[0].Roles.rank === "admin"){
             return next();
         } else {
             Responses.fail(res, "You do not have permission to do this.", null);

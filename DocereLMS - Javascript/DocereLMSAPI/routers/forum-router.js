@@ -4,10 +4,10 @@ const AuthService = require("../middleware/authentication-service");
 const ForumController = require("../controllers/forum-controller");
 
 module.exports = function(app){
-    app.get("/course/:course_id/forums", AuthService.isStudentOrAdminForCourse, ForumController);
-    app.get("/course/:course)id/forums/:forum_id", AuthService.isStudentOrAdminForCourse, ForumController);
+   
+    app.get("/course/:course_id/forum/:forum_id", AuthService.isStudentOrAdminForCourse, ForumController.getForum);
 
-    app.post("", AuthService.isAdminForCourse, ForumController);
-    app.put("", AuthService.isAdminForCourse, ForumController);
-    app.post("", AuthService.isAdminForCourse, ForumController);
+    app.post("/course/:course_id/forum/:forum_id", AuthService.isAdminForCourse, ForumController.updateForum);
+    // app.put("", AuthService.isAdminForCourse, ForumController);
+    // app.delete("", AuthService.isAdminForCourse, ForumController);
 }
