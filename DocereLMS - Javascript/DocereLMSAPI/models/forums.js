@@ -13,14 +13,20 @@ module.exports = function(sequelize, Sequelize){
         },
 
         description: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
+            type: Sequelize.STRING
         },
 
         order: {
             type: Sequelize.INTEGER
         }
     }, { underscored: true });
+
+    // READ
+    Forums.getForums = async function(course_id){
+        return await this.findAll({
+            where: { course_id: course_id }
+        });
+    }
 
     return Forums;
 }
