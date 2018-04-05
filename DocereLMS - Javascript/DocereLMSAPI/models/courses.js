@@ -214,9 +214,8 @@ module.exports = function(sequelize, Sequelize){
 
         const t = await sequelize.transaction();
         const currentCourse = await Courses.findOne({
-            where: { course_id: course_id }},
-            { transaction: t }
-        );
+            where: { course_id: course_id }
+        }, { transaction: t });
 
         if (!currentCourse){ return null; }
         const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t });
@@ -264,7 +263,12 @@ module.exports = function(sequelize, Sequelize){
             }
         }, { transaction: t });
 
-        if (destroyed != 1){ t.rollback(); return null; }
+        if (destroyed != 1){ 
+            t.rollback(); 
+            return null; 
+        } else { 
+            t.commit(); 
+        }
 
         return user;
     }

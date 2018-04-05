@@ -21,11 +21,6 @@ module.exports = function(sequelize, Sequelize){
             type: Sequelize.BOOLEAN,
             defaultValue: false
         },
-
-        editedByAdmin: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        }
     }, { underscored: true });
 
     return Topics;

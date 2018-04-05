@@ -7,6 +7,6 @@ module.exports = function(app){
     app.get("/user/:term", AuthServices.isLoggedIn, UserController.getUser);
     app.get("/user/:term/course/:course_id", AuthServices.isLoggedIn, UserController.getUserIncludingCourse);
     app.get("/user/:term/courses", AuthServices.isLoggedIn, UserController.getUserIncludingCourses);
-    app.post("/user/:term", AuthServices.IsCurrentUser, UserController.updateUser);
+    app.post("/user/:term", AuthServices.isCurrentUser, UserController.updateUser);
 }
 

@@ -35,6 +35,7 @@ db.Invitations = require("./invitations")(sequelizeCredentials, Sequelize);
 db.Forums = require("./forums")(sequelizeCredentials, Sequelize);
 db.Topics = require("./topics")(sequelizeCredentials, Sequelize);
 db.Posts = require("./posts")(sequelizeCredentials, Sequelize);
+db.Upvotes = require("./upvotes")(sequelizeCredentials, Sequelize);
 
 db.Channels = require("./channels")(sequelizeCredentials, Sequelize);
 db.Chats = require("./chats")(sequelizeCredentials, Sequelize);
@@ -60,8 +61,11 @@ db.Topics.belongsTo(db.Users, { foreignKey: "user_id" });
 
 db.Topics.hasMany(db.Posts);
 db.Users.hasMany(db.Posts);
-db.Posts.belongsTo(db.Topics, { foreignKey: "topic_id"});
+db.Posts.belongsTo(db.Topics, { foreignKey: "topic_id" });
 db.Posts.belongsTo(db.Users, { foreignKey: "user_id" });
+
+db.Posts.hasMany(db.Upvotes);
+db.Upvotes.belongsTo(db.Posts, { foreignKey: "post_id" });
 
 db.Courses.hasMany(db.Channels);
 db.Channels.belongsTo(db.Courses, { foreignKey: "course_id" });

@@ -31,7 +31,7 @@ exports.isPublicPage = function (req, res, next){
     Responses.fail(res, "Authentication failure: Not authenticated");
 }
 
-exports.IsCurrentUser = function(req, res, next){
+exports.isCurrentUser = function(req, res, next){
     const term = req.params.term;
     
     Models.Users.getUser(term, term, Models).then(function(user){
@@ -46,14 +46,30 @@ exports.IsCurrentUser = function(req, res, next){
     });
 }
 
+exports.isPostOwner = function(req, res, next){
+    const post_id = parseInt(req.params.post_id, 10);
+    var course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(post_id)){ Responses.error(res, "Error authenticating. Post ID is not a number", null); }
+    if (isNaN(course_id)){ Response.error(res, "Error authenticating. Course id is not a number", null); }
+
+    Promise.all([Models.Post.getPost(post_id), Models.Users.getUserIncludingCourse(null, req.user.email, course_id, Models)]).then(([post, user]) => {
+        if(!post || post.user_id != req.user.id || user.Courses[0].Roles.rank !== "admin"){
+            return Responses.fail(res, "This is not your post. You do not have permission to do this.", null)
+        } else {
+            return next();
+        }
+    });
+}
+
 exports.isStudentOrAdminForCourse = function(req, res, next){
     var course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(course_id)){ Response.error(res, "Error authenticating. Course id is not a number", null); }
     
     Models.Users.getUserIncludingCourse(null, req.user.email, course_id, Models).then(function(user){
         if (user.Courses[0].Roles.rank === "student" || user.Courses[0].Roles.rank === "admin"){
             return next();
         } else {
-            return Responses.fail(res, "You do not have permission to do this.");
+            return Responses.fail(res, "You do not have permission to do this.", null);
         }
     }).catch( e => {
         console.log(e);

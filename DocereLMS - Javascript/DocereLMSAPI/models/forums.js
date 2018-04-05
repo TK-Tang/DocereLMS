@@ -40,6 +40,20 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
+    Forums.insertForum = async function(course_id, name, description, order, models){
+        const forumDetails = {
+            name: name,
+            description: description,
+            order: order,
+            course_id: course_id
+        }
+
+        const currentCourse = await models.Courses.getCourse(course_id);
+        if (!currentCourse){ return null; }
+
+        return  this.create(forumDetails);
+    }
+
     Forums.updateForum = async function(course_id, forum_id, name, description, order, models){
         const forumDetails = {
             name: name,
@@ -57,6 +71,11 @@ module.exports = function(sequelize, Sequelize){
         const updatedForum = await currentForum.updateAttributes(forumDetails, { transation: t });
         t.commit();
         return updatedForum;
+    }
+
+    Forums.deleteForum = async function(course_id, forum_id){
+        const t = await sequelize.transaction();
+        // need to delete topics that then deletes posts
     }
 
     return Forums;

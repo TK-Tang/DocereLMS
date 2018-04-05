@@ -27,13 +27,16 @@ require("./routers/invitations-router.js")(App);
 require("./routers/invitation-router.js")(App);
 
 require("./routers/forum-router.js")(App);
+require("./routers/post-router.js")(App);
+require("./routers/posts-router.js")(App);
+require("./routers/upvote-router.js")(App);
 
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();
 
     App.listen(11000, () => {
-        console.log("Docere LMS API active on port 11000!");
+        console.log("Leaderboard LMS API active on port 11000!");
     });
 }).catch(e => {
     console.error(e);

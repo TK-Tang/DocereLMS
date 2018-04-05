@@ -5,7 +5,6 @@ module.exports.startScript = function(){
         title: "Welcome to INFO1103",
         isLocked: true,
         isPinned: true,
-        editedByAdmin: true,
         user_id: 1,
         forum_id: 1
     };
@@ -50,7 +49,6 @@ module.exports.startScript = function(){
         title: "Welcome to INFO1105",
         isLocked: true,
         isPinned: true,
-        editedByAdmin: true,
         user_id: 1,
         forum_id: 6
     };

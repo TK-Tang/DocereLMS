@@ -4,7 +4,6 @@ module.exports.startScript = function(){
     postList.post001 = {
         content: "Welcome to INFO1103 forums. This course introduces the basic principles of programming to you. \n If you have any questions, feel free to search it on the internet, or ask your tutors or myself.\n You'll find the tutorial answers have already been released for this week.",
         wasEdited: true,
-        editedByAdmin: true,
         user_id: 1,
         topic_id: 1
     };

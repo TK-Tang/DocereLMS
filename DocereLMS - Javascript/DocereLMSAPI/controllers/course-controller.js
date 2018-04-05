@@ -3,7 +3,7 @@ const Models = require("../models");
 
 exports.getCourse = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Responses.error(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourse(course_id).then(function(courses){
         if (!courses){
@@ -16,8 +16,11 @@ exports.getCourse = function(req, res){
 
 exports.getCourseIncludingUser = function(req, res){
     var email = req.params.term;
-    var user_id = parseInt(req.params.term);
-    const course_id = parseInt(req.params.course_id)
+    var user_id = parseInt(req.params.term, 10);
+    const course_id = parseInt(req.params.course_id, 10)
+
+    if (isNaN(course_id)){ Responses.error(res, "Course ID is not a number", null); }
+    if (isNaN(user_id)){ Responses.error(res, "User ID is not a number", null); }
 
     Models.Courses.getCourseIncludeUser(course_id, user_id, email, Models).then(function(course){
         if (!course){
@@ -30,7 +33,7 @@ exports.getCourseIncludingUser = function(req, res){
 
 exports.getCourseIncludingUsers = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Responses.error(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludingUsers(course_id, Models).then(function(courses){
         if (!courses){
@@ -43,7 +46,7 @@ exports.getCourseIncludingUsers = function(req, res){
 
 exports.getCourseIncludingStudents = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Responses.error(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Responses.error(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludingUsersAndRank (course_id, "student", Models).then(function(courses){
         if (!courses){
@@ -56,7 +59,7 @@ exports.getCourseIncludingStudents = function(req, res){
 
 exports.getCourseIncludingAdmins = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Responses.fail(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Responses.fail(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludingUsersAndRank(course_id, "admin", Models).then(function(courses){
         if (!courses){
@@ -69,7 +72,7 @@ exports.getCourseIncludingAdmins = function(req, res){
 
 exports.getCourseChannels = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Responses.fail(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Responses.fail(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludesChannels(course_id, Models).then(function(course){
         if(!course){
@@ -82,7 +85,7 @@ exports.getCourseChannels = function(req, res){
 
 exports.getCourseForums = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Response.fail(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Response.fail(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludesForums(course_id, Models).then(function(course){
         if(!course){
@@ -95,7 +98,7 @@ exports.getCourseForums = function(req, res){
 
 exports.getCourseCategories = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
-    if (isNaN(course_id)){ Response.fail(res, "Input Id is not a number", null); }
+    if (isNaN(course_id)){ Response.fail(res, "Course ID is not a number", null); }
 
     Models.Courses.getCourseIncludesCategories(course_id, Models).then(function(course){
         if(!course){
@@ -175,7 +178,7 @@ exports.kickUser = function(req, res){
         if (!user){
             Responses.fail(res, "Failed to kick user. The user does not exist or they may not be registered anymore.", null);
         } else {
-            Responses.success(res, user.email + " kicked");
+            Responses.success(res, user.email + " kicked", user);
         }
     });
 }
