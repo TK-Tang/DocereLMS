@@ -61,6 +61,21 @@ exports.isPostOwner = function(req, res, next){
     });
 }
 
+exports.isTopicOwner = function(req, res, next){
+    const topic_id = parseInt(req.params.topic_id, 10);
+    var course_id = parseInt(req.params.course_id, 10);
+    if (isNaN(topic_id)){ Responses.error(res, "Error authenticating. Topic ID is not a number", null); }
+    if (isNaN(course_id)){ Response.error(res, "Error authenticating. Course id is not a number", null); }
+
+    Promise.all([Models.Topic.getPost(topic_id), Models.Users.getUserIncludingCourse(null, req.user.email, course_id, Models)]).then(([topic, user]) => {
+        if(!topic || topic.user_id != req.user.id || user.Courses[0].Roles.rank !== "admin"){
+            return Responses.fail(res, "This is not your topic. You do not have permission to do this.", null)
+        } else {
+            return next();
+        }
+    });
+}
+
 exports.isStudentOrAdminForCourse = function(req, res, next){
     var course_id = parseInt(req.params.course_id, 10);
     if (isNaN(course_id)){ Response.error(res, "Error authenticating. Course id is not a number", null); }
