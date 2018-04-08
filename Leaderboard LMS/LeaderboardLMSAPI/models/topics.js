@@ -115,6 +115,7 @@ module.exports = function(sequelize, Sequelize){
 
         topic.Posts.forEach(function(post){
             var deletedPost = Models.Posts.deletePost(post.post_id);
+            if (!deletedPost){ return null; }
         });
 
         const destroyed = await this.destroy({
@@ -122,7 +123,7 @@ module.exports = function(sequelize, Sequelize){
         });
 
         if (destroyed != 1){
-            throw new Error("Expected one topi to be deleted. Instead, " + destroyed + " topics were deleted."); 
+            throw new Error("Expected one topic to be deleted. Instead, " + destroyed + " topics were deleted."); 
         } else {
             return topic;
         }

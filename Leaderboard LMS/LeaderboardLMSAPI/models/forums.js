@@ -1,3 +1,5 @@
+const Models = require("../models");
+
 module.exports = function(sequelize, Sequelize){
     const Forums = sequelize.define("Forums", {
         id: {
@@ -21,14 +23,14 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    Forums.getForum = async function(course_id, forum_id, models){
+    Forums.getForum = async function(course_id, forum_id){
         return await this.findOne({
             where: { 
                 forum_id: forum_id,
                 course_id: course_id,
             },
             include: {
-                model: models.Topics,
+                model: Models.Topics,
                 where: { forum_id: forum_id }
             }
         });
@@ -40,7 +42,7 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Forums.insertForum = async function(course_id, name, description, order, models){
+    Forums.insertForum = async function(course_id, name, description, order){
         const forumDetails = {
             name: name,
             description: description,
@@ -48,13 +50,13 @@ module.exports = function(sequelize, Sequelize){
             course_id: course_id
         }
 
-        const currentCourse = await models.Courses.getCourse(course_id);
+        const currentCourse = await Models.Courses.getCourse(course_id);
         if (!currentCourse){ return null; }
 
         return  this.create(forumDetails);
     }
 
-    Forums.updateForum = async function(course_id, forum_id, name, description, order, models){
+    Forums.updateForum = async function(course_id, forum_id, name, description, order){
         const forumDetails = {
             name: name,
             description: description,
@@ -62,8 +64,8 @@ module.exports = function(sequelize, Sequelize){
         }
 
         const t = await sequelize.transaction();
-        const currentForum = await models.Forums.getForumById(forum_id);
-        const currentCourse = await models.Courses.getCourse(course_id);
+        const currentForum = await Models.Forums.getForumById(forum_id);
+        const currentCourse = await Models.Courses.getCourse(course_id);
 
         if (!currentCourse){ return null; }
         if (!currentForum){ return null; }
@@ -75,7 +77,22 @@ module.exports = function(sequelize, Sequelize){
 
     Forums.deleteForum = async function(course_id, forum_id){
         const t = await sequelize.transaction();
-        // need to delete topics that then deletes posts
+        const forum = await this.getForum(forum_id);
+
+        forum.Topics.forEach(function(topic){
+            var deletedTopic = Models.Topics.deleteTopic(topic.topic_id);
+            if (!deletedTopic){ return null; }
+        });
+
+        const destroyed = await this.destroy({
+            where: { forum_id: forum_id }
+        });
+
+        if (destroyed != 1){
+            throw new Error("Expected one forum to be deleted. Instead, " + destroyed + " forums were deleted."); 
+        } else {
+            return forum;
+        }
     }
 
     return Forums;
