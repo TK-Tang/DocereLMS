@@ -1,5 +1,5 @@
 {
-    "name": "LeaderboardLMS",
+    "name": "leaderboardlms",
     "version": "0.0.1",
     "description": "Leaderboard LMS App",
     "main": "server.js",
