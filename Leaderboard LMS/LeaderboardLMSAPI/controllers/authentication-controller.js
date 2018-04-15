@@ -20,7 +20,7 @@ exports.signIn = function(req, res){
 }
 
 exports.signedIn = function(req, res){
-    Responses.success(res, "Successfully signed in");
+    Responses.success(res, "Successfully signed in OOF");
 }
 
 exports.signOut = function(req, res){
