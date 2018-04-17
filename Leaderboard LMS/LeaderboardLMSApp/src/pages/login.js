@@ -1,23 +1,16 @@
 import React from "react";
 import {Sidebar, Segment, Button, Menu, Image, Icon, Header, Form} from "semantic-ui-react";
-import {Link, browserHistory} from "react-router";
+import {Link} from "react-router";
 
 import AuthAPI from "../services/authentication-api";
 
-require('velocity-animate');
-require('velocity-animate/velocity.ui');
-
-var VelocityTransitionGroup= require('velocity-react').VelocityTransitionGroup;
+require("velocity-animate");
+require("velocity-animate/velocity.ui");
+var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
 
 export default class Login extends React.Component {
     constructor(props){
         super(props);
-
-        AuthAPI.getCurrentUser().then((res) => {
-            if (res.status === "success"){
-                console.log(res.message + ": " + res.payload.email + " " + res.payload.username);
-            }
-        });
 
         this.state = {
             loginComplete: false,
@@ -27,7 +20,24 @@ export default class Login extends React.Component {
         };
     }
 
-    componentWillMount(){ }
+    componentWillMount(){
+        AuthAPI.getCurrentUser().then((res) => {
+            if (res.status === "success"){
+                console.log(res.message + ": " + res.payload.email + " " + res.payload.username);
+                let message = "You are already signed in!";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                
+                this.setState({ loginComplete: true });
+                setTimeout(function(){
+                    this.props.history.push('/landing');
+                }.bind(this), 2000);
+            }
+        });
+    }
+
+    componentWillUnmount() {
+
+    }
 
     login(){
         let loginInfo = {
@@ -41,7 +51,7 @@ export default class Login extends React.Component {
 
                 this.setState({ loginComplete: true });
                 setTimeout(function(){
-                    browserHistory.push("/landing");
+                    this.props.history.push('/landing');
                 }.bind(this), 2000);
 
             } else {

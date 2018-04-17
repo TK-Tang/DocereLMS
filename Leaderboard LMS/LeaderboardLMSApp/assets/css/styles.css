@@ -73,7 +73,7 @@
     transition-duration: 0.2s;
 }
 
-.noTextDecoration{
+.no-text-decoration{
     text-decoration: none !important;
 }
  
@@ -322,4 +322,28 @@
 
 .white-color {
     color: white
+}
+
+.header-banner{
+    background:white;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-banner .ui.grid>.row{
+    margin-left: 10px;
+}
+
+.header-banner-icon{
+    font-size: 30px;
+    color: black;
+    margin-left: 10px;
+    transition-duration: 0.2s;
+}
+
+
+.header-banner-icon:hover{
+    color: rgba(0,0,0,0.5);
+    transition-duration: 0.2s;
 }
