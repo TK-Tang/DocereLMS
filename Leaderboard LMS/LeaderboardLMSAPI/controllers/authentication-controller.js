@@ -1,6 +1,15 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
 
+exports.getCurrentUser = function(req, res){
+    if (req.user.email){
+        Responses.success(res, "Current user", { "email": req.user.email, "username": req.user.username });
+    } else {
+        Responses.fail(res, "You are not logged in", null);
+    }
+    
+}
+
 exports.signUp = function(req, res){
     Models.Invitations.getByLink(req.params.link).then(function(invitation){
         if(!invitation){
@@ -16,15 +25,15 @@ exports.signedUp =  function(req, res){
 }
 
 exports.signIn = function(req, res){
-    Responses.success(res, "Sign-in");
+    Responses.success(res, "Sign-in", null);
 }
 
 exports.signedIn = function(req, res){
-    Responses.success(res, "Successfully signed in OOF");
+    Responses.success(res, "Successfully signed in", null);
 }
 
 exports.signOut = function(req, res){
     req.session.destroy(function(){
-        Responses.success(res, "Sign-out");
+        Responses.success(res, "Sign-out", null);
     });
 }

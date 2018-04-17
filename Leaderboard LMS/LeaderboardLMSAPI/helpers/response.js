@@ -7,7 +7,7 @@ function error(res, message, data){
 }
 
 function fail(res, message, data){
-    return res.status(400).send({ status: "fail", message: message, payload: data });
+    return res.status(200).send({ status: "fail", message: message, payload: data });
 }
 
 module.exports = {

@@ -12,6 +12,13 @@ var VelocityTransitionGroup= require('velocity-react').VelocityTransitionGroup;
 export default class Login extends React.Component {
     constructor(props){
         super(props);
+
+        AuthAPI.getCurrentUser().then((res) => {
+            if (res.status === "success"){
+                console.log(res.message + ": " + res.payload.email + " " + res.payload.username);
+            }
+        });
+
         this.state = {
             loginComplete: false,
             email: "",
@@ -28,16 +35,20 @@ export default class Login extends React.Component {
             password: this.state.password
         }
         AuthAPI.signin(loginInfo).then((res) => {
-            console.log(res);
             if (res.status === "success"){
                 let message = "Successfully logged in!";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+
+                this.setState({ loginComplete: true });
+                setTimeout(function(){
+                    browserHistory.push("/landing");
+                }.bind(this), 2000);
+
+            } else {
+                let message = "Login failed!";
+                window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
             }
         });
-        this.setState({ loginComplete: true });
-        setTimeout(function(){
-            browserHistory.push("/landing");
-        }.bind(this), 2000);
     }
 
     updateEmail(e){
