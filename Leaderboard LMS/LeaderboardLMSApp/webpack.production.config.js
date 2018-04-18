@@ -10,6 +10,9 @@ module.exports = {
         filename: "bundle.js",
         publicPath: "/"
     },
+    devServer: {
+        historyApiFallback: true,
+    },
     module: {
         loaders: [
             {
@@ -26,10 +29,6 @@ module.exports = {
                 loaders: [ "style-loader?sourceMap", "css-loader?modules&importLoaders=1&localIdentName=[path]__[name]__[local]_[hash:base64:5]"]
             }
         ]
-    },
-    devServer: {
-        historyApiFallback: { index: "./index.html" },
-        contentBase: "./"
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

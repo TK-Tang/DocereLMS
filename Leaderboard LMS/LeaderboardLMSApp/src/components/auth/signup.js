@@ -1,77 +1,33 @@
 import React from "react";
 import {Button, Image, Icon, Form} from "semantic-ui-react";
 
-import AuthAPI from "../services/authentication-api";
-
 require("velocity-animate");
 require("velocity-animate/velocity.ui");
 var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            loginComplete: false,
+            signupComplete: false,
             email: "",
-            password: ""
-        };
-    }
-
-    componentWillMount(){
-        AuthAPI.get_currentUser().then((res) => {
-            if (res.status === "success"){
-                console.log(res.message + ": " + res.payload.email + " " + res.payload.username);
-                let message = "You are already signed in!";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
-                
-                this.setState({ loginComplete: true });
-                setTimeout(function(){
-                    this.props.history.replace('/landing');
-                }.bind(this), 2000);
-            }
-        });
-    }
-
-    componentWillUnmount() {
-
-    }
-
-    login(){
-        let loginInfo = {
-            email: this.state.email,
-            password: this.state.password
+            password: "",
         }
-        AuthAPI.post_signin(loginInfo).then((res) => {
-            if (res.status === "success"){
-                let message = "Successfully logged in!";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
-
-                this.setState({ loginComplete: true });
-                setTimeout(function(){ this.props.history.replace('/landing'); }.bind(this), 2000);
-            } else {
-                let message = "Login failed!";
-                window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
-            }
-        });
     }
 
-    updateEmail(e){
-        this.setState({email: e.target.value});
-    }
-
-    updatePassword(e){
-        this.setState({password: e.target.value});
+    componentWillMount() {
+        this.props.history.replace('/auth/signup');
     }
 
     render(){
-        return(
-            <div className="text-centre">
+        <div className="text-centre">
                 <div className={(this.state.loginComplete) ? "appear intro-logo" : "disappear intro-logo"}>
                     <Icon.Group size="huge" className="icon-group">
                         <Icon className="white-color" size="big" name="checkmark" />
                     </Icon.Group>
                     <h4 className="intro-h4">Welcome to Leaderboard Learning Management System</h4>
+                    <h5 className="intro-h4">Signing you up!</h5>
                 </div>
 
                 <div className={(this.state.loginComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
@@ -82,6 +38,7 @@ export default class Login extends React.Component {
                         style={{display:"inline-block"}}
                     />
                     <h4 className="intro-h4">Welcome to Leaderboard Learning Management System</h4>
+                    <h5 className="intro-h4">You've been invited to a course! Sign up here!</h5>
                     <Form className="intro-form">
                         <Form.Group widths="equal">
                             <Form.Input id="form-subcomponent-shorthand-input-user-name" onChange={this.updateEmail.bind(this)} placeholder="Email" value={this.state.email} />
@@ -89,11 +46,9 @@ export default class Login extends React.Component {
                         <Form.Group widths="equal">
                             <Form.Input type="password" id="form-subcomponent-shorthand-input-password" onChange={this.updatePassword.bind(this)} placeholder="Password" value={this.state.password}/>
                         </Form.Group>
-                        <Button positive className="width-full" onClick={this.login.bind(this)}>Login</Button>
+                        <Button positive className="width-full">Login</Button>
                     </Form>
                 </div>
             </div>
-        );
     }
 }
-

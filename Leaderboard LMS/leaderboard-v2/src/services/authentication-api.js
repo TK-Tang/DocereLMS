@@ -51,4 +51,4 @@ var authentication_api = {
     }
 }
 
-module.exports = authentication_api;
+export default authentication_api;

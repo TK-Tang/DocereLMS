@@ -38,8 +38,7 @@ module.exports = {
         ]
     },
     devServer: {
-        historyApiFallback: { index: "./index.html" },
-        contentBase: "./"
+        historyApiFallback: true,
     },
     plugins: [
         new htmlWebpackPlugin({

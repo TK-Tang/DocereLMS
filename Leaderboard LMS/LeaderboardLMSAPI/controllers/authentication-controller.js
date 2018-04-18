@@ -24,10 +24,6 @@ exports.signedUp =  function(req, res){
     Responses.success(res, "Successfully signed up", null);
 }
 
-exports.signIn = function(req, res){
-    Responses.success(res, "Sign-in", null);
-}
-
 exports.signedIn = function(req, res){
     Responses.success(res, "Successfully signed in", null);
 }

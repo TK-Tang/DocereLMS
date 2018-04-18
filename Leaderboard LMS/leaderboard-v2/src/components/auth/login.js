@@ -1,11 +1,11 @@
 import React from "react";
 import {Button, Image, Icon, Form} from "semantic-ui-react";
 
-import AuthAPI from "../services/authentication-api";
+import AuthAPI from "../../services/authentication-api";
 
-require("velocity-animate");
-require("velocity-animate/velocity.ui");
-var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
+// require("velocity-animate");
+// require("velocity-animate/velocity.ui");
+// var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
 
 export default class Login extends React.Component {
     constructor(props){
@@ -76,7 +76,7 @@ export default class Login extends React.Component {
 
                 <div className={(this.state.loginComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
                     <Image 
-                        src="/assets/img/icons/icon.png"
+                        src="/public/img/icons/icon.png"
                         size="small"
                         shape="rounded"
                         style={{display:"inline-block"}}

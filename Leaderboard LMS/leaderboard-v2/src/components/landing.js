@@ -2,13 +2,13 @@ import React from "react";
 
 import CourseAPI from "../services/course-api.js";
 import AuthAPI from "../services/authentication-api.js";
-import Header from "../components/headers/Header.js";
+import Header from "./headers/header.js";
 
 import { Sidebar, Segment, Button, Menu, Image, Icon } from "semantic-ui-react";
 
-require("velocity-animate");
-require("velocity-animate/velocity.ui");
-var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
+// require("velocity-animate");
+// require("velocity-animate/velocity.ui");
+// var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
 
 export default class Landing extends React.Component {
     constructor(props){
