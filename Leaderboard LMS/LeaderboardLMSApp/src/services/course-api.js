@@ -15,4 +15,4 @@ var course_api = {
     }
 }
 
-module.exports = course_api;
+export default course_api;

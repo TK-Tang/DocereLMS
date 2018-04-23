@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Image, Icon, Form} from "semantic-ui-react";
 
-require("velocity-animate");
-require("velocity-animate/velocity.ui");
-var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
+// require("velocity-animate");
+// require("velocity-animate/velocity.ui");
+// var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
 
 export default class Signup extends React.Component {
     constructor(props){
@@ -19,9 +19,18 @@ export default class Signup extends React.Component {
     componentWillMount() {
         this.props.history.replace('/auth/signup');
     }
+    
+    updateEmail(e){
+        this.setState({email: e.target.value});
+    }
+
+    updatePassword(e){
+        this.setState({password: e.target.value});
+    }
 
     render(){
-        <div className="text-centre">
+        return (
+            <div className="text-centre">
                 <div className={(this.state.loginComplete) ? "appear intro-logo" : "disappear intro-logo"}>
                     <Icon.Group size="huge" className="icon-group">
                         <Icon className="white-color" size="big" name="checkmark" />
@@ -50,5 +59,6 @@ export default class Signup extends React.Component {
                     </Form>
                 </div>
             </div>
+        )
     }
 }
