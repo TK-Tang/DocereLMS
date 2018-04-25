@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Icon, Grid, Popup } from "semantic-ui-react";
 
+import AuthAPI from "../../services/authentication-api";
+
 export default class header extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +12,12 @@ export default class header extends React.Component {
     }
 
     sidebarToggle(){
+        console.log("asdf");
         this.props.sidebarToggle();
+    }
+
+    signout(){
+        this.props.signout();
     }
 
     render() {
@@ -29,8 +36,8 @@ export default class header extends React.Component {
                             <Button.Group>
                                 <Button size="big" icon="map" content="Dashboard" />
                                 <Button size="big" icon="list layout" content="Tasks" />
-                                <Button size="big" content="Agents" />
-                                <Button size="big" icon="users" content="Teams" />
+                                <Button size="big" icon="align justify" content="Agents" />
+                                <Button size="big" icon="plane" content="Sign Out" onClick={this.signout.bind(this)}/>
                             </Button.Group>
                         </Grid.Column>
                     </Grid.Row>

@@ -3,16 +3,12 @@ import {Button, Image, Icon, Form} from "semantic-ui-react";
 
 import AuthAPI from "../../services/authentication-api";
 
-// require("velocity-animate");
-// require("velocity-animate/velocity.ui");
-// var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
-
-export default class Login extends React.Component {
+export default class Signin extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            loginComplete: false,
+            signinComplete: false,
             email: "",
             password: ""
         };
@@ -21,11 +17,10 @@ export default class Login extends React.Component {
     componentWillMount(){
         AuthAPI.get_currentUser().then((res) => {
             if (res.status === "success"){
-                console.log(res.message + ": " + res.payload.email + " " + res.payload.username);
-                let message = "You are already signed in!";
+                let message = "You are already signed in " +  res.payload.username + "!";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
                 
-                this.setState({ loginComplete: true });
+                this.setState({ signinComplete: true });
                 setTimeout(function(){
                     this.props.history.replace('/landing');
                 }.bind(this), 2000);
@@ -33,24 +28,20 @@ export default class Login extends React.Component {
         });
     }
 
-    componentWillUnmount() {
-
-    }
-
-    login(){
-        let loginInfo = {
+    signin(){
+        let signinInfo = {
             email: this.state.email,
             password: this.state.password
         }
-        AuthAPI.post_signin(loginInfo).then((res) => {
+        AuthAPI.post_signin(signinInfo).then((res) => {
             if (res.status === "success"){
-                let message = "Successfully logged in!";
+                let message = "Successfully signed in - welcome back!";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
 
-                this.setState({ loginComplete: true });
+                this.setState({ signinComplete: true });
                 setTimeout(function(){ this.props.history.replace('/landing'); }.bind(this), 2000);
             } else {
-                let message = "Login failed!";
+                let message = "Sign in failed!";
                 window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
             }
         });
@@ -67,16 +58,16 @@ export default class Login extends React.Component {
     render(){
         return(
             <div className="text-centre">
-                <div className={(this.state.loginComplete) ? "appear intro-logo" : "disappear intro-logo"}>
+                <div className={(this.state.signinComplete) ? "appear intro-logo" : "disappear intro-logo"}>
                     <Icon.Group size="huge" className="icon-group">
                         <Icon className="white-color" size="big" name="checkmark" />
                     </Icon.Group>
                     <h4 className="intro-h4">Welcome to Leaderboard Learning Management System</h4>
                 </div>
 
-                <div className={(this.state.loginComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
+                <div className={(this.state.signinComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
                     <Image 
-                        src="/public/img/icons/icon.png"
+                        src="/img/icons/icon.png"
                         size="small"
                         shape="rounded"
                         style={{display:"inline-block"}}
@@ -89,7 +80,7 @@ export default class Login extends React.Component {
                         <Form.Group widths="equal">
                             <Form.Input type="password" id="form-subcomponent-shorthand-input-password" onChange={this.updatePassword.bind(this)} placeholder="Password" value={this.state.password}/>
                         </Form.Group>
-                        <Button positive className="width-full" onClick={this.login.bind(this)}>Login</Button>
+                        <Button positive className="width-full" onClick={this.signin.bind(this)}>Sign In</Button>
                     </Form>
                 </div>
             </div>

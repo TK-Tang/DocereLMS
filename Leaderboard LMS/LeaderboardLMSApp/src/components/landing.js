@@ -6,24 +6,24 @@ import Header from "./headers/header.js";
 
 import { Sidebar, Segment, Button, Menu, Image, Icon } from "semantic-ui-react";
 
-// require("velocity-animate");
-// require("velocity-animate/velocity.ui");
-// var VelocityTransitionGroup = require("velocity-react").VelocityTransitionGroup;
-
 export default class Landing extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             sidebarStatus: true,
-            user: AuthAPI.get_currentUser()
+            user: {}
         };
     }
 
     componentWillMount(){
-
+        AuthAPI.get_currentUser().then(function(res){
+            console.log(res);
+            this.state.user = res.payload;
+        });
     }
 
     sidebarToggle(){
+        console.log("ASDF");
         if (this.state.sidebarStatus) {
             this.setState({ sidebarStatus: false });
         } else {
@@ -31,7 +31,19 @@ export default class Landing extends React.Component {
         }
     }
 
+    signout(){
+        this.props.history.replace('/');
+        
+        AuthAPI.get_signout().then(function(res){
+            if (res.status === "success"){
+                let message = "Signed Out from Leaderboard LMS";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
+            }   
+        });
+    }
+
     render() {
+
         return (        
             <div>
                 <Sidebar.Pushable as={Segment}>
@@ -40,12 +52,15 @@ export default class Landing extends React.Component {
                             {this.state.user.email} | {this.state.user.username}
                         </Menu.Item>
                     </Sidebar>
+                    <Sidebar.Pusher>
+                        <Segment basic>
+                            <Header 
+                                sidebarToggle={this.sidebarToggle.bind(this)} 
+                                signout={this.signout.bind(this)}
+                            />
+                        </Segment>
+                    </Sidebar.Pusher>
                 </Sidebar.Pushable>
-                <Sidebar.Pusher>
-                    <Segment basic>
-                        <Header sidebarToggle={this.sidebarToggle.bind(this)}/>
-                    </Segment>
-                </Sidebar.Pusher>
             </div>
         );
     }

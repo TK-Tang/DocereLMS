@@ -31,7 +31,7 @@ export default class Signup extends React.Component {
     render(){
         return (
             <div className="text-centre">
-                <div className={(this.state.loginComplete) ? "appear intro-logo" : "disappear intro-logo"}>
+                <div className={(this.state.signinComplete) ? "appear intro-logo" : "disappear intro-logo"}>
                     <Icon.Group size="huge" className="icon-group">
                         <Icon className="white-color" size="big" name="checkmark" />
                     </Icon.Group>
@@ -39,7 +39,7 @@ export default class Signup extends React.Component {
                     <h5 className="intro-h4">Signing you up!</h5>
                 </div>
 
-                <div className={(this.state.loginComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
+                <div className={(this.state.signinComplete) ? "disappear intro-logging-in" : "appear intro-logging-in"}>
                     <Image 
                         src="/assets/img/icons/icon.png"
                         size="small"
@@ -55,7 +55,7 @@ export default class Signup extends React.Component {
                         <Form.Group widths="equal">
                             <Form.Input type="password" id="form-subcomponent-shorthand-input-password" onChange={this.updatePassword.bind(this)} placeholder="Password" value={this.state.password}/>
                         </Form.Group>
-                        <Button positive className="width-full">Login</Button>
+                        <Button positive className="width-full">Sign In</Button>
                     </Form>
                 </div>
             </div>
