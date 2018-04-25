@@ -28,7 +28,7 @@ App.use(function (req, res, next) {
     next();
 });
 
-App.use(Session({ secret: "secret_seed", resave: true, saveUninitialized: false, secure: false, rolling: true }));
+App.use(Session({ secret: "secret_seed", resave: false, saveUninitialized: false, secure: false, rolling: true }));
 App.use(Passport.initialize());
 App.use(Passport.session());
 App.use(BodyParser.urlencoded({ extended: true }));

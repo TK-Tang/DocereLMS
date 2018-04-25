@@ -4,12 +4,12 @@ const Responses = require("../helpers/response");
 
 exports.isLoggedIn= function (req, res, next){
     if (req.isAuthenticated()){ return next(); }
-    return Responses.success(res, "Redirect request as it has no token.");
+    return Responses.fail(res, "User not logged in");
 }
 
 exports.isNotLoggedIn = function (req, res, next){
     if (!req.isAuthenticated()){ return next(); }
-    return Responses.success(res, "Redirect request as it has a token.");
+    return Responses.fail(res, "User already logged in");
 }
 
 exports.isPublicPage = function (req, res, next){

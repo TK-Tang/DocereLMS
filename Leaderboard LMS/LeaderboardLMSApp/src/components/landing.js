@@ -16,10 +16,9 @@ export default class Landing extends React.Component {
     }
 
     componentWillMount(){
-        AuthAPI.get_currentUser().then(function(res){
-            console.log(res);
-            this.state.user = res.payload;
-        });
+        AuthAPI.get_currentUser().then(res =>   
+            this.setState({ user: res.payload })  
+        );
     }
 
     sidebarToggle(){
@@ -32,13 +31,12 @@ export default class Landing extends React.Component {
     }
 
     signout(){
-        this.props.history.replace('/');
-        
-        AuthAPI.get_signout().then(function(res){
+        AuthAPI.get_signout().then((res) => {
             if (res.status === "success"){
+                this.props.history.replace('/');
                 let message = "Signed Out from Leaderboard LMS";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
-            }   
+            }
         });
     }
 

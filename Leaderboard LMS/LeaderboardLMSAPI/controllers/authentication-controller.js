@@ -29,7 +29,9 @@ exports.signedIn = function(req, res){
 }
 
 exports.signOut = function(req, res){
+    req.logout();
     req.session.destroy(function(){
+        res.clearCookie('connect.sid');
         Responses.success(res, "Sign-out", null);
     });
 }

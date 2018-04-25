@@ -58,7 +58,7 @@ var authentication_api = {
 
         var req = {
             method: "GET",
-            credetials: "include"
+            credentials: "include"
         }
 
         return fetch(url, req).then((res) => res.json());
