@@ -7,23 +7,66 @@ let api_domain = domain + ":" + port;
 var authentication_api = {
     get_currentUser(){
         var url = api_domain + "/auth/user";
+        let headers = {
+            "Content-Type": "application/json"
+        }
+
         var req = {
             method: "GET",
+            headers: headers,
             credentials: "include"
         }
 
         return fetch(url, req).then((res) => res.json());
     },
 
-    get_signup(){
-        var url = api_domain + "/auth/signup";
+    get_signout(){
+        var url = api_domain + "/auth/signout";
+        let headers = {
+            "Content-Type": "application/json"
+        }
+
+        var req = {
+            method: "GET",
+            headers: headers,
+            credentials: "include"
+        }
+
+        return fetch(url, req).then((res) => res.json());
+    },
+
+    get_signup(invitation){
+        var url = api_domain + "/auth/signup/" + invitation;
+        let headers = {
+            "Content-Type": "application/json"
+        }
+
+        var req = {
+            method: "GET",
+            headers: headers,
+            credentials: "include"
+        }
+
+        return fetch(url, req).then((res) => res.json());
+    },
+
+    put_signup(signupInfo, invitation){
+        var url = api_domain + "/auth/signup/" + invitation;
         let headers = {
             "Content-Type": "application/json"
         };
 
+        let body = {
+            "email": signupInfo.email,
+            "password": signupInfo.password
+        }
+
         var req = {
-            method: "GET",
-            credentials: "include"
+            method: "PUT",
+            headers: headers,
+            credentials: "include",
+            body: JSON.stringify(body),
+
         };
 
         return fetch(url, req).then((res) => res.json());
@@ -43,23 +86,9 @@ var authentication_api = {
         var req = {
             method: "POST",
             headers: headers,
+            credentials: "include",
             body: JSON.stringify(body),
-            credentials: "include"
         };
-
-        return fetch(url, req).then((res) => res.json());
-    },
-
-    get_signout(){
-        var url = api_domain + "/auth/signout";
-        let headers = {
-            "Content-Type": "application/json"
-        }
-
-        var req = {
-            method: "GET",
-            credentials: "include"
-        }
 
         return fetch(url, req).then((res) => res.json());
     }

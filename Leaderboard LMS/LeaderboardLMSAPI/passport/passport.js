@@ -34,11 +34,11 @@ module.exports = function(passportApp, userModel){
                 if (req.user != null){
                     Models.Courses.getCourseIncludeUser(link.course_id, null, req.user.email, Models).then(function(course){
                         if (course && course.Users[0].email == req.user.email){
-                            return done("User already registered to this course", null);
+                            return done("Sorry, but this email address is already in use by somebody.", null);
                         } else {
                             Models.Roles.insert(link.course_id, req.user.id, "student").then(function(role){
                                 if (!role){
-                                    return done("Error registering user to course", false);
+                                    return done("Apologies. I'm afraid there was an error registering you to this course, please try again another time.", false);
                                 } else {
                                     return done(null , req.user);
                                 }
@@ -48,13 +48,13 @@ module.exports = function(passportApp, userModel){
                 } else {
                     Models.Courses.getCourseIncludeUser(link.course_id, null, email, Models).then(function(course){
                         if (course && course.Users[0].email == email){
-                            return done("User already registered to this course", null);
+                            return done("Sorry, but this email address is already in use by somebody.", null);
                         }
     
                         if (user){
                             Models.Roles.insert(link.course_id, user.id, "student").then(function(role){
                                 if (!role){
-                                    return done("Error registering user to course ", false);
+                                    return done("Apologies. I'm afraid there was an error registering you to this course, please try again another time.", false);
                                 } else {
                                     return done(null, user);
                                 }
@@ -65,12 +65,12 @@ module.exports = function(passportApp, userModel){
         
                             userModel.create(data).then(function(newUser){
                                 if (!newUser){
-                                    return done("Error creating new user", false);
+                                    return done("Terribly sorry. I'm afraid there was an error creating your account", false);
                                 }
         
                                 Models.Roles.insert(link.course_id, newUser.id, "student").then(function(role){
                                     if (!role){
-                                        return done("Error registering user to course", false);
+                                        return done("Apologies. I'm afraid there was an error registering you to this course, please try again another time.", false);
                                     } else {
                                         return done(null , newUser);
                                     }

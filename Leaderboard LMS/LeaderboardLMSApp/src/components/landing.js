@@ -41,7 +41,6 @@ export default class Landing extends React.Component {
     }
 
     render() {
-
         return (        
             <div>
                 <Sidebar.Pushable as={Segment}>

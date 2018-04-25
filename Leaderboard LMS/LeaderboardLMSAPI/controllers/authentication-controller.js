@@ -13,9 +13,9 @@ exports.getCurrentUser = function(req, res){
 exports.signUp = function(req, res){
     Models.Invitations.getByLink(req.params.link).then(function(invitation){
         if(!invitation){
-            Responses.fail(res, "Invalid invite link");
+            Responses.fail(res, "Invalid invite link", null);
         } else {
-            Responses.success(res, "Sign-up");
+            Responses.success(res, "Valid invite link", invitation);
         }
     });
 }

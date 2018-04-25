@@ -21,8 +21,8 @@ exports.isPublicPage = function (req, res, next){
             break;
     }
 
-    switch(req.path.substring(0, 13)){
-        case "/auth/signup/":
+    switch(req.path.substring(0, 12)){
+        case "/auth/signup":
             return next();
             break;
     }

@@ -23,7 +23,7 @@ export default class Signin extends React.Component {
                 this.setState({ signinComplete: true });
                 setTimeout(function(){
                     this.props.history.replace('/landing');
-                }.bind(this), 2000);
+                }.bind(this), 4000);
             }
         });
     }

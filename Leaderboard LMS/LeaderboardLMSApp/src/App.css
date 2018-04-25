@@ -177,6 +177,16 @@
   width: 100%;
 }
 
+.intro-signup {
+  position: absolute;
+  top: 15vh;
+  left: 35%
+}
+
+.margin-top-small {
+  margin-top: 10px !important;
+}
+
 .intro-logo {
   position: absolute;
   top: 30vh;
@@ -185,6 +195,14 @@
 
 .intro-form {
   margin-top: 20px;
+}
+
+.intro-signing-up {
+  width: 300px;
+  display: inline-block;
+  margin-top: 15vh;
+  text-align: center;
+  transform: scale(1.2)
 }
 
 .intro-logging-in {
@@ -296,6 +314,10 @@
 .disappear{
   opacity: 0;
   transition-duration: 0.5s;
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }
 
 .white-color {

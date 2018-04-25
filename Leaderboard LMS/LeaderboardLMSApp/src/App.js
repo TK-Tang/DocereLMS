@@ -9,12 +9,14 @@ import Landing from './components/landing'
 
 
 class App extends Component {
+
   render() {
     return (
       <Switch>
+        <Route exact path="/" component={Signin} />
         <Route path="/landing" component={Landing} />
-        <Route path="/auth/signup" component={Signup} />
-        <Route path="/" component={Signin} />
+        <Route path='/auth/signup/:invitation' component={Signup} />
+        <Route component={Signin} />
       </Switch>
     );
   }
