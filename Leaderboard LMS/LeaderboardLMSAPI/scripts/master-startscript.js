@@ -9,6 +9,7 @@ const resourceScript = require("./resource-startscript.js");
 const topicScript = require("./topic-startscript.js");
 const forumScript = require("./forum-startscript.js");
 const postScript = require("./post-startscript.js");
+const leaderboardScript = require("./leaderboard-startscript.js");
 const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
 
@@ -24,6 +25,7 @@ module.exports.startScript = function (){
     var forumList = forumScript.startScript();
     var topicList = topicScript.startScript();
     var postList = postScript.startScript();
+    var leaderboardList = leaderboardScript.startScript();
 
     for (var key in courseList){
         var course = courseList[key];
@@ -78,5 +80,10 @@ module.exports.startScript = function (){
     for (var key in postList){
         var post = postList[key];
         Models.Posts.create(post);
+    }
+
+    for (var key in leaderboardList){
+        var leaderboard = leaderboardList[key];
+        Models.Leaderboards.create(leaderboard);
     }
 };
