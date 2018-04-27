@@ -31,6 +31,7 @@ exports.isPublicPage = function (req, res, next){
     Responses.fail(res, "Authentication failure: Not authenticated");
 }
 
+// For updating profiles
 exports.isCurrentUser = function(req, res, next){
     const term = req.params.term;
     

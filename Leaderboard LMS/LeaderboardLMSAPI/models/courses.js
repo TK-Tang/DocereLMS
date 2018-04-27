@@ -45,13 +45,13 @@ module.exports = function(sequelize, Sequelize){
         };
 
         return await this.create(course);
-    }
+    };
 
     Courses.getCourse = async function(course_id){
         return await this.findOne({
             where: { course_id: course_id}
-        })
-    }
+        });
+    };
 
     Courses.getCourseIncludeUser = async function(course_id, user_id, email, models){
         return await this.findOne({
@@ -63,7 +63,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
         });
-    }
+    };
 
     Courses.getCourseIncludingUsers = async function(course_id, models){
         return await this.findAll({
@@ -79,7 +79,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
         });
-     }
+     };
 
     Courses.getCourseIncludingUsersAndRank = async function(course_id, rank, models){
        return await this.findAll({
@@ -99,7 +99,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
        });
-    }
+    };
 
     Courses.getCourseIncludesChannels = async function(course_id, models){
         return await this.findOne({
@@ -115,7 +115,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
         });
-    }
+    };
 
     Courses.getCourseIncludesForums = async function(course_id, models){
         return await this.findOne({
@@ -131,7 +131,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
         });
-    }
+    };
 
     Courses.getCourseIncludesCategories = async function(course_id, models){
         return await this.findOne({
@@ -147,7 +147,7 @@ module.exports = function(sequelize, Sequelize){
                 }
             ]
         });
-    }
+    };
 
 
     Courses.insertCourse = async function(user_id, email, name, description, coordinator, pictureLink, allowInvitations, models){
@@ -185,7 +185,7 @@ module.exports = function(sequelize, Sequelize){
 
         if (Role){ t.commit(); }
         return course;
-    }
+    };
 
     Courses.deactivateCourse = async function(course_id, isActive){
         const courseDetails = {
@@ -201,7 +201,7 @@ module.exports = function(sequelize, Sequelize){
         const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t });
         t.commit();
         return updatedCourse;
-    }
+    };
 
     Courses.updateCourse = async function(course_id, name, description, coordinator, pictureLink, allowInvitations, models){
         const courseDetails = {
@@ -221,7 +221,7 @@ module.exports = function(sequelize, Sequelize){
         const updatedCourse = await currentCourse.updateAttributes(courseDetails, { transaction: t });
         t.commit();
         return updatedCourse;
-    }
+    };
 
     Courses.setUserAsAdmin = async function(course_id, user_id, models){
         const user = await models.Users.findOne({
@@ -240,7 +240,7 @@ module.exports = function(sequelize, Sequelize){
 
         await role.updateAttributes({ rank: "admin"});
         return await this.findOne({ where: { course_id: course_id }});
-    }
+    };
 
     Courses.kickUser = async function(course_id, user_id, models){
         const t = await sequelize.transaction();
@@ -271,7 +271,7 @@ module.exports = function(sequelize, Sequelize){
         }
 
         return user;
-    }
+    };
 
     return Courses;
 };

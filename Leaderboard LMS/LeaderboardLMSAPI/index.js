@@ -49,6 +49,8 @@ require("./routers/post-router.js")(App);
 require("./routers/posts-router.js")(App);
 require("./routers/upvote-router.js")(App);
 
+require("./routers/leaderboard-router.js")(App);
+
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {
     startScript.startScript();

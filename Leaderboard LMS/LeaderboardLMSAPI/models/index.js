@@ -43,6 +43,11 @@ db.Chats = require("./chats")(sequelizeCredentials, Sequelize);
 db.Resources = require("./resources")(sequelizeCredentials, Sequelize);
 db.Categories = require("./categories")(sequelizeCredentials, Sequelize);
 
+db.Leaderboards = require("./leaderboards")(sequelizeCredentials, Sequelize);
+db.Examinables = require("./examinables")(sequelizeCredentials, Sequelize);
+db.ExaminableSections = require("./examinable-sections")(sequelizeCredentials, Sequelize);
+db.StudentAnonymitySettings = require("./student-anonymity-settings")(sequelizeCredentials, Sequelize);
+
 db.Roles.belongsTo(db.Users, {foreignKey: "user_id"});
 db.Roles.belongsTo(db.Courses, {foreignKey: "course_id"});
 db.Courses.belongsToMany(db.Users, { through: "Roles" });
@@ -80,5 +85,19 @@ db.Categories.belongsTo(db.Courses, { foreignKey: "course_id" });
 
 db.Categories.hasMany(db.Resources);
 db.Resources.belongsTo(db.Categories);
+
+db.Courses.hasMany(db.Leaderboards);
+db.Leaderboards.belongsTo(db.Courses, { foreignKey: "course_id"});
+
+db.Leaderboards.hasMany(db.Examinables);
+db.Users.hasMany(db.Examinables);
+db.Examinables.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
+db.Examinables.belongsTo(db.Users, { foreignKey: "user_id"});
+
+db.Examinables.hasOne(db.ExaminableSections);
+db.ExaminableSections.belongsTo(db.ExaminableSections, { foreignKey: "examinable_id"});
+
+db.Examinables.hasOne(db.StudentAnonymitySettings);
+db.StudentAnonymitySettings.belongsTo(db.Examinables, { foreignKey: "examinable_id"});
 
 module.exports = db;

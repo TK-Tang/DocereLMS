@@ -8,7 +8,7 @@ module.exports = function(sequelize, Sequelize){
         },
 
         content: {
-            type: Sequelize.STRING(2048),
+            type: Sequelize.STRING(4000),
         },
 
         wasEdited: {
