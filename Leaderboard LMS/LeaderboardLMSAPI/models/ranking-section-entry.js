@@ -17,11 +17,11 @@ module.exports = function(sequelize, Sequelize){
         return await this.findAll({
             where: { leaderboard_id: leaderboard_id }
         });
-    }
+    };
 
     RankingSectionEntries.insertRankingSectionEntry = async function(name){
         return await this.create({ name });
-    }
+    };
 
     RankingSectionEntries.updateRankingSectionEntry = async function(ranking_section_entry_id, name){
         const t = await sequelize.transaction();
@@ -34,7 +34,7 @@ module.exports = function(sequelize, Sequelize){
         t.commit();
 
         return updatedRankingSectionEntry;
-    }
+    };
 
     RankingSectionEntries.deleteRankingSectionEntry = async function(ranking_section_entry_id){
         return await this.destroy({
@@ -42,7 +42,7 @@ module.exports = function(sequelize, Sequelize){
                 ranking_section_entry_id: ranking_section_entry_id
             }
         });
-    }
+    };
 
     return RankingSectionEntries;
 }

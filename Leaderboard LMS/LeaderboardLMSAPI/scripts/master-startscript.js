@@ -10,6 +10,7 @@ const topicScript = require("./topic-startscript.js");
 const forumScript = require("./forum-startscript.js");
 const postScript = require("./post-startscript.js");
 const leaderboardScript = require("./leaderboard-startscript.js");
+const rankingSectionEntryScript = require("./ranking-section-entry-startscript.js")
 const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
 
@@ -26,6 +27,7 @@ module.exports.startScript = function (){
     var topicList = topicScript.startScript();
     var postList = postScript.startScript();
     var leaderboardList = leaderboardScript.startScript();
+    var rankingSectionEntryList = rankingSectionEntryScript.startScript();
 
     for (var key in courseList){
         var course = courseList[key];
@@ -85,5 +87,10 @@ module.exports.startScript = function (){
     for (var key in leaderboardList){
         var leaderboard = leaderboardList[key];
         Models.Leaderboards.create(leaderboard);
+    }
+
+    for (var key in rankingSectionEntryList){
+        var rankingSectionEntry = rankingSectionEntryList[key];
+        Models.RankingSectionEntries.create(rankingSectionEntry);
     }
 };
