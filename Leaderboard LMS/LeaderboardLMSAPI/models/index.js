@@ -44,8 +44,9 @@ db.Resources = require("./resources")(sequelizeCredentials, Sequelize);
 db.Categories = require("./categories")(sequelizeCredentials, Sequelize);
 
 db.Leaderboards = require("./leaderboards")(sequelizeCredentials, Sequelize);
-db.Examinables = require("./examinables")(sequelizeCredentials, Sequelize);
-db.ExaminableSections = require("./examinable-sections")(sequelizeCredentials, Sequelize);
+db.RankingSectionEntries = require("./ranking-section-entry")(sequelizeCredentials, Sequelize);
+db.Rankings = require("./rankings")(sequelizeCredentials, Sequelize);
+db.RankingSections = require("./ranking-sections")(sequelizeCredentials, Sequelize);
 db.StudentAnonymitySettings = require("./student-anonymity-settings")(sequelizeCredentials, Sequelize);
 
 db.Roles.belongsTo(db.Users, {foreignKey: "user_id"});
@@ -89,15 +90,18 @@ db.Resources.belongsTo(db.Categories);
 db.Courses.hasMany(db.Leaderboards);
 db.Leaderboards.belongsTo(db.Courses, { foreignKey: "course_id"});
 
-db.Leaderboards.hasMany(db.Examinables);
-db.Users.hasMany(db.Examinables);
-db.Examinables.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
-db.Examinables.belongsTo(db.Users, { foreignKey: "user_id"});
+db.Leaderboards.hasMany(db.Rankings);
+db.Users.hasMany(db.Rankings);
+db.Rankings.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
+db.Rankings.belongsTo(db.Users, { foreignKey: "user_id"});
 
-db.Examinables.hasOne(db.ExaminableSections);
-db.ExaminableSections.belongsTo(db.ExaminableSections, { foreignKey: "examinable_id"});
+db.Leaderboards.hasOne(db.RankingSectionEntries);
+db.RankingSectionEntries.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
 
-db.Examinables.hasOne(db.StudentAnonymitySettings);
-db.StudentAnonymitySettings.belongsTo(db.Examinables, { foreignKey: "examinable_id"});
+db.Rankings.hasOne(db.RankingSections);
+db.RankingSections.belongsTo(db.RankingSections, { foreignKey: "ranking_id"});
+
+db.Rankings.hasOne(db.StudentAnonymitySettings);
+db.StudentAnonymitySettings.belongsTo(db.Rankings, { foreignKey: "ranking_id"});
 
 module.exports = db;

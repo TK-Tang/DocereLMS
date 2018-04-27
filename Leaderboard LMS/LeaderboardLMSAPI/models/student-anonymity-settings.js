@@ -12,7 +12,7 @@ module.exports = function(sequelize, Sequelize){
             defaultValue: false
         },
 
-        revealLeaderboardExaminableSections: {
+        revealLeaderboardRankingSections: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         }

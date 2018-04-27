@@ -23,18 +23,18 @@ module.exports = function(sequelize, Sequelize){
         });
     };
 
-    Leaderboards.getLeaderboardIncludingExaminables = async function(leaderboard_id){
+    Leaderboards.getLeaderboardIncludingRankings = async function(leaderboard_id){
         return await this.findOne({
             where: { leaderboard_id: leaderboard_id },
             include: [
                 {
-                    model: models.Examinables
+                    model: models.Rankings
                 }
             ]
         });
     }
 
-    Leaderboards.insert = async function(name, blurb){
+    Leaderboards.insertLeaderboard = async function(name, blurb){
         const leaderboard = {
             name: name,
             blurb: blurb

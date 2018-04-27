@@ -1,11 +1,11 @@
 module.exports = function(sequelize, Sequelize){
-    const Examinables = sequelize.define("Examinables", {
+    const RankingSections = sequelize.define("RankingSections", {
         id: {
-            autoIncrement: true, 
+            autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
-            field: "examinable_id"
-        },
+            field: "rankingSectionId"
+        }, 
 
         name: {
             type: Sequelize.STRING,
@@ -13,10 +13,10 @@ module.exports = function(sequelize, Sequelize){
         },
 
         mark: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             notEmpty: true
         }
     }, { underscored: true });
 
-    return Examinables;
+    return RankingSections
 }

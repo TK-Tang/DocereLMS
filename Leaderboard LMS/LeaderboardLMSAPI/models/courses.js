@@ -36,20 +36,9 @@ module.exports = function(sequelize, Sequelize){
 
     }, { underscored: true });
 
-    Courses.insert = async function(name, coordinator, pictureLink, allowInvitations){
-        const course = {
-            name : name,
-            coordinator: coordinator,
-            pictureLink: pictureLink,
-            allowInvitations: allowInvitations
-        };
-
-        return await this.create(course);
-    };
-
     Courses.getCourse = async function(course_id){
         return await this.findOne({
-            where: { course_id: course_id}
+            where: { course_id: course_id }
         });
     };
 
