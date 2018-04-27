@@ -50,7 +50,7 @@ exports.deleteRankingSectionEntry = function(res, req){
         if(numberOfRankingSectionEntryDeleted != 1){
             Responses.error(res, "Error with deleting ranking section entry", null);
         } else {
-            Responses.success(res, "Invitation deleted ranking section entry", null);
+            Responses.success(res, "Invitation deleted ranking section entry", numberOfRankingSectionEntryDeleted);
         }
     });
 }

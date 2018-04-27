@@ -17,12 +17,12 @@ module.exports.startScript = function(){
     };
 
     rankingSectionEntryList.rankingSectionEntry004 = {
-        name: "Question 1 - Array Lists",
+        name: "Question 2 - Array Lists",
         leaderboard_id: 2
     };
 
     rankingSectionEntryList.rankingSectionEntry005 = {
-        name: "Question 1 - Priority Queues",
+        name: "Question 3 - Priority Queues",
         leaderboard_id: 2
     };
 
