@@ -7,7 +7,6 @@ exports.getCurrentUser = function(req, res){
     } else {
         Responses.fail(res, "You are not logged in", null);
     }
-    
 }
 
 exports.signUp = function(req, res){

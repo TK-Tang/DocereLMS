@@ -4,6 +4,7 @@ const RankingController = require("../controllers/ranking-controller");
 
 module.exports = function(app){
     app.get("/course/:course_id/ranking/:ranking_id", AuthService.isStudentOrAdminForCourse, RankingController.getRanking);
+    app.get("/course/:course_id/ranking/:ranking_id", AuthService)
 
     app.put("/course/:course_id/leaderboard/:leaderboard/ranking", AuthService.isAdminForCourse, RankingController.insertRanking);
 

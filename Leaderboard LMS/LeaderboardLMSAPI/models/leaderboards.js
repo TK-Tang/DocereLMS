@@ -28,7 +28,14 @@ module.exports = function(sequelize, Sequelize){
             where: { leaderboard_id: leaderboard_id },
             include: [
                 {
-                    model: models.Rankings
+                    model: models.Rankings,
+                    include: [
+                        {
+                            model: models.StudentAnonymitySettings,
+                            model: models.RankingSections,
+                            model: models.User
+                        }
+                    ]
                 }
             ]
         });

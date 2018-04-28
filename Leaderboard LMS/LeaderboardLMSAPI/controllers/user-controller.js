@@ -46,6 +46,19 @@ exports.getUserIncludingCourses = function(req, res){
     });
 };
 
+exports.getUserIncludingCourseAndRole = function(req, res){
+    const user_id = parseInt(req.params.user_id, 10);
+    var course_id = req.params.course_id;
+
+    Models.Users.getUserIncludingCourseAndRole(user_id, course_id, Models).then(function(user){
+        if (!user){
+            Responses.fail(res, "User not found", null);
+        } else {
+            Responses.success(res, "User found", null);
+        }
+    })
+}
+
 exports.updateUser = function(req, res){
     const user_id = parseInt(req.params.term, 10);
     const email = req.body.email;

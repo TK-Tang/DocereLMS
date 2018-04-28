@@ -4,19 +4,45 @@ module.exports = function(sequelize, Sequelize){
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
-            field: "rankingSectionId"
-        }, 
-
-        name: {
-            type: Sequelize.STRING,
-            notEmpty: true
+            field: "ranking_section_id"
         },
 
-        mark: {
-            type: Sequelize.STRING,
-            notEmpty: true
+        name: {
+            type: Sequelize.STRING
         }
+
     }, { underscored: true });
 
-    return RankingSections
+    RankingSections.getAllRankingSections = async function(leaderboard_id){
+        return await this.findAll({
+            where: { leaderboard_id: leaderboard_id }
+        });
+    };
+
+    RankingSections.insertRankingSection = async function(name){
+        return await this.create({ name });
+    };
+
+    RankingSections.updateRankingSection = async function(ranking_section_id, name, models){
+        const t = await sequelize.transaction();
+        const currentRankingSection = await RankingSections.findOne({
+            where: { ranking_section_id }
+        }, {transaction: t});
+
+        if (!currentRankingSection){ return null; }
+        const updatedRankingSection = currentRankingSection.updateAttributes({ name }, {transaction: t});
+        t.commit();
+
+        return updatedRankingSection;
+    };
+
+    RankingSections.deleteRankingSection = async function(ranking_section_id){
+        return await this.destroy({
+            where: {
+                ranking_section_id: ranking_section_id
+            }
+        });
+    };
+
+    return RankingSections;
 }

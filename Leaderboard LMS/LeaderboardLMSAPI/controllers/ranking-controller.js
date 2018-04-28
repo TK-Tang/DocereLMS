@@ -7,6 +7,16 @@ exports.getRanking = function(res, req){
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
     Model.Rankings.getRanking(ranking_id).then(function(ranking){
+
+        if (ranking.StudentAnonymitySettings.revealLeaderboardname === false){
+            ranking.Users.email = "Anonymous",
+            ranking.Users.username = "Anonymous"
+        }
+
+        if (ranking.StudentAnonymitySettings.revealLeaderboardRankingSections === false){
+            ranking.RankingSections = null;
+        }
+        
         if(!ranking){
             Responses.fail(res, "No ranking found", null);
         } else {

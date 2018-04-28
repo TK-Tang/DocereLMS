@@ -1,30 +1,30 @@
 module.exports.startScript = function(){
-    var rankingSectionEntryList = {};
+    var rankingSectionList = {};
 
-    rankingSectionEntryList.rankingSectionEntry001 = {
+    rankingSectionList.rankingSection001 = {
         name: "Task 1 - Classes & Objects",
         leaderboard_id: 1
     };
 
-    rankingSectionEntryList.rankingSectionEntry002 = {
+    rankingSectionList.rankingSection002 = {
         name: "Task 2 - Polymorphism and Inheritance",
         leaderboard_id: 1
     };
 
-    rankingSectionEntryList.rankingSectionEntry003 = {
+    rankingSectionList.rankingSection003 = {
         name: "Question 1 - Linked Lists",
         leaderboard_id: 2
     };
 
-    rankingSectionEntryList.rankingSectionEntry004 = {
+    rankingSectionList.rankingSection004 = {
         name: "Question 2 - Array Lists",
         leaderboard_id: 2
     };
 
-    rankingSectionEntryList.rankingSectionEntry005 = {
+    rankingSectionList.rankingSection005 = {
         name: "Question 3 - Priority Queues",
         leaderboard_id: 2
     };
 
-    return rankingSectionEntryList;
+    return rankingSectionList;
 }

@@ -3,9 +3,31 @@ const Models = require("../models");
 
 exports.getLeaderboardIncludingRankings = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
+    const course_id = parseInt(req.params.course_id, 10);
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
-    Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id, Models).then(function(leaderboard){ 
+    Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id, Models).then(async function(leaderboard){ 
+
+        for (var r in leaderboard.Rankings){
+            var user = await Models.Users.getLeaderboardIncludingRankings(req.user.id, course_id, Models);
+            if (user.Courses[0].Roles.rank === "admin"){
+                continue;
+            }
+
+            if (req.user.id === r.Users.user_id){
+                continue;
+            }
+
+            if (r.StudentAnonymitySettings.revealLeaderboardname === false){
+                r.Users.email = "Anonymous",
+                r.Users.username = "Anonymous"
+            }
+    
+            if (r.StudentAnonymitySettings.revealLeaderboardRankingSections === false){
+                r.RankingSections = null;
+            }
+        }
+
         if(!leaderboard){
             Responses.fail(res, "Leaderboard not found", null);
         } else {

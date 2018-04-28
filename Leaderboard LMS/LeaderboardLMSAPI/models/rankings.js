@@ -23,7 +23,9 @@ module.exports = function(sequelize, Sequelize){
             where: { ranking_id: ranking_id }, 
             include: [
                 {
-                    model: models.StudentAnonymitySettings
+                    model: models.StudentAnonymitySettings,
+                    model: models.RankingSections,
+                    model: models.User
                 }
             ]
         });
@@ -37,13 +39,15 @@ module.exports = function(sequelize, Sequelize){
             mark: mark
         };
 
+        var newRanking = await this.create(ranking, {transaction: t});
+
         const studentAnonymitySettings = {
+            ranking_id: newRanking.ranking_id,
             revealLeaderboardName: false,
             revealLeaderboardRankingSections: false
         }
 
         Models.StudentAnonymitySettings.create(studentAnonymitySettings, {transaction: t});
-        var newRanking = await this.create(ranking, {transaction: t});
         t.commit();
 
         return newRanking;
@@ -71,7 +75,7 @@ module.exports = function(sequelize, Sequelize){
         const t = await sequelize.transaction();
 
         var numberOfStudentAnonymitySettingsDeleted= await models.StudentAnonymitySettings.destroy({
-            where: { student_anonymity_settings_id: student_anonymity_settings_id }
+            where: { ranking_id: ranking_id }
         }, {transaction: t});
 
         var numberOfRankingsDeleted = await this.destroy({

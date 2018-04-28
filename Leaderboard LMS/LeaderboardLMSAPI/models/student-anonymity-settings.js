@@ -51,5 +51,6 @@ module.exports = function(sequelize, Sequelize){
         return updatedStudentAnonymitySettings;
     }
 
+
     return StudentAnonymitySettings;
 }
