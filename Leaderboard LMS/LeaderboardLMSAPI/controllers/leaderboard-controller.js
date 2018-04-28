@@ -54,10 +54,11 @@ exports.insertLeaderboard = function(req, res){
 exports.updateLeaderboard = function(req, res){
     const name = req.body.name;
     const blurb = req.body.blurb;
+    const course_id = req.params.course_id;
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
-    Model.Leaderboards.updateLeaderboard(name, blurb).then(function(leaderboard){
+    Model.Leaderboards.updateLeaderboard(course_id, name, blurb).then(function(leaderboard){
         if(!leaderboard){
             Responses.fail(res, "Leaderboard could not be updated", null);
         } else {

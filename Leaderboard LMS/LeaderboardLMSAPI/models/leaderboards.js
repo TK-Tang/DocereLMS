@@ -41,8 +41,9 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Leaderboards.insertLeaderboard = async function(name, blurb){
+    Leaderboards.insertLeaderboard = async function(course_id, name, blurb){
         const leaderboard = {
+            course_id: course_id,
             name: name,
             blurb: blurb
         };
