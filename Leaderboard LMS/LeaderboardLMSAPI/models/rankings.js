@@ -29,14 +29,24 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Rankings.insertRanking = async function(leaderboard_id, note, mark){
+    Rankings.insertRanking = async function(leaderboard_id, note, mark, models){
+        const t = await sequelize.transaction();
         const ranking = {
             leaderboard_id,
             note: note,
             mark: mark
         };
 
-        return await this.create(ranking)
+        const studentAnonymitySettings = {
+            revealLeaderboardName: false,
+            revealLeaderboardRankingSections: false
+        }
+
+        Models.StudentAnonymitySettings.create(studentAnonymitySettings, {transaction: t});
+        var newRanking = await this.create(ranking, {transaction: t});
+        t.commit();
+
+        return newRanking;
     }
 
     Rankings.updateRanking = async function(ranking_id, note, mark){
@@ -57,12 +67,21 @@ module.exports = function(sequelize, Sequelize){
         return updatedRanking;
     }
 
-    Rankings.deleteRanking = async function(ranking_id){
-        return await this.destroy({
+    Rankings.deleteRanking = async function(ranking_id, models){
+        const t = await sequelize.transaction();
+
+        var numberOfStudentAnonymitySettingsDeleted= await models.StudentAnonymitySettings.destroy({
+            where: { student_anonymity_settings_id: student_anonymity_settings_id }
+        }, {transaction: t});
+
+        var numberOfRankingsDeleted = await this.destroy({
             where: {
                 ranking_id: ranking_id
             }
-        });
+        }, {transaction: t});
+        t.commit();
+
+        return numberOfRankingsDeleted;
     }
 
     return Rankings;

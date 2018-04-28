@@ -20,7 +20,7 @@ exports.insertRanking = function(res, req){
 
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
-    Model.Rankings.insertRanking(leaderboard_id, note, mark).then(function(ranking){
+    Model.Rankings.insertRanking(leaderboard_id, note, mark, Models).then(function(ranking){
         if(!ranking){
             Responses.fail(res, "Ranking could not be inserted to this leaderboard");
         } else {
@@ -48,7 +48,7 @@ exports.deleteRanking = function(res, req){
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
-    Model.Rankings.deleteRanking(ranking_id).then(function(numberOfRankingsDeleted){
+    Model.Rankings.deleteRanking(ranking_id, Models).then(function(numberOfRankingsDeleted){
         if(numberOfRankingsDeleted != 1){
             Responses.fail(res, "Ranking could not be deleted");
         } else {
