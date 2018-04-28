@@ -78,6 +78,21 @@ module.exports = function(sequelize, Sequelize) {
             ]
         });
     }
+    
+    Users.getUserIncludingCourseAndRole = async function(user_id, course_id, models){
+        return await this.findOne({
+            where: { user_id: user_id},
+            include: [
+                {
+                    model: models.Courses,
+                    where: { course_id: course_id },
+                    include: [
+                        { model: models.Roles }
+                    ]
+                }
+            ]
+        });
+    }
 
     // READ - returning a list of users
     Users.getAll = async function(models){
@@ -100,7 +115,7 @@ module.exports = function(sequelize, Sequelize) {
     }
 
     // UPDATE
-    Users.update = async function(user_id, email, username, profilePictureLink){
+    Users.updateUser = async function(user_id, email, username, profilePictureLink){
         const updateUserValues = {
             email: email,
             username: username,
@@ -108,10 +123,13 @@ module.exports = function(sequelize, Sequelize) {
         }
 
         const t = await sequelize.transaction();
-        const currentUser = await Users.findOne( { where: { user_id: user_id }}, { transaction: t });
+        const currentUser = await Users.findOne({
+            where: { 
+                user_id: user_id }
+            }, { transaction: t });
 
         const updatedUser = await currentUser.updateAttributes(updateUserValues, { transaction: t });
-        transaction.commit();
+        t.commit();
         return updatedUser;
     }
 

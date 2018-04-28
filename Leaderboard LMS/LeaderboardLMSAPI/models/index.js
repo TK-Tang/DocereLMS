@@ -98,10 +98,11 @@ db.Rankings.belongsTo(db.Users, { foreignKey: "user_id"});
 db.Leaderboards.hasOne(db.RankingSections);
 db.RankingSections.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
 
-db.Rankings.hasOne(db.RankingSections);
 db.RankingSections.hasMany(db.RankingSectionEntries);
 db.RankingSectionEntries.belongsTo(db.RankingSections, {foreignKey: "ranking_section_id"})
-db.RankingSections.belongsTo(db.RankingSections, { foreignKey: "ranking_id"});
+
+db.Rankings.hasOne(db.RankingSectionEntries);
+db.RankingSectionEntries.belongsTo(db.Rankings, { foreignKey: "ranking_id"});
 
 db.Rankings.hasOne(db.StudentAnonymitySettings);
 db.StudentAnonymitySettings.belongsTo(db.Rankings, { foreignKey: "ranking_id"});

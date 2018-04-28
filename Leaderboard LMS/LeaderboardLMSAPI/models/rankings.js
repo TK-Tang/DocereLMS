@@ -31,15 +31,15 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Rankings.insertRanking = async function(leaderboard_id, note, mark, models){
-        const t = await sequelize.transaction();
+    Rankings.insertRanking = async function(leaderboard_id, user_id, note, mark, models){
         const ranking = {
-            leaderboard_id,
+            leaderboard_id: leaderboard_id,
+            user_id: user_id,
             note: note,
             mark: mark
         };
 
-        var newRanking = await this.create(ranking, {transaction: t});
+        var newRanking = await this.create(ranking);
 
         const studentAnonymitySettings = {
             ranking_id: newRanking.ranking_id,
@@ -47,8 +47,7 @@ module.exports = function(sequelize, Sequelize){
             revealLeaderboardRankingSections: false
         }
 
-        Models.StudentAnonymitySettings.create(studentAnonymitySettings, {transaction: t});
-        t.commit();
+        models.StudentAnonymitySettings.create(studentAnonymitySettings);
 
         return newRanking;
     }

@@ -12,6 +12,7 @@ const postScript = require("./post-startscript.js");
 const leaderboardScript = require("./leaderboard-startscript.js");
 const rankingSectionScript = require("./ranking-section-startscript.js");
 const rankingScript = require("./ranking-startscript.js");
+
 const Models = require("../models");
 const bCrypt = require("bcrypt-nodejs");
 
@@ -98,6 +99,6 @@ module.exports.startScript = function (){
 
     for (var key in rankingList){
         var ranking = rankingList[key];
-        Models.Rankings.create(ranking);
+        Models.Rankings.insertRanking(ranking.leaderboard_id, ranking.user_id, ranking.note, ranking.mark, Models);
     }
 };

@@ -71,7 +71,7 @@ exports.updateUser = function(req, res){
         Responses.fail(res, "Username cannot be empty", null);
     }
 
-    Models.Users.update(user_id, email, username, profilePictureLink).then(function(user){
+    Models.Users.updateUser(user_id, email, username, profilePictureLink).then(function(user){
         if (!user){
             Responses.fail(res, "Error updating user", null);
         } else {

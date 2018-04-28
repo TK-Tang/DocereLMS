@@ -19,7 +19,7 @@ module.exports = function(sequelize, Sequelize){
         });
     };
 
-    RankingSections.insertRankingSection = async function(name){
+    RankingSections.insertRankingSection = async function(name, leaderboard_id){
         return await this.create({ name });
     };
 
