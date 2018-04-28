@@ -4,7 +4,7 @@ const Models = require("../models");
 exports.getRanking = function(res, req){
     const ranking_id = parseInt(req.params.ranking_id, 10)
 
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking Id is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
     Model.Rankings.getRanking(ranking_id).then(function(ranking){
         if(!ranking){
@@ -18,7 +18,7 @@ exports.getRanking = function(res, req){
 exports.insertRanking = function(res, req){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
 
-    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard Id is not a number", null); }
+    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
     Model.Rankings.insertRanking(leaderboard_id, note, mark).then(function(ranking){
         if(!ranking){
@@ -32,7 +32,7 @@ exports.insertRanking = function(res, req){
 exports.updateRanking = function(res, req){
     const ranking_id = parseInt(req.params.ranking_id, 10)
 
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking Id is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
     Model.Rankings.updateRanking(ranking_id, note, mark).then(function(ranking){
         if(!ranking){
@@ -46,7 +46,7 @@ exports.updateRanking = function(res, req){
 exports.deleteRanking = function(res, req){
     const ranking_id = parseInt(req.params.ranking_id, 10)
 
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking Id is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
     Model.Rankings.deleteRanking(ranking_id).then(function(numberOfRankingsDeleted){
         if(numberOfRankingsDeleted != 1){

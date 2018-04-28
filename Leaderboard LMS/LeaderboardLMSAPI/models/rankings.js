@@ -18,14 +18,20 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
-    Rankings.getRanking = async function(ranking_id){
+    Rankings.getRankingIncludingStudentAnonymitySettings = async function(ranking_id, models){
         return await this.findOne({
-            where: { ranking_id: ranking_id }
+            where: { ranking_id: ranking_id }, 
+            include: [
+                {
+                    model: models.StudentAnonymitySettings
+                }
+            ]
         });
     }
 
-    Rankings.insertRanking = async function(note, mark){
+    Rankings.insertRanking = async function(leaderboard_id, note, mark){
         const ranking = {
+            leaderboard_id,
             note: note,
             mark: mark
         };

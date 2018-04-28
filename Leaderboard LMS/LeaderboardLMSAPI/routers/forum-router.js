@@ -1,5 +1,4 @@
 const Responses = require("../helpers/response");
-const Models = require("../models");
 const AuthService = require("../middleware/authentication-service");
 const ForumController = require("../controllers/forum-controller");
 

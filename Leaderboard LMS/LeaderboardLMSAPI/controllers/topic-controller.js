@@ -6,7 +6,7 @@ exports.getTopic = function(req, res){
     const topic_id = parseInt(req.params.topic_id, 10);
     if (isNaN(topic_id)){ Responses.error(res, "Topic ID is not a number", null); }
 
-    Models.Topics.getTopic(topic_id).then(function(topic){
+    Models.Topics.getTopic(topic_id, Models).then(function(topic){
         if (!topic){
             Responses.fail(res, "Topic not found", null);
         } else {
@@ -36,7 +36,7 @@ exports.getTopicsByUser = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
     if (isNaN(course_id)){ Responses.error(res, "Course ID is not a number", null); }
 
-    Models.Topics.getTopicsByUser(user_id, course_id).then(function(topics){
+    Models.Topics.getTopicsByUser(user_id, course_id, Models).then(function(topics){
         if (!topics){
             Responses.fail(res, "No topics for this user could be found", null);
         } else {

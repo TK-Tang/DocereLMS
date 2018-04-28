@@ -23,7 +23,7 @@ module.exports = function(sequelize, Sequelize){
         });
     };
 
-    Leaderboards.getLeaderboardIncludingRankings = async function(leaderboard_id){
+    Leaderboards.getLeaderboardIncludingRankings = async function(leaderboard_id, models){
         return await this.findOne({
             where: { leaderboard_id: leaderboard_id },
             include: [

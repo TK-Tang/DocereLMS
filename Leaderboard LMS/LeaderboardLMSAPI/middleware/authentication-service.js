@@ -2,7 +2,7 @@ const Models = require("../models");
 const Passport = require("passport");
 const Responses = require("../helpers/response");
 
-exports.isLoggedIn= function (req, res, next){
+exports.isLoggedIn = function (req, res, next){
     if (req.isAuthenticated()){ return next(); }
     return Responses.fail(res, "User not logged in");
 }

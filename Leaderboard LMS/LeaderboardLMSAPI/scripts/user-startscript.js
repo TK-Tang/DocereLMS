@@ -52,7 +52,7 @@ module.exports.startScript = function (){
     }
 
     userList.user007 = {
-        email: "Brendn@gmail.com",
+        email: "Brendan@gmail.com",
         username: "BrendanT",
         password: generateHash("24157817"),
         status: "offline",

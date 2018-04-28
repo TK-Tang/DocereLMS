@@ -5,7 +5,7 @@ exports.getLeaderboardIncludingRankings = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
-    Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id).then(function(leaderboard){ 
+    Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id, Models).then(function(leaderboard){ 
         if(!leaderboard){
             Responses.fail(res, "Leaderboard not found", null);
         } else {

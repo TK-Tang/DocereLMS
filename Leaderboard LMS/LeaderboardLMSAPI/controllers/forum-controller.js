@@ -8,7 +8,7 @@ exports.getForum = function(req, res){
     if (isNaN(course_id)){ Response.error(res, "Course ID is not a number", null); }
     if (isNaN(forum_id)){ Response.error(res, "Forum ID is not a number", null); }
 
-    Models.Forums.getForum(course_id, forum_id).then(function(forum){
+    Models.Forums.getForum(course_id, forum_id, Models).then(function(forum){
         if(!forum){
             Responses.error(res, "Forum not found", null);
         } else {
@@ -25,7 +25,7 @@ exports.insertForum = function(req, res){
 
     if (isNaN(course_id)){ Response.error(res, "Course ID is not a number", null); }
 
-    Models.Forums.insertForum(course_id, name, description, order).then(function(forum){
+    Models.Forums.insertForum(course_id, name, description, order, Models).then(function(forum){
         if (!forum){
             Responses.fail(req, "Forum could not be createed", null);
         } else {
@@ -44,7 +44,7 @@ exports.updateForum = function(req, res){
     if (isNaN(course_id)){ Response.error(res, "Course ID is not a number", null); }
     if (isNaN(forum_id)){ Response.error(res, "Forum ID is not a number", null); }
 
-    Models.Forums.updateForum(course_id, forum_id, name, description, order).then(function(forum){
+    Models.Forums.updateForum(course_id, forum_id, name, description, order, Models).then(function(forum){
         if(!forum){
             Responses.fail(res, "Forum could not be updated", null);
         } else {
@@ -60,7 +60,7 @@ exports.deleteForum = function(req, res){
     if (isNaN(course_id)){ Response.error(res, "Course ID is not a number", null); }
     if (isNaN(forum_id)){ Response.error(res, "Forum ID is not a number", null); }
 
-    Models.Forums.deleteForum(course_id, forum_id).then(function(forum){
+    Models.Forums.deleteForum(course_id, forum_id, Models).then(function(forum){
         if (!forum){
             Responses.fail(res, "Failed to delete forum", null);
         } else {

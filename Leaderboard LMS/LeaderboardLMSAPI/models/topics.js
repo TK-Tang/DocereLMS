@@ -1,5 +1,3 @@
-const Models = require("../models");
-
 module.exports = function(sequelize, Sequelize){
     const Topics = sequelize.define("Topics", {
         id: {
@@ -21,7 +19,7 @@ module.exports = function(sequelize, Sequelize){
     }, { underscored: true });
 
 
-    Topics.getTopic = async function(topic_id){
+    Topics.getTopic = async function(topic_id, models){
         return await this.findOne({
             where: { topic_id: topic_id },
             include: [
@@ -33,7 +31,7 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Topics.getTopicsByUser = async function(user_id, course_id){
+    Topics.getTopicsByUser = async function(user_id, course_id, models){
         return await this.findAll({
             where: { user_id: user_id },
             include: [
@@ -51,7 +49,7 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Topics.insertTopic = async function(user_id, title, content){
+    Topics.insertTopic = async function(user_id, title, content, models){
         const t = await sequelize.transaction();
         const topicDetails = { 
             user_id: user_id,
@@ -67,7 +65,7 @@ module.exports = function(sequelize, Sequelize){
             content: content
         }
 
-        const post = await Models.Posts.create(postDetails, { transaction: t });
+        const post = await models.Posts.create(postDetails, { transaction: t });
 
         return topic;
     }
@@ -110,11 +108,11 @@ module.exports = function(sequelize, Sequelize){
         return this.currentCourse.updateAttributes(topicDetails);
     }
 
-    Topics.deleteTopic = async function(topic_id){
+    Topics.deleteTopic = async function(topic_id, models){
         const topic = await this.getTopic(topic_id);
 
         topic.Posts.forEach(function(post){
-            var deletedPost = Models.Posts.deletePost(post.post_id);
+            var deletedPost = models.Posts.deletePost(post.post_id);
             if (!deletedPost){ return null; }
         });
 
