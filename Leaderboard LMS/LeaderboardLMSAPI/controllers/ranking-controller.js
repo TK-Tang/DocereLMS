@@ -6,7 +6,7 @@ exports.getRanking = function(res, req){
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
-    Model.Rankings.getRanking(ranking_id).then(function(ranking){
+    Models.Rankings.getRanking(ranking_id).then(function(ranking){
 
         if (ranking.StudentAnonymitySettings.revealLeaderboardname === false){
             ranking.Users.email = "Anonymous",
@@ -30,7 +30,7 @@ exports.insertRanking = function(res, req){
 
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
-    Model.Rankings.insertRanking(leaderboard_id, note, mark, Models).then(function(ranking){
+    Models.Rankings.insertRanking(leaderboard_id, note, mark, Models).then(function(ranking){
         if(!ranking){
             Responses.fail(res, "Ranking could not be inserted to this leaderboard");
         } else {
@@ -44,7 +44,7 @@ exports.updateRanking = function(res, req){
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
-    Model.Rankings.updateRanking(ranking_id, note, mark).then(function(ranking){
+    Models.Rankings.updateRanking(ranking_id, note, mark).then(function(ranking){
         if(!ranking){
             Responses.fail(res, "Ranking could not be updated");
         } else {
@@ -58,7 +58,7 @@ exports.deleteRanking = function(res, req){
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
-    Model.Rankings.deleteRanking(ranking_id, Models).then(function(numberOfRankingsDeleted){
+    Models.Rankings.deleteRanking(ranking_id, Models).then(function(numberOfRankingsDeleted){
         if(numberOfRankingsDeleted != 1){
             Responses.fail(res, "Ranking could not be deleted");
         } else {

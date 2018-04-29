@@ -19,7 +19,7 @@ exports.insertRankingSections = function(res, req){
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
 
-    Model.RankingSections.insertRankingSection(name).then(function(rankingSection){
+    Models.RankingSections.insertRankingSection(name).then(function(rankingSection){
         if(!rankingSection){
             Responses.fail(res, "Assignment/exam section could not be created", null);
         } else {
@@ -33,7 +33,7 @@ exports.updateRankingSection = function(res, req){
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
 
-    Model.RankingSections.updateRankingSection(name).then(function(rankingSection){
+    Models.RankingSections.updateRankingSection(name).then(function(rankingSection){
         if(!rankingSection){
             Responses.fail(res, "Assignment/exam section could not be updated", null);
         } else {
@@ -46,7 +46,7 @@ exports.deleteRankingSection = function(res, req){
     const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
     if (isNaN(ranking_section_id)){ Responses.error(res, "Ranking section ID is not a number", null); }
 
-    Model.RankingSections.deleteRankingSection(ranking_section_id).then(function(numberOfRankingSectionDeleted){
+    Models.RankingSections.deleteRankingSection(ranking_section_id).then(function(numberOfRankingSectionDeleted){
         if(numberOfRankingSectionDeleted != 1){
             Responses.error(res, "Error with deleting ranking section", null);
         } else {
