@@ -40,7 +40,7 @@ exports.getLeaderboardIncludingRankings = function(req, res){
 }
 
 exports.insertLeaderboard = function(req, res){
-    const course_id = req.body.course_id;
+    const course_id = req.params.course_id;
     const name = req.body.name;
     const blurb = req.body.blurb;
 
@@ -62,7 +62,7 @@ exports.updateLeaderboard = function(req, res){
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
-    Models.Leaderboards.updateLeaderboard(course_id, name, blurb).then(function(leaderboard){
+    Models.Leaderboards.updateLeaderboard(leaderboard_id, name, blurb).then(function(leaderboard){
         if(!leaderboard){
             Responses.fail(res, "Leaderboard could not be updated", null);
         } else {

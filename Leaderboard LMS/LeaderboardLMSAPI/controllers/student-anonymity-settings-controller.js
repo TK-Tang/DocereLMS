@@ -1,7 +1,7 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
 
-exports.getStudentAnonymitySettings = function(res, req){
+exports.getStudentAnonymitySettings = async function(res, req){
     const student_anonymity_settings_id = parseInt(req.params.student_anonymity_settings_id, 10);
     const ranking_id = parseInt(req.params.ranking_id, 10);
 
@@ -23,7 +23,7 @@ exports.getStudentAnonymitySettings = function(res, req){
     });
 }
 
-exports.updateStudentAnonymitySettings = function(res, req){
+exports.updateStudentAnonymitySettings = async function(res, req){
     const student_anonymity_settings_id = parseInt(req.params.student_anonymity_settings_id, 10);
     const ranking_id = parseInt(req.params.ranking_id, 10);
     const revealLeaderboardName = req.body.revealLeaderboardName;

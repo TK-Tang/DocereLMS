@@ -14,7 +14,7 @@ exports.getAllRankingSections = function(res, req){
     })
 }
 
-exports.insertRankingSections = function(res, req){
+exports.insertRankingSection = function(res, req){
     const name = req.body.name;
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }

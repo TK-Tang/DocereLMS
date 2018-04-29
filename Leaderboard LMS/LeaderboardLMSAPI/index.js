@@ -50,6 +50,10 @@ require("./routers/posts-router.js")(App);
 require("./routers/upvote-router.js")(App);
 
 require("./routers/leaderboard-router.js")(App);
+require("./routers/ranking-section-router.js")(App);
+require("./routers/ranking-router.js")(App);
+require("./routers/ranking-section-entry-router.js")(App);
+require("./routers/student-anonymity-settings-router.js")(App);
 
 
 Models.sequelizeCredentials.sync({ force: true }).then(() => {

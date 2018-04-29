@@ -7,7 +7,7 @@ module.exports = function(app){
 
     app.put("/course/:course_id/leaderboard/:leaderboard_id/rankingsection", AuthService.isAdminForCourse, RankingSectionController.insertRankingSection);
 
-    app.post("/course/:course_id/leaderboard/:leaderboard_id/rankingsection/:ranking_section_id", AuthService.isAdminForCours, RankingSectionController.updateRankingSection);
+    app.post("/course/:course_id/leaderboard/:leaderboard_id/rankingsection/:ranking_section_id", AuthService.isAdminForCourse, RankingSectionController.updateRankingSection);
     
     app.delete("/course/:course_id/leaderboard/:leaderboard_id/rankingsection/:ranking_section_id", AuthService.isAdminForCourse, RankingSectionController.deleteRankingSection)
 }
