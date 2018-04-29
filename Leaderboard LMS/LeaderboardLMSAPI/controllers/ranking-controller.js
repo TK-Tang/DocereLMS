@@ -49,6 +49,8 @@ exports.insertRanking = function(req, res){
 
 exports.updateRanking = function(req, res){
     const ranking_id = parseInt(req.params.ranking_id, 10)
+    const note = req.body.note;
+    const mark = req.body.mark;
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
