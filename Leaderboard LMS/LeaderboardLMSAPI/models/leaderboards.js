@@ -31,11 +31,16 @@ module.exports = function(sequelize, Sequelize){
                     model: models.Rankings,
                     include: [
                         {
-                            model: models.StudentAnonymitySettings,
-                            model: models.RankingSections,
-                            model: models.User
+                            model: models.StudentAnonymitySettings
+                        },
+                        {
+                            model: models.Users,
+                            attributes: [ "email", "username", "profilePictureLink"]
                         }
                     ]
+                },
+                {
+                    model: models.RankingSections
                 }
             ]
         });

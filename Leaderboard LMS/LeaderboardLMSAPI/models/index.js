@@ -53,6 +53,9 @@ db.Roles.belongsTo(db.Users, {foreignKey: "user_id"});
 db.Roles.belongsTo(db.Courses, {foreignKey: "course_id"});
 db.Courses.belongsToMany(db.Users, { through: "Roles" });
 db.Users.belongsToMany(db.Courses, { through: "Roles" });
+db.Courses.hasMany(db.Roles);
+db.Users.hasMany(db.Roles);
+
 
 db.Courses.hasMany(db.Invitations);
 db.Invitations.belongsTo(db.Courses, { foreignKey: "course_id" });
@@ -95,13 +98,13 @@ db.Users.hasMany(db.Rankings);
 db.Rankings.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
 db.Rankings.belongsTo(db.Users, { foreignKey: "user_id"});
 
-db.Leaderboards.hasOne(db.RankingSections);
+db.Leaderboards.hasMany(db.RankingSections);
 db.RankingSections.belongsTo(db.Leaderboards, { foreignKey: "leaderboard_id"});
 
 db.RankingSections.hasMany(db.RankingSectionEntries);
 db.RankingSectionEntries.belongsTo(db.RankingSections, {foreignKey: "ranking_section_id"})
 
-db.Rankings.hasOne(db.RankingSectionEntries);
+db.Rankings.hasMany(db.RankingSectionEntries);
 db.RankingSectionEntries.belongsTo(db.Rankings, { foreignKey: "ranking_id"});
 
 db.Rankings.hasOne(db.StudentAnonymitySettings);

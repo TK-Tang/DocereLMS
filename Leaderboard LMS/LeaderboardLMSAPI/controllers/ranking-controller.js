@@ -13,7 +13,7 @@ exports.getRanking = function(res, req){
             ranking.Users.username = "Anonymous"
         }
 
-        if (ranking.StudentAnonymitySettings.revealLeaderboardRankingSections === false){
+        if (ranking.StudentAnonymitySettings.revealRankingSections === false){
             ranking.RankingSections = null;
         }
         

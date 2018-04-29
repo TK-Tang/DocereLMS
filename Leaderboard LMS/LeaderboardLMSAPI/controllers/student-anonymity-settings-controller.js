@@ -27,7 +27,7 @@ exports.updateStudentAnonymitySettings = function(res, req){
     const student_anonymity_settings_id = parseInt(req.params.student_anonymity_settings_id, 10);
     const ranking_id = parseInt(req.params.ranking_id, 10);
     const revealLeaderboardName = req.body.revealLeaderboardName;
-    const revealLeaderboardRankingSections = req.body.revealLeaderboardRankingSections;
+    const revealRankingSections = req.body.revealRankingSections;
 
     if (isNaN(student_anonymity_settings_id)){ Responses.fail(res, "Student anonymity settings ID is not a number", null); }
     if (isNaN(ranking_id)){ Responses.fail(res, "Ranking ID is not a number", null); }
@@ -38,7 +38,7 @@ exports.updateStudentAnonymitySettings = function(res, req){
         Responses.fail(res, "You cannot view this student's anonymity settings", null);
     }
 
-    Models.StudentAnonymitySettings.updateStudentAnonymitySettings(student_anonymity_settings_id, revealLeaderboardName, revealLeaderboardRankingSections).then(function(studentAnonymitySettings){
+    Models.StudentAnonymitySettings.updateStudentAnonymitySettings(student_anonymity_settings_id, revealLeaderboardName, revealRankingSections).then(function(studentAnonymitySettings){
         if (!studentAnonymitySettings){
             Responses.error(res, "The student's anonymity settings could not be updated for this ranking at the moment", null);
         } else {

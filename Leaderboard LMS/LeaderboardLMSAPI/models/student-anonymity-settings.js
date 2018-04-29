@@ -12,7 +12,7 @@ module.exports = function(sequelize, Sequelize){
             defaultValue: false
         },
 
-        revealLeaderboardRankingSections: {
+        revealRankingSections: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         }
@@ -24,19 +24,19 @@ module.exports = function(sequelize, Sequelize){
         });
     };
 
-    StudentAnonymitySettings.insertStudentAnonymitySettings = async function(revealLeaderboardName, revealLeaderboardRankingSections){
+    StudentAnonymitySettings.insertStudentAnonymitySettings = async function(revealLeaderboardName, revealRankingSections){
         const studentAnonymitySettings = {
             revealLeaderboardName: revealLeaderboardName,
-            revealLeaderboardRankingSections: revealLeaderboardRankingSections
+            revealRankingSections: revealRankingSections
         }
 
         return await this.create(studentAnonymitySettings);
     }
 
-    StudentAnonymitySettings.updateStudentAnonymitySettings = async function(student_anonymity_settings_id, revealLeaderboardName, revealLeaderboardRankingSections){
+    StudentAnonymitySettings.updateStudentAnonymitySettings = async function(student_anonymity_settings_id, revealLeaderboardName, revealRankingSections){
         const studentAnonymitySettingsDetails = {
             revealLeaderboardName: revealLeaderboardName,
-            revealLeaderboardRankingSections: revealLeaderboardRankingSections
+            revealRankingSections: revealRankingSections
         }
 
         const t = await sequelize.transaction();

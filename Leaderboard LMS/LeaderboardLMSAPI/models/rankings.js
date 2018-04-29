@@ -42,9 +42,9 @@ module.exports = function(sequelize, Sequelize){
         var newRanking = await this.create(ranking);
 
         const studentAnonymitySettings = {
-            ranking_id: newRanking.ranking_id,
+            ranking_id: newRanking.id,
             revealLeaderboardName: false,
-            revealLeaderboardRankingSections: false
+            revealRankingSections: true
         }
 
         models.StudentAnonymitySettings.create(studentAnonymitySettings);

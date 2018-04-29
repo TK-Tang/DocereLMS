@@ -85,11 +85,9 @@ module.exports = function(sequelize, Sequelize) {
             include: [
                 {
                     model: models.Courses,
-                    where: { course_id: course_id },
-                    include: [
-                        { model: models.Roles }
-                    ]
-                }
+                    where: { course_id: course_id }
+                },
+                { model: models.Roles }
             ]
         });
     }

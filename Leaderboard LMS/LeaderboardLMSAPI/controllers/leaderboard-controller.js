@@ -7,9 +7,8 @@ exports.getLeaderboardIncludingRankings = function(req, res){
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
     Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id, Models).then(async function(leaderboard){ 
-
         for (var r in leaderboard.Rankings){
-            var user = await Models.Users.getLeaderboardIncludingRankings(req.user.id, course_id, Models);
+            var user = await Models.Users.getUserIncludingCourseAndRole(req.user.id, course_id, Models);
             if (user.Courses[0].Roles.rank === "admin"){
                 continue;
             }
@@ -23,7 +22,7 @@ exports.getLeaderboardIncludingRankings = function(req, res){
                 r.Users.username = "Anonymous"
             }
     
-            if (r.StudentAnonymitySettings.revealLeaderboardRankingSections === false){
+            if (r.StudentAnonymitySettings.revealRankingSections === false){
                 r.RankingSections = null;
             }
         }
@@ -31,7 +30,7 @@ exports.getLeaderboardIncludingRankings = function(req, res){
         if(!leaderboard){
             Responses.fail(res, "Leaderboard not found", null);
         } else {
-            Responses.success(res, "Leaderboard found", null);
+            Responses.success(res, "Leaderboard found", leaderboard);
         }
     });
 }
