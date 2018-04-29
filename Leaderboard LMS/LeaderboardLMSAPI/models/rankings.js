@@ -25,7 +25,7 @@ module.exports = function(sequelize, Sequelize){
                 {
                     model: models.StudentAnonymitySettings,
                     model: models.RankingSections,
-                    model: models.User
+                    model: models.Users
                 }
             ]
         });

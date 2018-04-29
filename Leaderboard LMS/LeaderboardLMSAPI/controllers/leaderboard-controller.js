@@ -7,26 +7,30 @@ exports.getLeaderboardIncludingRankings = function(req, res){
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
     Models.Leaderboards.getLeaderboardIncludingRankings(leaderboard_id, Models).then(async function(leaderboard){ 
-        for (var r in leaderboard.Rankings){
+        for (var key in leaderboard.Rankings){
+            var r = leaderboard.Rankings[key];
+
             var user = await Models.Users.getUserIncludingCourseAndRole(req.user.id, course_id, Models);
             if (user.Courses[0].Roles.rank === "admin"){
-                continue;
+                return;
             }
 
-            if (req.user.id === r.Users.user_id){
-                continue;
+            if (req.user.id === r.User.user_id){
+                return;
             }
 
-            if (r.StudentAnonymitySettings.revealLeaderboardname === false){
-                r.Users.email = "Anonymous",
-                r.Users.username = "Anonymous"
+            if (r.StudentAnonymitySetting.revealLeaderboardName === false){
+                r.User.id = 0
+                r.User.email = "Anonymous",
+                r.User.username = "Anonymous"
             }
     
-            if (r.StudentAnonymitySettings.revealRankingSections === false){
-                r.RankingSections = null;
+            if (r.StudentAnonymitySetting.revealRankingSections === false){
+                r.RankingSectionEntries = [];
+                r.dataValues.RankingSectionEntries = [];
             }
         }
-
+      
         if(!leaderboard){
             Responses.fail(res, "Leaderboard not found", null);
         } else {
@@ -41,7 +45,7 @@ exports.insertLeaderboard = function(req, res){
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
-    Model.Leaderboards.insertLeaderboard(name, blurb).then(function(leaderboard){
+    Models.Leaderboards.insertLeaderboard(name, blurb).then(function(leaderboard){
         if (!leaderboard){
             Responses.fail(res, "Leaderboard could not be created", null);
         } else {

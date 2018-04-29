@@ -35,7 +35,11 @@ module.exports = function(sequelize, Sequelize){
                         },
                         {
                             model: models.Users,
-                            attributes: [ "email", "username", "profilePictureLink"]
+                            attributes: [ "id", "email", "username", "profilePictureLink"]
+                        },
+                        {
+                            model: models.RankingSectionEntries,
+                            attributes: ["mark", "ranking_section_id", "ranking_id"]
                         }
                     ]
                 },
