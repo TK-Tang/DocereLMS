@@ -14,7 +14,7 @@ module.exports = function(sequelize, Sequelize){
     }, { underscored: true });
 
     RankingSectionEntries.getRankingSectionEntries = async function(ranking_id, Models){
-        return await this.findOne({
+        return await this.findAll({
             where: { ranking_id, ranking_id },
             include: [
                 {
@@ -45,7 +45,7 @@ module.exports = function(sequelize, Sequelize){
         const updatedRankingSectionEntry = await currentRankingSectionEntry.updateAttributes({ mark }, {transaction: t});
         t.commit();
 
-        return updatedBankingSectionEntry;
+        return updatedRankingSectionEntry;
     }
 
     RankingSectionEntries.deleteRankingSectionEntry = async function(ranking_section_entry_id){

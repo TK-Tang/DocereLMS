@@ -3,7 +3,7 @@ const AuthService = require("../middleware/authentication-service");
 const RankingSectionEntriesController = require("../controllers/ranking-section-entries-controller");
 
 module.exports = function(app){
-    app.get("/course/:course_id/ranking/:ranking_id", AuthService.isStudentOrAdminForCourse, RankingSectionEntriesController.getRankingSectionEntries);
+    app.get("/course/:course_id/ranking/:ranking_id/rankingsectionentries", AuthService.isStudentOrAdminForCourse, RankingSectionEntriesController.getRankingSectionEntries);
 
     app.put("/course/:course_id/ranking/:ranking_id/rankingsectionentries", AuthService.isAdminForCourse, RankingSectionEntriesController.insertRankingSectionEntry);
 

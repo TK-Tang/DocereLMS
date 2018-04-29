@@ -33,7 +33,7 @@ module.exports = function(sequelize, Sequelize){
         return await this.create(studentAnonymitySettings);
     }
 
-    StudentAnonymitySettings.updateStudentAnonymitySettings = async function(student_anonymity_settings_id, revealLeaderboardName, revealRankingSections){
+    StudentAnonymitySettings.updateStudentAnonymitySettings = async function(ranking_id, revealLeaderboardName, revealRankingSections){
         const studentAnonymitySettingsDetails = {
             revealLeaderboardName: revealLeaderboardName,
             revealRankingSections: revealRankingSections
@@ -41,7 +41,7 @@ module.exports = function(sequelize, Sequelize){
 
         const t = await sequelize.transaction();
         const currentStudentAnonymitySettings = await StudentAnonymitySettings.findOne({
-            where: { student_anonymity_settings_id: student_anonymity_settings_id }
+            where: { ranking_id: ranking_id }
         }, {transaction: t});
 
         if (!currentStudentAnonymitySettings){ return null; }
