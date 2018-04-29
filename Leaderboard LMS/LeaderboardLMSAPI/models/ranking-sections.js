@@ -19,8 +19,11 @@ module.exports = function(sequelize, Sequelize){
         });
     };
 
-    RankingSections.insertRankingSection = async function(name, leaderboard_id){
-        return await this.create({ name });
+    RankingSections.insertRankingSection = async function(leaderboard_id, name){
+        return await this.create({ 
+            leaderboard_id: leaderboard_id, 
+            name: name 
+        });
     };
 
     RankingSections.updateRankingSection = async function(ranking_section_id, name, models){
@@ -30,7 +33,7 @@ module.exports = function(sequelize, Sequelize){
         }, {transaction: t});
 
         if (!currentRankingSection){ return null; }
-        const updatedRankingSection = currentRankingSection.updateAttributes({ name }, {transaction: t});
+        const updatedRankingSection = await currentRankingSection.updateAttributes({ name: name }, {transaction: t});
         t.commit();
 
         return updatedRankingSection;

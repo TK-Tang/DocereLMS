@@ -9,35 +9,37 @@ exports.getAllRankingSections = function(req, res){
         if (!rankingSections){
             Responses.fail(res, "No template sections for this assignment/exam could be found", null);
         } else {
-            Responses.success(res, "List of template sections for this assignment/exam found", null)
+            Responses.success(res, "List of template sections for this assignment/exam found", rankingSections)
         }
     })
 }
 
 exports.insertRankingSection = function(req, res){
     const name = req.body.name;
+    const leaderboard_id= parseInt(req.params.leaderboard_id, 10);
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
 
-    Models.RankingSections.insertRankingSection(name).then(function(rankingSection){
+    Models.RankingSections.insertRankingSection(leaderboard_id, name).then(function(rankingSection){
         if(!rankingSection){
             Responses.fail(res, "Assignment/exam section could not be created", null);
         } else {
-            Responses.success(res, "Assignment/exam section created", null);
+            Responses.success(res, "Assignment/exam section created", rankingSection);
         }
     });
 }
 
 exports.updateRankingSection = function(req, res){
     const name = req.body.name;
+    const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
 
-    Models.RankingSections.updateRankingSection(name).then(function(rankingSection){
+    Models.RankingSections.updateRankingSection(ranking_section_id, name).then(function(rankingSection){
         if(!rankingSection){
             Responses.fail(res, "Assignment/exam section could not be updated", null);
         } else {
-            Responses.success(res, "Assignment/exam section updated", null);
+            Responses.success(res, "Assignment/exam section updated", rankingSection);
         }
     });
 }
