@@ -32,10 +32,13 @@ exports.getRanking = function(req, res){
 
 exports.insertRanking = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
+    const user_id = req.body.user_id;
+    const note = req.body.note;
+    const mark = req.body.mark;
 
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
 
-    Models.Rankings.insertRanking(leaderboard_id, note, mark, Models).then(function(ranking){
+    Models.Rankings.insertRanking(leaderboard_id, user_id, note, mark, Models).then(function(ranking){
         if(!ranking){
             Responses.fail(res, "Ranking could not be inserted to this leaderboard");
         } else {
