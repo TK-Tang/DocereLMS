@@ -22,11 +22,9 @@ module.exports = function(sequelize, Sequelize){
         return await this.findOne({
             where: { ranking_id: ranking_id }, 
             include: [
-                {
-                    model: models.StudentAnonymitySettings,
-                    model: models.RankingSections,
-                    model: models.Users
-                }
+                { model: models.StudentAnonymitySettings },
+                { model: models.RankingSectionEntries },
+                { model: models.Users }
             ]
         });
     }
@@ -44,7 +42,7 @@ module.exports = function(sequelize, Sequelize){
         const studentAnonymitySettings = {
             ranking_id: newRanking.id,
             revealLeaderboardName: false,
-            revealRankingSections: true
+            revealRankingSections: false
         }
 
         models.StudentAnonymitySettings.create(studentAnonymitySettings);

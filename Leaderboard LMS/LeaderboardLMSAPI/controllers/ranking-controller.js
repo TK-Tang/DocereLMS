@@ -2,19 +2,24 @@ const Responses = require("../helpers/response");
 const Models = require("../models");
 
 exports.getRanking = function(req, res){
+    const course_id = req.params.course_id;
     const ranking_id = parseInt(req.params.ranking_id, 10);
 
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
-    Models.Rankings.getRanking(ranking_id).then(function(ranking){
+    Models.Rankings.getRankingIncludingStudentAnonymitySettings(ranking_id, Models).then(async function(ranking){
 
-        if (ranking.StudentAnonymitySettings.revealLeaderboardname === false){
-            ranking.Users.email = "Anonymous",
-            ranking.Users.username = "Anonymous"
-        }
-
-        if (ranking.StudentAnonymitySettings.revealRankingSections === false){
-            ranking.RankingSections = null;
+        var user = await Models.Users.getUserIncludingCourseAndRole(req.user.id, course_id, Models);
+        if (user.Courses[0].Roles.rank !== "admin"){
+            if (ranking.StudentAnonymitySetting.revealLeaderboardName === false){
+                ranking.User.email = "Anonymous",
+                ranking.User.username = "Anonymous"
+            }
+    
+            if (ranking.StudentAnonymitySetting.revealRankingSections === false){
+                ranking.RankingSectionEntries = [];
+                ranking.dataValues.RankingSectionEntries = [];
+            }
         }
         
         if(!ranking){
