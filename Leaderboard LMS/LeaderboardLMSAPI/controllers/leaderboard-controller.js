@@ -12,11 +12,11 @@ exports.getLeaderboardIncludingRankings = function(req, res){
 
             var user = await Models.Users.getUserIncludingCourseAndRole(req.user.id, course_id, Models);
             if (user.Courses[0].Roles.rank === "admin"){
-                return;
+                break;
             }
 
             if (req.user.id === r.User.user_id){
-                return;
+                break;
             }
 
             if (r.StudentAnonymitySetting.revealLeaderboardName === false){
