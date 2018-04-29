@@ -1,7 +1,7 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
 
-exports.getRankingSectionEntries = function(res, req){
+exports.getRankingSectionEntries = function(req, res){
     const ranking_id = parseInt(req.params.ranking_id, 10);
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
 
@@ -14,7 +14,7 @@ exports.getRankingSectionEntries = function(res, req){
     });
 }
 
-exports.insertRankingSectionEntry = function(res, req){
+exports.insertRankingSectionEntry = function(req, res){
     const ranking_id = parseInt(req.params.ranking_id, 10);
     if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); } 
 
@@ -30,7 +30,7 @@ exports.insertRankingSectionEntry = function(res, req){
     });
 }
 
-exports.updateRankingSectionEntry = function(res, req){
+exports.updateRankingSectionEntry = function(req, res){
     const ranking_section_entry_id = parseInt(req.params.ranking_section_entry_id, 10);
     if(isNaN(ranking_section_entry_id)){ Responses.error(res, "Ranking section entry ID is not a number", null); } 
 
@@ -45,7 +45,7 @@ exports.updateRankingSectionEntry = function(res, req){
     });
 }
 
-exports.deleteRankingSectionEntry = function(res, req){
+exports.deleteRankingSectionEntry = function(req, res){
     const ranking_section_entry_id = parseInt(req.params.ranking_section_entry_id, 10);
     if(isNaN(ranking_section_entry_id)){ Responses.error(res, "Ranking section entry ID is not a number", null); } 
     

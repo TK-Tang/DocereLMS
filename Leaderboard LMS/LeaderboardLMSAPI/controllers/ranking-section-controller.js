@@ -1,7 +1,7 @@
 const Responses = require("../helpers/response");
 const Models = require("../models");
 
-exports.getAllRankingSections = function(res, req){
+exports.getAllRankingSections = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
     if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard Id is not a number", null); }
 
@@ -14,7 +14,7 @@ exports.getAllRankingSections = function(res, req){
     })
 }
 
-exports.insertRankingSection = function(res, req){
+exports.insertRankingSection = function(req, res){
     const name = req.body.name;
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
@@ -28,7 +28,7 @@ exports.insertRankingSection = function(res, req){
     });
 }
 
-exports.updateRankingSection = function(res, req){
+exports.updateRankingSection = function(req, res){
     const name = req.body.name;
 
     if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
@@ -42,7 +42,7 @@ exports.updateRankingSection = function(res, req){
     });
 }
 
-exports.deleteRankingSection = function(res, req){
+exports.deleteRankingSection = function(req, res){
     const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
     if (isNaN(ranking_section_id)){ Responses.error(res, "Ranking section ID is not a number", null); }
 
