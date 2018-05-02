@@ -144,11 +144,11 @@ exports.updateCourse = function(req, res){
     });
 }
 
-exports.deactivateCourse = function(req, res){
+exports.toggleActivation = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
     const isActive = req.body.isActive;
 
-    Models.Courses.deactivateCourse(course_id, isActive).then(function(course){
+    Models.Courses.toggleActivation(course_id, isActive).then(function(course){
         if(!course){
             Responses.fail(res, "Course could not be deactivated", null);
         } else {

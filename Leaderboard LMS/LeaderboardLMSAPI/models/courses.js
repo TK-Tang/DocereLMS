@@ -176,7 +176,7 @@ module.exports = function(sequelize, Sequelize){
         return course;
     };
 
-    Courses.deactivateCourse = async function(course_id, isActive){
+    Courses.toggleActivation = async function(course_id, isActive){
         const courseDetails = {
             isActive: isActive
         }

@@ -6,7 +6,7 @@ let api_domain = domain + ":" + port;
 
 let headers = {
     "Content-Type": "application-json"
-}
+};
 
 var user_api = {
 
@@ -46,6 +46,24 @@ var user_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
+    post_updateUser(term, userInfo){
+        var url = api_domain + "/user/" + term;
+
+        let body = {
+            "email": userInfo.email,
+            "username": userInfo.username,
+            "profilePictureLink": userInfo.profilePictureLink
+        }
+
+        var req = {
+            method: "POST",
+            headers: headers,
+            credentials: "include",
+            body: JSON.stringify(body)
+        };
+
+        return fetch(url, req).then((res) => res.json());
+    }
 }
 
 export default user_api;
