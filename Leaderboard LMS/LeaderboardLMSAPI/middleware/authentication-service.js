@@ -28,7 +28,7 @@ exports.isPublicPage = function (req, res, next){
     }
 
     if (req.isAuthenticated()){ return next(); }
-    Responses.fail(res, "Authentication failure: Not authenticated");
+    Responses.fail(res, "Authentication failure: Not authenticated for non-public data");
 }
 
 // For updating profiles

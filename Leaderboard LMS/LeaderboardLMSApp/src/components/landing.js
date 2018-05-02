@@ -3,6 +3,7 @@ import React from "react";
 import CourseAPI from "../services/course-api.js";
 import AuthAPI from "../services/authentication-api.js";
 import Header from "./headers/header.js";
+import CourseList from "./sidebar/course-list.js"
 
 import { Sidebar, Segment, Button, Menu, Image, Icon } from "semantic-ui-react";
 
@@ -16,13 +17,13 @@ export default class Landing extends React.Component {
     }
 
     componentWillMount(){
-        AuthAPI.get_currentUser().then(res =>   
-            this.setState({ user: res.payload })  
-        );
+        AuthAPI.get_currentUser().then(res =>  {
+            console.log(res); 
+            this.setState({ user: res.payload });
+        });
     }
 
     sidebarToggle(){
-        console.log("ASDF");
         if (this.state.sidebarStatus) {
             this.setState({ sidebarStatus: false });
         } else {
@@ -45,9 +46,7 @@ export default class Landing extends React.Component {
             <div>
                 <Sidebar.Pushable as={Segment}>
                     <Sidebar as={Menu} animation="slide along" width="thin" visible={this.state.sidebarStatus} icon="labeled" vertical inverted>
-                        <Menu.Item name="home">
-                            {this.state.user.email} | {this.state.user.username}
-                        </Menu.Item>
+                        <CourseList {...this.state} />
                     </Sidebar>
                     <Sidebar.Pusher>
                         <Segment basic>
@@ -55,6 +54,9 @@ export default class Landing extends React.Component {
                                 sidebarToggle={this.sidebarToggle.bind(this)} 
                                 signout={this.signout.bind(this)}
                             />
+
+                            <div style={{height: "100vh"}}>
+                            </div>
                         </Segment>
                     </Sidebar.Pusher>
                 </Sidebar.Pushable>

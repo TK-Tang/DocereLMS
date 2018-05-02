@@ -1,4 +1,4 @@
-import "whatwg-fetch"
+import "whatwg-fetch";
 
 let domain = "http://localhost";
 let port = "11000";
@@ -11,7 +11,7 @@ var course_api = {
             method: "GET"
         };
 
-        return fetch(url, req).then(function(res) { console.log(res); res.json()});
+        return fetch(url, req).then((res) => res.json());
     }
 }
 
