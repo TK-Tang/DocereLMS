@@ -72,7 +72,7 @@ export default class Signup extends React.Component {
                 this.setState({ signupComplete: true });
                 setTimeout(function(){ this.props.history.replace("/landing"); }.bind(this), 4000);
             } else if (res.status === "fail") {
-                let message = res.message;
+                let message = "That email is already taken. Please choose another.";
                 window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
             } else {
                 let message = "There was an issue with signing up"

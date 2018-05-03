@@ -41,7 +41,7 @@ export default class Signin extends React.Component {
                 this.setState({ signinComplete: true });
                 setTimeout(function(){ this.props.history.replace('/landing'); }.bind(this), 2000);
             } else {
-                let message = res.message;
+                let message = "Sign in failed. Check your email and password please.";
                 window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
             }
         });
