@@ -12,13 +12,14 @@ export default class Landing extends React.Component {
         super(props);
         this.state = {
             sidebarStatus: true,
+            courseId: 0,
             user: {}
         };
     }
 
     componentWillMount(){
         AuthAPI.get_currentUser().then(res =>  {
-            console.log(res); 
+            console.log(res);
             this.setState({ user: res.payload });
         });
     }
@@ -42,11 +43,12 @@ export default class Landing extends React.Component {
     }
 
     render() {
+        console.log(this.state.user);
         return (        
             <div>
                 <Sidebar.Pushable as={Segment}>
-                    <Sidebar as={Menu} animation="slide along" width="thin" visible={this.state.sidebarStatus} icon="labeled" vertical inverted>
-                        <CourseList {...this.state} />
+                    <Sidebar as={Menu} animation="slide along" visible={this.state.sidebarStatus} icon="labeled" vertical inverted>
+                        { this.state.user.email ? <CourseList user={this.state.user} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>
                     <Sidebar.Pusher>
                         <Segment basic>

@@ -33,7 +33,7 @@ export default class header extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                             <Button.Group>
-                                <Button size="big" icon="list alternate" content="Forums" />
+                                <Button size="big" icon="grid layout" content="Forums" />
                                 <Button size="big" icon="comments" content="Chat" />
                                 <Button size="big" icon="chart line" content="Leaderboard" />
                                 <Button size="big" icon="plane" content="Sign Out" onClick={this.signout.bind(this)}/>

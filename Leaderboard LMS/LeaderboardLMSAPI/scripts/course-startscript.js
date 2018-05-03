@@ -5,7 +5,7 @@ module.exports.startScript = function(){
         name: "INFO1103",
         description: "Introductory programming course",
         coordinator: "Dong Yuan",
-        pictureLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/University_of_Sydney.svg/1200px-University_of_Sydney.svg.png",
+        pictureLink: "http://logodatabases.com/wp-content/uploads/2012/03/java-logo-wallpaper.jpg",
         allowInvitations: true
     };
 
@@ -13,7 +13,7 @@ module.exports.startScript = function(){
         name: "INFO1105",
         description: "Data Structures",
         coordinator: "Dong Yuan",
-        pictureLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/University_of_Sydney.svg/1200px-University_of_Sydney.svg.png",
+        pictureLink: "https://pbs.twimg.com/profile_images/943919605814214656/3-UIm1if_400x400.jpg",
         allowInvitations: true
     };
 
