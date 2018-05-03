@@ -12,7 +12,6 @@ export default class header extends React.Component {
     }
 
     sidebarToggle(){
-        console.log("asdf");
         this.props.sidebarToggle();
     }
 
@@ -34,9 +33,9 @@ export default class header extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                             <Button.Group>
-                                <Button size="big" icon="map" content="Dashboard" />
-                                <Button size="big" icon="list layout" content="Tasks" />
-                                <Button size="big" icon="align justify" content="Agents" />
+                                <Button size="big" icon="list alternate" content="Forums" />
+                                <Button size="big" icon="comments" content="Chat" />
+                                <Button size="big" icon="chart line" content="Leaderboard" />
                                 <Button size="big" icon="plane" content="Sign Out" onClick={this.signout.bind(this)}/>
                             </Button.Group>
                         </Grid.Column>
