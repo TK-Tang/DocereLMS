@@ -12,6 +12,11 @@ module.exports = function(sequelize, Sequelize){
             notEmpty: true
         },
 
+        weighting: {
+            type: Sequelize.INTEGER,
+            notEmpty: true
+        },
+
         blurb: {
             type: Sequelize.STRING
         }
@@ -50,20 +55,22 @@ module.exports = function(sequelize, Sequelize){
         });
     }
 
-    Leaderboards.insertLeaderboard = async function(course_id, name, blurb){
+    Leaderboards.insertLeaderboard = async function(course_id, name, blurb, weighting){
         const leaderboard = {
             course_id: course_id,
             name: name,
-            blurb: blurb
+            blurb: blurb,
+            weight: weighting
         };
 
         return await this.create(leaderboard);
     };
 
-    Leaderboards.updateLeaderboard = async function(leaderboard_id, name, blurb){
+    Leaderboards.updateLeaderboard = async function(leaderboard_id, name, blurb, weighting){
         leaderboardDetails = {
             name: name,
-            blurb: blurb
+            blurb: blurb,
+            weight: weighting
         }
 
         const t = await sequelize.transaction();

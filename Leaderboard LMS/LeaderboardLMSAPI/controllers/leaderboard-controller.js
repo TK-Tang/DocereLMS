@@ -46,7 +46,7 @@ exports.insertLeaderboard = function(req, res){
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
-    Models.Leaderboards.insertLeaderboard(course_id, name, blurb).then(function(leaderboard){
+    Models.Leaderboards.insertLeaderboard(course_id, name, blurb, weighting).then(function(leaderboard){
         if (!leaderboard){
             Responses.fail(res, "Leaderboard could not be created", null);
         } else {
@@ -62,7 +62,7 @@ exports.updateLeaderboard = function(req, res){
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
-    Models.Leaderboards.updateLeaderboard(leaderboard_id, name, blurb).then(function(leaderboard){
+    Models.Leaderboards.updateLeaderboard(leaderboard_id, name, blurb, weighting).then(function(leaderboard){
         if(!leaderboard){
             Responses.fail(res, "Leaderboard could not be updated", null);
         } else {
