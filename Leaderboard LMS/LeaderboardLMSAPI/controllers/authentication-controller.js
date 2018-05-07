@@ -3,7 +3,13 @@ const Models = require("../models");
 
 exports.getCurrentUser = function(req, res){
     if (req.user.email){
-        Responses.success(res, "Current user", { "email": req.user.email, "username": req.user.username });
+        Models.Users.getUser(req.user.id, req.user.email, Models).then(function(user){
+            if (!user){
+                Responses.fail(res, "No user found", null);
+            } else {
+                Responses.success(res, "User found", user);
+            }
+        });
     } else {
         Responses.fail(res, "You are not logged in", null);
     }

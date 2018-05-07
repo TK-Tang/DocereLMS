@@ -60,7 +60,7 @@ exports.getUserIncludingCourseAndRole = function(req, res){
 }
 
 exports.updateUser = function(req, res){
-    const user_id = parseInt(req.params.term, 10);
+    const user_id = parseInt(req.params.user_id, 10);
     const email = req.body.email;
     const username = req.body.username;
     const profilePictureLink = req.body.profilePictureLink;

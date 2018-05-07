@@ -5,7 +5,7 @@ let port = "11000";
 let api_domain = domain + ":" + port;
 
 let headers = {
-    "Content-Type": "application-json"
+    "Content-Type": "application/json"
 };
 
 var user_api = {
@@ -46,8 +46,8 @@ var user_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    post_updateUser(term, userInfo){
-        var url = api_domain + "/user/" + term;
+    post_updateUser(user_id, userInfo){
+        var url = api_domain + "/user/" + user_id;
 
         let body = {
             "email": userInfo.email,

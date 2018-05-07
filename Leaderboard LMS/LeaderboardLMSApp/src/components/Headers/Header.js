@@ -25,13 +25,13 @@ export default class header extends React.Component {
 
     render() {
         return (
-            <div className = "header-banner">
+            <div className="header-banner">
                 <Grid className="width-100-percent-important">
                     <Grid.Row>
                         <Grid.Column width={4}>
                             <div className="inline-block">
-                                <a className = "no-text-decoration" onClick={this.sidebarToggle.bind(this)}>
-                                    <Icon name="sidebar" size="big" className = "vertical-align-middle header-banner-icon" />
+                                <a className="no-text-decoration" onClick={this.sidebarToggle.bind(this)}>
+                                    <Icon name="sidebar" size="big" className="vertical-align-middle header-banner-icon" />
                                 </a>
                             </div>
                         </Grid.Column>

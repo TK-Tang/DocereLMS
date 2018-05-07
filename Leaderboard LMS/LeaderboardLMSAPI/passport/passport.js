@@ -95,7 +95,7 @@ module.exports = function(passportApp, userModel){
                 return bCrypt.compareSync(password, userpass);
             }
 
-            userModel.getUser(null, email, Models).then(function(user){
+            userModel.getUserIncludingPassword(null, email, Models).then(function(user){
                 if (!user){
                     return done("Email does not exist", false);
                 }

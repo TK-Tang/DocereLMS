@@ -33,9 +33,9 @@ exports.isPublicPage = function (req, res, next){
 
 // For updating profiles
 exports.isCurrentUser = function(req, res, next){
-    const term = req.params.term;
+    const user_id = req.params.user_id;
     
-    Models.Users.getUser(term, term, Models).then(function(user){
+    Models.Users.getUserIncludingPassword(user_id, user_id, Models).then(function(user){
         if (user.email == req.user.email){
             return next();
         } else {

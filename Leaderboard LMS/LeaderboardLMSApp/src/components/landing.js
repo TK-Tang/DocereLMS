@@ -20,7 +20,11 @@ export default class Landing extends React.Component {
 
     componentWillMount(){
         AuthAPI.get_currentUser().then(res =>  {
-            console.log(res);
+            if (res.status !== "success"){
+                this.props.history.replace('/');
+                let message = "You're not signed in on Leaderboard LMS";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
+            }
             this.setState({ user: res.payload });
         });
     }
@@ -66,7 +70,7 @@ export default class Landing extends React.Component {
                     <Sidebar as={Menu} animation="slide along" visible={this.state.sidebarStatus} icon="labeled" vertical inverted>
                         { this.state.user.email ? <CourseList user={this.state.user} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>
-                    <Sidebar.Pusher>
+                    <Sidebar.Pusher className="main">
                         <Segment basic>
                             <Header 
                                 sidebarToggle={this.sidebarToggle.bind(this)}

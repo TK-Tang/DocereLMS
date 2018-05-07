@@ -8,7 +8,9 @@ module.exports.startScript = function (){
         username: "Dong",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "http://www.isa.org.usyd.edu.au/homeimg/USYD_LOGO_New.jpg"
+        
     };
 
     userList.user002 = {
@@ -16,7 +18,8 @@ module.exports.startScript = function (){
         username: "TKTang",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "https://vignette.wikia.nocookie.net/epicbattlefantasy/images/6/66/Lance%27s_face.png/revision/latest?cb=20120506031800"
     };
 
     userList.user003 = {
@@ -24,7 +27,8 @@ module.exports.startScript = function (){
         username: "Kitty",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "https://img00.deviantart.net/bd82/i/2014/353/6/4/fluttershy___oh__yes__by_ajvl-d65tdq6.jpg"
     }
 
     userList.user004 = {
@@ -32,7 +36,8 @@ module.exports.startScript = function (){
         username: "Simon",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/tsuyu-asui--54.8.jpg"
     }
 
     userList.user005 = {
@@ -41,6 +46,7 @@ module.exports.startScript = function (){
         password: generateHash("24157817"),
         status: "offline",
         activation: "active",
+        profilePictureLink: "https://vignette.wikia.nocookie.net/casuallyexplained/images/1/19/Avatar.jpg/revision/latest/scale-to-width-down/150?cb=20171203035936"
     }
 
     userList.user006 = {
@@ -48,7 +54,8 @@ module.exports.startScript = function (){
         username: "Darren",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "https://images.techhive.com/images/article/2016/01/thinkstockphotos-481493125-100638928-large.jpg"
     }
 
     userList.user007 = {
@@ -56,7 +63,8 @@ module.exports.startScript = function (){
         username: "BrendanT",
         password: generateHash("24157817"),
         status: "offline",
-        activation: "active"
+        activation: "active",
+        profilePictureLink: "https://ih0.redbubble.net/image.387863594.5073/flat,800x800,075,f.jpg"
     }
 
     return userList;

@@ -347,3 +347,7 @@
   color: rgba(0,0,0,0.5);
   transition-duration: 0.2s;
 }
+
+.main{
+  right: 168px !important;
+}

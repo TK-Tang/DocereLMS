@@ -50,14 +50,25 @@ module.exports = function(sequelize, Sequelize) {
         return await this.create(user);
     }
 
-    // READ - returning a single user
     Users.getUser = async function(user_id, email, models){
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
+            attributes: ["id", "email", "username", "profilePictureLink", "status", "activation", "created_at", "updated_at"]
+        });
+    }
+
+    // READ - returning a single user
+    Users.getUserIncludingPassword = async function(user_id, email, models){
+        if(isNaN(user_id)){ user_id = -1; }
+
+        return await this.findOne({
+            where: Sequelize.or({ user_id: user_id }, { email: email })
         });
     }
 
     Users.getUserIncludingCourses = async function(user_id, email, models){
+        if(!isNaN(user_id)){ user_id = -1; }
+
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [
@@ -67,6 +78,8 @@ module.exports = function(sequelize, Sequelize) {
     }
 
     Users.getUserIncludingCourse = async function(user_id, email, course_id, models){
+        if(!isNaN(user_id)){ user_id = -1; }
+
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             include: [

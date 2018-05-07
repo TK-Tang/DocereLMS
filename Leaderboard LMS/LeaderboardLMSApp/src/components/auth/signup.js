@@ -51,7 +51,6 @@ export default class Signup extends React.Component {
     }
 
     signup(){
-
         if (this.state.password !== this.state.passwordCheck){
             let message = "The passwords you have entered do not match";
             window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
@@ -112,7 +111,7 @@ export default class Signup extends React.Component {
                             <Form.Input type="password" id="form-subcomponent-shorthand-input-password" onChange={this.updatePassword.bind(this)} placeholder="Password" value={this.state.password}/>
                         </Form.Group>
                         <Form.Group widths="equal">
-                            <Form.Input type="password" onChange={this.updatePasswordCheck.bind(this)} placeholder="Re-type your password" value={this.state.passwordCheck}/>
+                            <Form.Input type="password" onChange={this.updatePasswordCheck.bind(this)} placeholder="Confirm Password" value={this.state.passwordCheck}/>
                         </Form.Group>
                         <Button positive className={(this.state.invitationValidity) ? "width-full" : "width-full disabled"} onClick={this.signup.bind(this)}>Sign up and accept invitation</Button>
                         <Button positive className="width-full margin-top-small" onClick={this.signin.bind(this)}>Sign in here</Button>
