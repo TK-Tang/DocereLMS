@@ -190,7 +190,7 @@
 .intro-logo {
   position: absolute;
   top: 30vh;
-  left: 35%
+  left: 42%
 }
 
 .intro-form {
@@ -350,4 +350,36 @@
 
 .main{
   right: 168px !important;
+}
+
+.course-menu{
+  background: #444649 !important;
+}
+
+.course-menu-category{
+  text-align: left;
+  color: #6a90c4 !important;
+  font-size: 12x;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer
+}
+
+.course-menu-category:hover{
+  color: #9ebbe5 !important;
+}
+
+
+.sub-menu{
+  text-align: left !important;
+  color: #b4b9c1 !important;
+  font-size: 16px !important;
+  cursor: pointer;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sub-menu:hover{
+  background-color: #4e5156 !important;
 }

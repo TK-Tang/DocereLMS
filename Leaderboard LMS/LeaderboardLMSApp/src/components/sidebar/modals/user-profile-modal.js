@@ -15,6 +15,11 @@ export default class UserProfileModal extends React.Component {
     openModal = () => this.setState({modal: true});
 
     closeModal = () => this.setState({modal: false});
+
+    signout(){
+        this.props.signout();
+    }
+    
     render() {
         return (
             <Modal
@@ -46,6 +51,7 @@ export default class UserProfileModal extends React.Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
+                    <Button color="red" floated="left" onClick={this.signout.bind(this)}>Sign out</Button>
                     <UserProfileUpdateModal user={this.props.user} />
                     <Button onClick={this.closeModal}>Close</Button>
                 </Modal.Actions>

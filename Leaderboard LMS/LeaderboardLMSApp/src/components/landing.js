@@ -1,20 +1,20 @@
 import React from "react";
-import { Sidebar, Segment, Button, Menu, Image, Icon } from "semantic-ui-react";
+import { Sidebar, Segment, Button, Menu, Image, Icon, Input, Divider, Header } from "semantic-ui-react";
 
 import CourseAPI from "../services/course-api.js";
 import AuthAPI from "../services/authentication-api.js";
 
-import Header from "./headers/header.js";
-import CourseList from "./sidebar/course-list.js"
+import CourseList from "./sidebar/course-list.js";
+import ChatList from "./sidebar/chat-list.js";
+import ForumList from "./sidebar/forum-list.js";
+import LeaderboardList from "./sidebar/leaderboard-list.js";
 
 export default class Landing extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            sidebarStatus: true,
-            courseId: 1,
             user: {},
-            dashboardBlob: ""
+            course_id: 1         
         };
     }
 
@@ -22,43 +22,21 @@ export default class Landing extends React.Component {
         AuthAPI.get_currentUser().then(res =>  {
             if (res.status !== "success"){
                 this.props.history.replace('/');
-                let message = "You're not signed in on Leaderboard LMS";
+                let message = "You're not signed in on Leaderboard LMS, you need to sign in mate.";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
             }
             this.setState({ user: res.payload });
         });
     }
 
-    sidebarToggle(){
-        if (this.state.sidebarStatus) {
-            this.setState({ sidebarStatus: false });
-        } else {
-            this.setState({ sidebarStatus: true });
-        }
-    }
-
     signout(){
         AuthAPI.get_signout().then((res) => {
             if (res.status === "success"){
                 this.props.history.replace('/');
-                let message = "Signed Out from Leaderboard LMS";
+                let message = "Signed out from Leaderboard LMS. See you later, check back soon!";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
             }
         });
-    }
-
-    loadForums(){
-        CourseAPI.get_courseForums(this.state.courseId).then((res) => {
-            if (res.status === "success"){
-                let message = "Forums loaded";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
-                this.setState({dashboardBlob: res.payload});
-            }
-        });
-    }
-
-    loadLeaderboard(){
-        
     }
 
     render() {
@@ -67,28 +45,49 @@ export default class Landing extends React.Component {
         return (
             <div>
                 <Sidebar.Pushable as={Segment}>
-                    <Sidebar as={Menu} animation="slide along" visible={this.state.sidebarStatus} icon="labeled" vertical inverted>
-                        { this.state.user.email ? <CourseList user={this.state.user} /> : <Menu.Item>loading...</Menu.Item>}
+                    <Sidebar as={Menu} visible={true} icon="labeled" vertical inverted>
+                        {this.state.user.email ? <CourseList user={this.state.user} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>
                     <Sidebar.Pusher className="main">
-                        <Segment basic>
-                            <Header 
-                                sidebarToggle={this.sidebarToggle.bind(this)}
-                                loadForums={this.loadForums.bind(this)}
-                                signout={this.signout.bind(this)}
-                            />
+                        <Sidebar as={Menu} visible={true} icon="labeled" className="course-menu" vertical inverted>
+                            <Menu inverted vertical className="course-menu">
+                                <Divider/>
+                                <Menu.Item >
+                                    <Input placeholder='Search...' />
+                                </Menu.Item>
+                                <Divider/>
+                                <Menu.Item>
+                                    <div className="course-menu-category"><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
+                                    <LeaderboardList course_id={this.state.course_id} />
+                                </Menu.Item>
+                                <Divider />
+                                <Menu.Item>
+                                    <div className="course-menu-category"><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
+                                    <Menu.Menu>
+                                        <ChatList course_id={this.state.course_id} />
+                                    </Menu.Menu>
+                                </Menu.Item>
+                                <Divider />
+                                <Menu.Item>
+                                    <div className="course-menu-category"><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
+                                    <Menu.Menu>
+                                        <ForumList course_id={this.state.course_id} />
+                                    </Menu.Menu>
+                                </Menu.Item>
+                                <Divider inverted />
+                                <Menu.Item>
+                                    <div className="course-menu-category"><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
+                                </Menu.Item>
+                            </Menu>
+                        </Sidebar>
 
-                            <div style={{height: "100vh"}}>
-                                <p dangerouslySetInnerHTML={{__html: this.state.dashboardBlob}}/>
-                                <ol>
-                                    <li>{this.state.dashboardBlob.Forums ? this.state.dashboardBlob.Forums[1].name : "loading..."}</li>
-                                    <li>{this.state.dashboardBlob.Forums ? this.state.dashboardBlob.Forums[2].name : "loading..."}</li>
-                                    <li>{this.state.dashboardBlob.Forums ? this.state.dashboardBlob.Forums[3].name : "loading..."}</li>
-                                    <li>{this.state.dashboardBlob.Forums ? this.state.dashboardBlob.Forums[4].name : "loading..."}</li>
-                                    <li>{this.state.dashboardBlob.Forums ? this.state.dashboardBlob.Forums[0].name : "loading..."}</li>
-                                </ol>
-                            </div>
-                        </Segment>
+                        <Sidebar.Pusher>
+                            <Segment basic>
+                                <div style={{height: "100vh"}}>
+                                </div>
+                            </Segment>
+                        </Sidebar.Pusher>
+                        
                     </Sidebar.Pusher>
                 </Sidebar.Pushable>
             </div>

@@ -12,6 +12,7 @@ module.exports = function(app){
     app.get("/course/:course_id/channels", AuthService.isStudentOrAdminForCourse, CourseController.getCourseChannels);
     app.get("/course/:course_id/forums", AuthService.isStudentOrAdminForCourse, CourseController.getCourseForums);
     app.get("/course/:course_id/categories", AuthService.isStudentOrAdminForCourse, CourseController.getCourseCategories);
+    app.get("/course/:course_id/leaderboards", AuthService.isStudentOrAdminForCourse, CourseController.getCourseLeaderboards)
 
     app.put("/course", AuthService.isLoggedIn, CourseController.insertCourse);
 

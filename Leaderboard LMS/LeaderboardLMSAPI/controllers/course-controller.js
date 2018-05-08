@@ -109,6 +109,18 @@ exports.getCourseCategories = function(req, res){
     });
 }
 
+exports.getCourseLeaderboards = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    
+    Models.Courses.getCourseIncludesLeaderboards(course_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "Course not found", null);
+        } else {
+            Responses.success(res, "Course with leaderboards found", course);
+        }
+    });
+}
+
 exports.insertCourse = function(req, res){
     const user_id = req.user.id;
     const email = req.user.email;

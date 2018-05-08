@@ -98,9 +98,7 @@ module.exports = function(sequelize, Sequelize){
                     model: models.Channels,
                     attributes: ["name", "description", "adminChannelOnly", "viewChannelOnly", "order"],
                     required: false,
-                    order: [
-                        ["name", "DESC"]
-                    ]
+                    order: [[ "order", "DESC" ]]
                 }
             ]
         });
@@ -114,9 +112,7 @@ module.exports = function(sequelize, Sequelize){
                     model: models.Forums,
                     attributes: ["name", "description", "order"],
                     required: false,
-                    order: [
-                        "name", "DESC"
-                    ]
+                    order: [[ "order", "DESC" ]]
                 }
             ]
         });
@@ -137,6 +133,18 @@ module.exports = function(sequelize, Sequelize){
             ]
         });
     };
+
+    Courses.getCourseIncludesLeaderboards = async function(course_id, models){
+        return await this.findOne({
+            where: { course_id: course_id },
+            include: [
+                {
+                    model: models.Leaderboards,
+                    required: false
+                }
+            ]
+        });
+    }
 
 
     Courses.insertCourse = async function(user_id, email, name, description, coordinator, pictureLink, allowInvitations, models){
