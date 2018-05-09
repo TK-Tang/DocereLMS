@@ -8,12 +8,16 @@ export default class ChatList extends React.Component {
         super(props);
 
         this.state = {
+            course_id: this.props.course_id,
             channelList: []
         }
     }
 
-    componentWillMount() {
-        CourseAPI.get_courseChannels(this.props.course_id).then((res) => {
+    componentWillReceiveProps(props) {
+        this.setState({ course_id: props.course_id });
+        this.setState({ channelList: []});
+
+        CourseAPI.get_courseChannels(this.state.course_id).then((res) => {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Channels.length; i++){
                     let channel = (

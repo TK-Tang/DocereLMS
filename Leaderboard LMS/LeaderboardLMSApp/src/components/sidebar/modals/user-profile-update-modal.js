@@ -70,11 +70,11 @@ export default class UserProfileUpdateModal extends React.Component {
                                 <Label>Email:</Label>
                                 <Input onChange={this.updateEmail.bind(this)} value={this.state.email} />
                             </Form.Field>
-                            <Form.Field width="equal">
+                            <Form.Field width="16">
                                 <Label>Username:</Label>
                                 <Input  onChange={this.updateUsername.bind(this)} value={this.state.username} />
                             </Form.Field>
-                            <Form.Field width="equal">
+                            <Form.Field width="16">
                                 <Label>Profile Picture:</Label>
                                 <Input onChange={this.updateProfilePictureLink.bind(this)} value={this.state.profilePictureLink} />
                             </Form.Field>

@@ -18,8 +18,8 @@ export default class CourseList extends React.Component {
         this.props.signout();
     }
 
-    selectCourse(){
-        this.props.selectCourse();
+    selectCourse(e){
+        this.props.selectCourse(e.currentTarget.id);
     }
 
     componentWillMount() {
@@ -51,7 +51,7 @@ export default class CourseList extends React.Component {
 
             for (var i = 0; i < res.payload.Courses.length; i++){
                 let courseIcon = (
-                    <div key={i} onClick={this.selectCourse.bind(this)}>                        
+                    <div key={i} onClick={this.selectCourse.bind(this)} id={res.payload.Courses[i].id}>                        
                         <Menu.Item> 
                             <CoursePopupInfo course={res.payload.Courses[i]} />
                         </Menu.Item>

@@ -44,9 +44,10 @@ export default class Landing extends React.Component {
         });
     }
 
-    selectCourse(){
-        console.log("asdfd");
-        this.setState({course_id: 1});
+    selectCourse(i){
+        console.log("course: " + i);
+        this.setState({course_id: i});
+        this.forceUpdate();
     }
 
     toggleLeaderboardListDisplay(){
@@ -88,7 +89,7 @@ export default class Landing extends React.Component {
                                 </Menu.Item>
                                 <Divider />
                                 <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
+                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS {this.state.course_id} <Icon disabled name="comments" /></div>
                                     <Menu.Menu className={this.state.hideChatList ? "void" : ""}>
                                         <ChatList course_id={this.state.course_id} />
                                     </Menu.Menu>
