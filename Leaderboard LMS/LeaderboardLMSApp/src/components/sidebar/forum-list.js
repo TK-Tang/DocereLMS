@@ -8,16 +8,14 @@ export default class ForumList extends React.Component {
         super(props);
 
         this.state = {
-            course_id: this.props.course_id,
             forumList: []
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState({ course_id: props.course_id });
         this.setState({ forumList: []});
 
-        CourseAPI.get_courseForums(this.state.course_id).then((res) => {
+        CourseAPI.get_courseForums(props.course_id).then((res) => {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Forums.length; i++){
                     let forum = (

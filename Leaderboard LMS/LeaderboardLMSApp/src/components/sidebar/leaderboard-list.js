@@ -8,16 +8,14 @@ export default class LeaderboardList extends React.Component {
         super(props);
 
         this.state = {
-            course_id: this.props.course_id,
             leaderboardList: []
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState({ course_id: props.course_id });
         this.setState({ leaderboardList: []});
 
-        CourseAPI.get_courseLeaderboards(this.state.course_id).then((res) => {
+        CourseAPI.get_courseLeaderboards(props.course_id).then((res) => {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Leaderboards.length; i++){
                     let leaderboard = (
@@ -28,7 +26,6 @@ export default class LeaderboardList extends React.Component {
 
                     this.state.leaderboardList.push(leaderboard);
                 }
-
                 this.forceUpdate();
             } else {
                 let message = "Leaderboards could not be loaded at this time";

@@ -8,16 +8,14 @@ export default class ChatList extends React.Component {
         super(props);
 
         this.state = {
-            course_id: this.props.course_id,
             channelList: []
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState({ course_id: props.course_id });
         this.setState({ channelList: []});
 
-        CourseAPI.get_courseChannels(this.state.course_id).then((res) => {
+        CourseAPI.get_courseChannels(props.course_id).then((res) => {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Channels.length; i++){
                     let channel = (
@@ -37,10 +35,11 @@ export default class ChatList extends React.Component {
         });
     }
 
+
     render() {
         return (
             <div>
-                {this.state.channelList}
+                {this.state.channelList.length === 0 ? <Menu.Item key={1} className="sub-menu">Loading...</Menu.Item> : this.state.channelList}
             </div>
         );
     }

@@ -45,9 +45,7 @@ export default class Landing extends React.Component {
     }
 
     selectCourse(i){
-        console.log("course: " + i);
         this.setState({course_id: i});
-        this.forceUpdate();
     }
 
     toggleLeaderboardListDisplay(){

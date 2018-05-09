@@ -8,16 +8,14 @@ export default class DownloadList extends React.Component {
         super(props);
 
         this.state = {
-            course_id: this.props.course_id,
             downloadList: []
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState({ course_id: props.course_id })
         this.setState({ downloadList: []});
 
-        CourseAPI.get_courseDownloads(this.state.course_id).then((res) => {
+        CourseAPI.get_courseDownloads(props.course_id).then((res) => {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Categories.length; i++){
                     let download = (
