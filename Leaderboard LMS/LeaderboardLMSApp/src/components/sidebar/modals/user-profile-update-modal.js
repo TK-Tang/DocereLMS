@@ -82,7 +82,7 @@ export default class UserProfileUpdateModal extends React.Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    {this.state.erroMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
+                    {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
                     {this.state.successMessage ? <Label basic color="green" pointing="right">{this.state.successMessage}</Label> : ""}
                     <Button primary onClick={this.updateUserProfile.bind(this)}>Save</Button>
                 </Modal.Actions>

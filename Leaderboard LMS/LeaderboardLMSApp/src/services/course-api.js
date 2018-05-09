@@ -92,7 +92,7 @@ var course_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    get_courseCategories(course_id){
+    get_courseDownloads(course_id){
         var url = api_domain + "/course/" + course_id + "/categories";
 
         var req = {

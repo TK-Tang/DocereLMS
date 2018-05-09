@@ -5,16 +5,21 @@ import CourseAPI from "../services/course-api.js";
 import AuthAPI from "../services/authentication-api.js";
 
 import CourseList from "./sidebar/course-list.js";
+import LeaderboardList from "./sidebar/leaderboard-list.js";
 import ChatList from "./sidebar/chat-list.js";
 import ForumList from "./sidebar/forum-list.js";
-import LeaderboardList from "./sidebar/leaderboard-list.js";
+import DownloadList from "./sidebar/download-list.js"
 
 export default class Landing extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             user: {},
-            course_id: 1         
+            course_id: 1,
+            hideLeaderboardList: false,
+            hideChatList: false,
+            hideForumList: false,
+            hideDownloadList: false
         };
     }
 
@@ -39,14 +44,33 @@ export default class Landing extends React.Component {
         });
     }
 
-    render() {
+    selectCourse(){
+        console.log("asdfd");
+        this.setState({course_id: 1});
+    }
 
-        
+    toggleLeaderboardListDisplay(){
+        this.setState({ hideLeaderboardList: !this.state.hideLeaderboardList});
+    }
+
+    toggleChatListDisplay(){
+        this.setState({ hideChatList: !this.state.hideChatList});
+    }
+
+    toggleForumListDisplay(){
+        this.setState({ hideForumList: !this.state.hideForumList});
+    }
+
+    toggleDownloadListDisplay(){
+        this.setState({ hideDownloadList: !this.state.hideDownloadList});
+    }
+
+    render() {
         return (
             <div>
                 <Sidebar.Pushable as={Segment}>
                     <Sidebar as={Menu} visible={true} icon="labeled" vertical inverted>
-                        {this.state.user.email ? <CourseList user={this.state.user} /> : <Menu.Item>loading...</Menu.Item>}
+                        {this.state.user.email ? <CourseList user={this.state.user} signout={this.signout.bind(this)} selectCourse={this.selectCourse.bind(this)} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>
                     <Sidebar.Pusher className="main">
                         <Sidebar as={Menu} visible={true} icon="labeled" className="course-menu" vertical inverted>
@@ -57,26 +81,32 @@ export default class Landing extends React.Component {
                                 </Menu.Item>
                                 <Divider/>
                                 <Menu.Item>
-                                    <div className="course-menu-category"><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
-                                    <LeaderboardList course_id={this.state.course_id} />
+                                    <div className="course-menu-category" onClick={this.toggleLeaderboardListDisplay.bind(this)}><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
+                                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""}>
+                                        <LeaderboardList course_id={this.state.course_id} />
+                                    </Menu.Menu>
                                 </Menu.Item>
                                 <Divider />
                                 <Menu.Item>
-                                    <div className="course-menu-category"><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
-                                    <Menu.Menu>
+                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
+                                    <Menu.Menu className={this.state.hideChatList ? "void" : ""}>
                                         <ChatList course_id={this.state.course_id} />
                                     </Menu.Menu>
                                 </Menu.Item>
-                                <Divider />
+                                <Divider inverted/>
                                 <Menu.Item>
-                                    <div className="course-menu-category"><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
-                                    <Menu.Menu>
+                                    <div className="course-menu-category" onClick={this.toggleForumListDisplay.bind(this)}><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
+                                    <Menu.Menu className={this.state.hideForumList ? "void" : ""}>
                                         <ForumList course_id={this.state.course_id} />
                                     </Menu.Menu>
                                 </Menu.Item>
-                                <Divider inverted />
+                                <Divider />
                                 <Menu.Item>
-                                    <div className="course-menu-category"><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
+                                    <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
+                                    <br/>
+                                    <div className={this.state.hideDownloadList ? "void" : ""}>
+                                        <DownloadList course_id={this.state.course_id} />
+                                    </div>
                                 </Menu.Item>
                             </Menu>
                         </Sidebar>

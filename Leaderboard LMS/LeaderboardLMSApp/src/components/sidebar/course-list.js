@@ -18,6 +18,10 @@ export default class CourseList extends React.Component {
         this.props.signout();
     }
 
+    selectCourse(){
+        this.props.selectCourse();
+    }
+
     componentWillMount() {
         UserAPI.get_userIncludingCourses(this.props.user.email).then((res) => {
 
@@ -27,6 +31,7 @@ export default class CourseList extends React.Component {
                         <UserProfileModal 
                             user={this.props.user} 
                             signout={this.signout.bind(this)} 
+                            
                         />
                     </Menu.Item>
                 </div>
@@ -46,7 +51,7 @@ export default class CourseList extends React.Component {
 
             for (var i = 0; i < res.payload.Courses.length; i++){
                 let courseIcon = (
-                    <div key={i}>                        
+                    <div key={i} onClick={this.selectCourse.bind(this)}>                        
                         <Menu.Item> 
                             <CoursePopupInfo course={res.payload.Courses[i]} />
                         </Menu.Item>

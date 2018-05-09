@@ -17,7 +17,7 @@ export default class ForumList extends React.Component {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Forums.length; i++){
                     let forum = (
-                        <Menu.Item key={i} className="sub-menu">
+                        <Menu.Item key={i} className="forum-menu">
                             {res.payload.Forums[i].name}
                         </Menu.Item>
                     );
