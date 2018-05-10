@@ -74,7 +74,6 @@ export default class CourseList extends React.Component {
                 <div key={res.payload.Courses.length + 1}>
                     <Divider/>
                     <CourseInsertModal />
-                    <Icon className="add-course-icon" name="add square" />
                 </div>
             )
 
