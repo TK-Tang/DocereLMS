@@ -13,6 +13,7 @@ export default class ForumList extends React.Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.course_id === 0){ return; };
         this.setState({ forumList: []});
 
         CourseAPI.get_courseForums(props.course_id).then((res) => {

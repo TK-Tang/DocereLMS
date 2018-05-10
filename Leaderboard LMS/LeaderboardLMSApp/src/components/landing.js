@@ -15,7 +15,7 @@ export default class Landing extends React.Component {
         super(props);
         this.state = {
             user: {},
-            course_id: 1,
+            course_id: 0,
             hideLeaderboardList: false,
             hideChatList: false,
             hideForumList: false,
@@ -87,7 +87,7 @@ export default class Landing extends React.Component {
                                 </Menu.Item>
                                 <Divider />
                                 <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS {this.state.course_id} <Icon disabled name="comments" /></div>
+                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
                                     <Menu.Menu className={this.state.hideChatList ? "void" : ""}>
                                         <ChatList course_id={this.state.course_id} />
                                     </Menu.Menu>
@@ -99,7 +99,7 @@ export default class Landing extends React.Component {
                                         <ForumList course_id={this.state.course_id} />
                                     </Menu.Menu>
                                 </Menu.Item>
-                                <Divider />
+                                <Divider inverted/>
                                 <Menu.Item>
                                     <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
                                     <br/>

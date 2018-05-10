@@ -21,14 +21,13 @@ export default class UserPopupInfo extends React.Component {
                 position="right center"
                 trigger={
                     <div>
-                        <Transition animation="bounce" duration={this.state.duration} visible={this.state.visibility}>
+                        <Transition animation="pulse" duration={this.state.duration} visible={this.state.visibility}>
                             <Image
                                 src={this.props.user.profilePictureLink}
-                                circular={true}
                                 height="55px"
                                 width="55px"
-                                onMouseEnter = {this.toggleVisibility}
-                                style = {{display:"inline-block"}} 
+                                onMouseEnter ={this.toggleVisibility}
+                                className="user-profile-icon"
                             />
                         </Transition>
                     </div>

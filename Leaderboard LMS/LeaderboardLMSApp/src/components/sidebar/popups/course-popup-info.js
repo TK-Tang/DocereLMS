@@ -19,14 +19,14 @@ export default class CoursePopupInfo extends React.Component {
                 position="right center"
                 trigger={
                     <div>
-                        <Transition animation="bounce" duration={this.state.duration} visible={this.state.visibility}>
+                        <Transition animation="pulse" duration={this.state.duration} visible={this.state.visibility}>
                             <Image 
                                 src={this.props.course.pictureLink}
+                                height="50px"
+                                width="50px"
+                                onMouseOver={this.toggleVisibility}
                                 rounded={true}
-                                height="55px"
-                                width="55px"
-                                onMouseOver = {this.toggleVisibility}
-                                style = {{display:"inline-block"}} 
+                                style={{display:"inline-block", cursor: "pointer"}} 
                             />
                         </Transition>
                     </div>

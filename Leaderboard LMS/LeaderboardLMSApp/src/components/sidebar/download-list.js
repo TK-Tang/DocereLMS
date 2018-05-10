@@ -13,6 +13,7 @@ export default class DownloadList extends React.Component {
     }
 
     componentWillReceiveProps(props) {
+        if(props.course_id === 0){ return; };
         this.setState({ downloadList: []});
 
         CourseAPI.get_courseDownloads(props.course_id).then((res) => {

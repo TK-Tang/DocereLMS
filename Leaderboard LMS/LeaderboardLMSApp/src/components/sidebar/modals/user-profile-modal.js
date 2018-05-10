@@ -39,6 +39,7 @@ export default class UserProfileModal extends React.Component {
                         wrapped 
                         size="small"
                         src={this.props.user.profilePictureLink}
+                        bordered={true}
                     />
                     <Modal.Description>
                         <Header>Email</Header>{this.props.user.email}
