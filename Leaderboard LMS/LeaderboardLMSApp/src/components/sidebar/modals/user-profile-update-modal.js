@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Image, Header, Label, Form, Input, Container } from "semantic-ui-react";
+import { Modal, Button, Image, Header, Label, Form, Input, Container, Segment } from "semantic-ui-react";
 
 import UserAPI from "../../../services/user-api";
 
@@ -63,22 +63,27 @@ export default class UserProfileUpdateModal extends React.Component {
                         src={this.state.profilePictureLink}
                     />
                     
-                    <Modal.Description>
-                        <Header>Edit your user profile here:</Header>
-                        <Form>
-                            <Form.Field width="16">
-                                <Label>Email:</Label>
-                                <Input onChange={this.updateEmail.bind(this)} value={this.state.email} />
-                            </Form.Field>
-                            <Form.Field width="16">
-                                <Label>Username:</Label>
-                                <Input  onChange={this.updateUsername.bind(this)} value={this.state.username} />
-                            </Form.Field>
-                            <Form.Field width="16">
-                                <Label>Profile Picture:</Label>
-                                <Input onChange={this.updateProfilePictureLink.bind(this)} value={this.state.profilePictureLink} />
-                            </Form.Field>
-                        </Form>
+                    <Modal.Description style={{width: "50%"}}>
+                        <Segment>
+                            <Header>Edit your user profile here:</Header>
+                        </Segment>
+                        <Segment>
+                            <Form>
+                                <Form.Field width="16">
+                                    <Label>Email:</Label>
+                                    <Input onChange={this.updateEmail.bind(this)} value={this.state.email} />
+                                </Form.Field>
+                                <Form.Field width="16">
+                                    <Label>Username:</Label>
+                                    <Input  onChange={this.updateUsername.bind(this)} value={this.state.username} />
+                                </Form.Field>
+                                <Form.Field width="16">
+                                    <Label>Profile Picture:</Label>
+                                    <Input onChange={this.updateProfilePictureLink.bind(this)} value={this.state.profilePictureLink} />
+                                </Form.Field>
+                            </Form>
+                            <br />
+                        </Segment>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>

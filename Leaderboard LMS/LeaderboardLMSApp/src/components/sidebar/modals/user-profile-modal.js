@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Image, Header } from "semantic-ui-react";
+import { Modal, Button, Image, Header, Segment, Divider } from "semantic-ui-react";
 
 import UserPopupInfo from "../popups/user-popup-info";
 import UserProfileUpdateModal from "./user-profile-update-modal"
@@ -41,14 +41,20 @@ export default class UserProfileModal extends React.Component {
                         src={this.props.user.profilePictureLink}
                         bordered={true}
                     />
-                    <Modal.Description>
-                        <Header>Email</Header>{this.props.user.email}
+                    <Modal.Description style={{width: "65%"}}>
+                        <Segment>
+                            <Header>Email</Header>
+                            <p>{this.props.user.email}</p>
+                            <Header>Username</Header>
+                            <p>{this.props.user.username}</p>
+                        </Segment>
 
-                        <Header>Username</Header>{this.props.user.username}
-
-                        <Header>Audit</Header>
-                        <p>Profile created: <i>{this.props.user.created_at.substring(0, 10) + " " + this.props.user.created_at.substring(11,19)}</i></p>
-                        <p>Profile updated: <i>{this.props.user.created_at.substring(0, 10) + " " + this.props.user.created_at.substring(11,19)}</i></p>
+                        <Segment>
+                            <Header>Audit</Header>
+                            <p>Profile created: <i>{this.props.user.created_at.substring(0, 10) + " " + this.props.user.created_at.substring(11,19)}</i></p>
+                            <p>Profile updated: <i>{this.props.user.created_at.substring(0, 10) + " " + this.props.user.created_at.substring(11,19)}</i></p>
+                            <p>User ID:  <i>{this.props.user.id}</i></p>
+                        </Segment>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
