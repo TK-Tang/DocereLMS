@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Image, Header, Label, Form, Input, Container, Segment } from "semantic-ui-react";
+import { Modal, Button, Image, Header, Label, Form, Input, Segment } from "semantic-ui-react";
 
 import UserAPI from "../../../services/user-api";
 

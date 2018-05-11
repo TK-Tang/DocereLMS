@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, Icon, Menu, Popup, Button, Transition, Divider} from "semantic-ui-react";
+import {Image, Menu, Divider} from "semantic-ui-react";
 
 import CoursePopupInfo from "./popups/course-popup-info";
 import UserAPI from "../../services/user-api";
@@ -53,7 +53,7 @@ export default class CourseList extends React.Component {
 
     loadCourses(){
         this.state.courseList = [];
-        this.state.menuList = []
+        this.state.menuList = [];
         this.loadMenu();
         this.state.courseList = this.state.menuList;
         

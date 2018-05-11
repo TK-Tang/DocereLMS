@@ -1,14 +1,14 @@
 import React from "react";
-import { Sidebar, Segment, Button, Menu, Image, Icon, Input, Divider, Header } from "semantic-ui-react";
+import { Sidebar, Segment, Menu, Icon, Input, Divider } from "semantic-ui-react";
 
-import CourseAPI from "../services/course-api.js";
 import AuthAPI from "../services/authentication-api.js";
 
 import CourseList from "./sidebar/course-list.js";
 import LeaderboardList from "./sidebar/leaderboard-list.js";
 import ChatList from "./sidebar/chat-list.js";
 import ForumList from "./sidebar/forum-list.js";
-import DownloadList from "./sidebar/download-list.js"
+import DownloadList from "./sidebar/download-list.js";
+import CourseInfoList from "./sidebar/course-info-list.js";
 
 export default class Landing extends React.Component {
     constructor(props){
@@ -19,7 +19,8 @@ export default class Landing extends React.Component {
             hideLeaderboardList: false,
             hideChatList: false,
             hideForumList: false,
-            hideDownloadList: false
+            hideDownloadList: false,
+            hideCourseInfoList: false
         };
     }
 
@@ -64,6 +65,10 @@ export default class Landing extends React.Component {
         this.setState({ hideDownloadList: !this.state.hideDownloadList});
     }
 
+    toggleCourseInfoListDisplay(){
+        this.setState({hideCourseInfoList: !this.state.hideCourseInfoList});
+    }
+
     render() {
         return (
             <div>
@@ -92,19 +97,27 @@ export default class Landing extends React.Component {
                                         <ChatList course_id={this.state.course_id} />
                                     </Menu.Menu>
                                 </Menu.Item>
-                                <Divider inverted/>
+                                <Divider />
                                 <Menu.Item>
                                     <div className="course-menu-category" onClick={this.toggleForumListDisplay.bind(this)}><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
                                     <Menu.Menu className={this.state.hideForumList ? "void" : ""}>
                                         <ForumList course_id={this.state.course_id} />
                                     </Menu.Menu>
                                 </Menu.Item>
-                                <Divider inverted/>
+                                <Divider />
                                 <Menu.Item>
                                     <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
                                     <br/>
                                     <div className={this.state.hideDownloadList ? "void" : ""}>
                                         <DownloadList course_id={this.state.course_id} />
+                                    </div>
+                                </Menu.Item>
+                                <Divider />
+                                <Menu.Item>
+                                    <div className="course-menu-category" onClick={this.toggleCourseInfoListDisplay.bind(this)}><Icon name="chevron right" />  COURSE INFO <Icon disabled name="newspaper" /></div>
+                                    <br/>
+                                    <div className={this.state.hideCourseInfoList ? "void" : ""}>
+                                        <CourseInfoList course_id={this.state.course_id} />
                                     </div>
                                 </Menu.Item>
                             </Menu>

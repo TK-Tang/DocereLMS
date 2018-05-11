@@ -454,3 +454,19 @@
   display: inline-block;
   padding-bottom: 50px;
 }
+
+.course-info-menu {
+  text-align: left !important;
+  color: #b4b9c1 !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  font-family: Helvetica, sans-serif;
+  cursor: pointer;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-info-menu:hover{
+  background-color: #4e5156 !important;
+}

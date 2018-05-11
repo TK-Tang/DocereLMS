@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Image, Header, Label, Form, Input, Icon, Checkbox} from "semantic-ui-react";
+import {Modal, Button, Image, Label, Form, Input, Icon, Checkbox} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
 
@@ -43,14 +43,14 @@ export default class CourseInsertModal extends React.Component {
         this.setState({allowInvitations: !this.state.allowInvitations});
     }
 
-    insertCourse(){
+    async insertCourse(){
         if (!this.state.name){
             this.setState({errorMessage: "You need to set a course name"});
             return;
         };
 
         if (!this.state.pictureLink){
-            this.state.pictureLink = "https://image.freepik.com/free-icon/electronic-circular-printed-circuit_318-50817.jpg"
+            await this.setState({pictureLink: "https://image.freepik.com/free-icon/electronic-circular-printed-circuit_318-50817.jpg"});
         };
 
         var courseInfo = {
