@@ -73,7 +73,8 @@ export default class CourseList extends React.Component {
             this.state.courseList.push(
                 <div key={res.payload.Courses.length + 1}>
                     <Divider/>
-                    <CourseInsertModal />
+                    <CourseInsertModal loadCourses={this.loadCourses.bind(this)}/>
+                    <Divider/>
                 </div>
             )
 

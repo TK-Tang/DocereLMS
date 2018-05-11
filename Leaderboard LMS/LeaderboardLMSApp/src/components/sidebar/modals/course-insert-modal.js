@@ -1,5 +1,7 @@
 import React from "react";
-import {Modal, Button, Image, Header, Label, Form, Input, Icon} from "semantic-ui-react";
+import {Modal, Button, Image, Header, Label, Form, Input, Icon, Checkbox} from "semantic-ui-react";
+
+import CourseAPI from "../../../services/course-api";
 
 export default class CourseInsertModal extends React.Component {
     constructor(props){
@@ -7,15 +9,26 @@ export default class CourseInsertModal extends React.Component {
 
         this.state = {
             modal: false,
+            errorMessage: "",
             name: "",
+            coordinator: "",
             description: "",
             pictureLink: "",
-            defaultPictureLink: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png"
+            defaultPictureLink: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png",
+            allowInvitations: false
         }
     }
 
+    openModal = () => this.setState({modal: true});
+
+    closeModal = () => this.setState({modal: false});
+
     updateName(e){
         this.setState({name: e.target.value});
+    }
+
+    updateCoordinator(e){
+        this.setState({coordinator: e.target.value});
     }
 
     updateDescription(e){
@@ -26,12 +39,51 @@ export default class CourseInsertModal extends React.Component {
         this.setState({pictureLink: e.target.value});
     }
 
+    updateAllowInvitations(e){
+        this.setState({allowInvitations: !this.state.allowInvitations});
+    }
+
+    insertCourse(){
+        if (!this.state.name){
+            this.setState({errorMessage: "You need to set a course name"});
+            return;
+        };
+
+        if (!this.state.pictureLink){
+            this.state.pictureLink = "https://image.freepik.com/free-icon/electronic-circular-printed-circuit_318-50817.jpg"
+        };
+
+        var courseInfo = {
+            name: this.state.name,
+            coordinator: this.state.coordinator,
+            description: this.state.description,
+            pictureLink: this.state.pictureLink
+        };
+
+        CourseAPI.put_course(courseInfo).then((res) => {
+            if (res.status === "success"){
+                let message = "New course server ready to go!";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000});
+
+                // Race condition. The get course retrieves courses faster than the new one can be inserted. 
+                setTimeout(function() {this.props.loadCourses()}.bind(this), 1000);
+            } else {
+                let message = res.message;
+                window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 6000});
+            }
+            
+            this.closeModal();
+        });
+    }
+
     render(){
         return (
             <Modal
+                onClose={this.closeModal}
                 closeIcon
                 size="small"
-                trigger={<Icon className="add-course-icon" name="add square"/>}
+                open={this.state.modal}
+                trigger={<Icon className="add-course-icon" name="add square" style={{cursor: "pointer"}} onClick={this.openModal}/>}
             >
                 <Modal.Header>
                     Create New Course
@@ -51,6 +103,10 @@ export default class CourseInsertModal extends React.Component {
                                 <Input  onChange={this.updateName.bind(this)} value={this.state.name} placeholder="Name of your new course"/>
                             </Form.Field>
                             <Form.Field width="16">
+                                <Label>Coordinator:</Label>
+                                <Input  onChange={this.updateCoordinator.bind(this)} value={this.state.coordinator} placeholder="Name of the coordinator for your new course"/>
+                            </Form.Field>
+                            <Form.Field width="16">
                                 <Label>Description:</Label>
                                 <Input onChange={this.updateDescription.bind(this)} value={this.state.description} placeholder="Description of your new course" />
                             </Form.Field>
@@ -58,11 +114,15 @@ export default class CourseInsertModal extends React.Component {
                                 <Label>Icon Link:</Label>
                                 <Input onChange={this.updatePictureLink.bind(this)} value={this.state.pictureLink} placeholder="Link to icon picture for your course"/>
                             </Form.Field>
+                            <Form.Group>
+                                <Form.Field onChange={this.updateAllowInvitations.bind(this)} control={Checkbox} label="Allow Invitations"/>
+                            </Form.Group>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button primary>Create</Button>
+                {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
+                    <Button primary onClick={this.insertCourse.bind(this)}>Create</Button>
                 </Modal.Actions>
             </Modal>
         )

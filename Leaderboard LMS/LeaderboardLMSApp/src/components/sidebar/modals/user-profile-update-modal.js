@@ -36,9 +36,9 @@ export default class UserProfileUpdateModal extends React.Component {
         }
 
         UserAPI.post_updateUser(this.props.user.id, userInfo).then((res) => {
-            if(res.status === "success"){
+            if (res.status === "success"){
                 this.setState({successMessage:"Changes saved"})
-            } else if(res.status === "fail"){
+            } else if (res.status === "fail"){
                 this.setState({errorMessage:"You could not edit this profile"})
             }
         });

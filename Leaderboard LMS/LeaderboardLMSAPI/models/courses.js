@@ -9,7 +9,7 @@ module.exports = function(sequelize, Sequelize){
 
         name: {
             type: Sequelize.STRING,
-            notEmpty: true
+            allowNull: false
         },
 
         description: {
@@ -22,11 +22,12 @@ module.exports = function(sequelize, Sequelize){
 
         pictureLink: {
             type: Sequelize.STRING,
-            allowNull: false
+            defaultValue: "https://image.freepik.com/free-icon/electronic-circular-printed-circuit_318-50817.jpg"
         },
 
         allowInvitations: {
             type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
 
         isActive: {

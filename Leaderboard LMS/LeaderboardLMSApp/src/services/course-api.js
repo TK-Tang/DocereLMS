@@ -5,7 +5,7 @@ let port = "11000";
 let api_domain = domain + ":" + port;
 
 let headers = {
-    "Content-Type": "application-json"
+    "Content-Type": "application/json"
 };
 
 var course_api = {

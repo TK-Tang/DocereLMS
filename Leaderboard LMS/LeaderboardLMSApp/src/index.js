@@ -8,7 +8,7 @@ var Alert = require('react-s-alert').default;
 
 ReactDOM.render(
     <div>
-        <Alert stack={true}/>
+        <Alert stack={true} limit={{limit: 2}}/>
         <Root />
     </div>
     , 

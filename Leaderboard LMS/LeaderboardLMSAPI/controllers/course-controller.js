@@ -130,9 +130,13 @@ exports.insertCourse = function(req, res){
     const pictureLink = req.body.pictureLink;
     const allowInvitations = req.body.allowInvitations;
 
+    if(!name){
+        Responses.fail(res, "Your new course needs a name"), null;
+        return;
+    }
     Models.Courses.insertCourse(user_id, email, name, description, coordinator, pictureLink, allowInvitations, Models).then(function(course){
         if (!course){
-            Responses.fail(res, "Course could not be created", null);
+            Responses.fail(res, "Sorry. It seems as though that a new course server cannot be created at this time.", null);
         } else {
             Responses.success(res, "Courses created", course);
         }
