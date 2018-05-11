@@ -1,5 +1,5 @@
 import React from "react";
-import {Menu} from "semantic-ui-react";
+import {Menu, Icon} from "semantic-ui-react";
 
 import CourseAPI from "../../services/course-api";
 
@@ -8,8 +8,13 @@ export default class LeaderboardList extends React.Component {
         super(props);
 
         this.state = {
+            hideLeaderboardList: false,
             leaderboardList: []
         }
+    }
+
+    toggleLeaderboardListDisplay(){
+        this.setState({hideLeaderboardList: !this.state.hideLeaderboardList});
     }
 
     componentWillReceiveProps(props) {
@@ -37,9 +42,14 @@ export default class LeaderboardList extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.leaderboardList}
-            </div>
+            <Menu.Item>
+                <div className="course-menu-category" onClick={this.toggleLeaderboardListDisplay.bind(this)}><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
+                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""}>
+                        <div>
+                            {this.state.leaderboardList}
+                        </div>
+                    </Menu.Menu>
+            </Menu.Item>
         );
     }
 }

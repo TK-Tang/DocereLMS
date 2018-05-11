@@ -16,10 +16,7 @@ export default class Landing extends React.Component {
         this.state = {
             user: {},
             course_id: 0,
-            hideLeaderboardList: false,
-            hideChatList: false,
-            hideDownloadList: false,
-            hideCourseInfoList: false
+            
         };
     }
 
@@ -48,22 +45,6 @@ export default class Landing extends React.Component {
         this.setState({course_id: i});
     }
 
-    toggleLeaderboardListDisplay(){
-        this.setState({hideLeaderboardList: !this.state.hideLeaderboardList});
-    }
-
-    toggleChatListDisplay(){
-        this.setState({hideChatList: !this.state.hideChatList});
-    }
-
-    toggleDownloadListDisplay(){
-        this.setState({hideDownloadList: !this.state.hideDownloadList});
-    }
-
-    toggleCourseInfoListDisplay(){
-        this.setState({hideCourseInfoList: !this.state.hideCourseInfoList});
-    }
-
     render() {
         return (
             <div>
@@ -79,37 +60,15 @@ export default class Landing extends React.Component {
                                     <Input placeholder='Search...' />
                                 </Menu.Item>
                                 <Divider/>
-                                <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleLeaderboardListDisplay.bind(this)}><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
-                                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""}>
-                                        <LeaderboardList course_id={this.state.course_id} />
-                                    </Menu.Menu>
-                                </Menu.Item>
+                                <LeaderboardList course_id={this.state.course_id} />   
                                 <Divider />
-                                <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
-                                    <Menu.Menu className={this.state.hideChatList ? "void" : ""}>
-                                        <ChatList course_id={this.state.course_id} />
-                                    </Menu.Menu>
-                                </Menu.Item>
+                                <ChatList course_id={this.state.course_id} />
                                 <Divider />
-                                    <ForumList course_id={this.state.course_id}/>
+                                <ForumList course_id={this.state.course_id}/>
                                 <Divider />
-                                <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
-                                    <br/>
-                                    <div className={this.state.hideDownloadList ? "void" : ""}>
-                                        <DownloadList course_id={this.state.course_id} />
-                                    </div>
-                                </Menu.Item>
+                                <DownloadList course_id={this.state.course_id} />
                                 <Divider />
-                                <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleCourseInfoListDisplay.bind(this)}><Icon name="chevron right" />  COURSE INFO <Icon disabled name="newspaper" /></div>
-                                    <br/>
-                                    <div className={this.state.hideCourseInfoList ? "void" : ""}>
-                                        <CourseInfoList course_id={this.state.course_id} />
-                                    </div>
-                                </Menu.Item>
+                                <CourseInfoList course_id={this.state.course_id} />
                             </Menu>
                         </Sidebar>
 

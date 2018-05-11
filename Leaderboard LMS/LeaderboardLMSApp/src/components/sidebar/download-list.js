@@ -1,5 +1,5 @@
 import React from "react";
-import {Menu} from "semantic-ui-react";
+import {Menu, Icon} from "semantic-ui-react";
 
 import CourseAPI from "../../services/course-api";
 
@@ -10,6 +10,10 @@ export default class DownloadList extends React.Component {
         this.state = {
             downloadList: []
         }
+    }
+
+    toggleDownloadListDisplay(){
+        this.setState({hideDownloadList: !this.state.hideDownloadList});
     }
 
     componentWillReceiveProps(props) {
@@ -38,9 +42,15 @@ export default class DownloadList extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.downloadList}
-            </div>
+            <Menu.Item>
+                <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>
+                <br/>
+                <div className={this.state.hideDownloadList ? "void" : ""}>
+                    <div>
+                        {this.state.downloadList}
+                    </div>
+                </div>
+            </Menu.Item>
         );
     }
 }
