@@ -18,7 +18,6 @@ export default class Landing extends React.Component {
             course_id: 0,
             hideLeaderboardList: false,
             hideChatList: false,
-            hideForumList: false,
             hideDownloadList: false,
             hideCourseInfoList: false
         };
@@ -50,19 +49,15 @@ export default class Landing extends React.Component {
     }
 
     toggleLeaderboardListDisplay(){
-        this.setState({ hideLeaderboardList: !this.state.hideLeaderboardList});
+        this.setState({hideLeaderboardList: !this.state.hideLeaderboardList});
     }
 
     toggleChatListDisplay(){
-        this.setState({ hideChatList: !this.state.hideChatList});
-    }
-
-    toggleForumListDisplay(){
-        this.setState({ hideForumList: !this.state.hideForumList});
+        this.setState({hideChatList: !this.state.hideChatList});
     }
 
     toggleDownloadListDisplay(){
-        this.setState({ hideDownloadList: !this.state.hideDownloadList});
+        this.setState({hideDownloadList: !this.state.hideDownloadList});
     }
 
     toggleCourseInfoListDisplay(){
@@ -98,12 +93,7 @@ export default class Landing extends React.Component {
                                     </Menu.Menu>
                                 </Menu.Item>
                                 <Divider />
-                                <Menu.Item>
-                                    <div className="course-menu-category" onClick={this.toggleForumListDisplay.bind(this)}><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
-                                    <Menu.Menu className={this.state.hideForumList ? "void" : ""}>
-                                        <ForumList course_id={this.state.course_id} />
-                                    </Menu.Menu>
-                                </Menu.Item>
+                                    <ForumList course_id={this.state.course_id}/>
                                 <Divider />
                                 <Menu.Item>
                                     <div className="course-menu-category" onClick={this.toggleDownloadListDisplay.bind(this)}><Icon name="chevron right" />  DOWNLOADS <Icon disabled name="book" /></div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Menu} from "semantic-ui-react"
+import {Menu, Icon} from "semantic-ui-react"
 
 import CourseAPI from "../../services/course-api";
 
@@ -8,8 +8,13 @@ export default class ForumList extends React.Component {
         super(props);
 
         this.state = {
+            hideForumList: false,
             forumList: []
         }
+    }
+
+    toggleForumListDisplay(){
+        this.setState({hideForumList: !this.state.hideForumList});
     }
 
     componentWillReceiveProps(props) {
@@ -38,9 +43,14 @@ export default class ForumList extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.forumList}
-            </div>
+            <Menu.Item>
+                <div className="course-menu-category" onClick={this.toggleForumListDisplay.bind(this)}><Icon name="chevron right" />  FORUMS <Icon disabled name="columns" /></div>
+                <Menu.Menu>
+                    <div className={this.state.hideForumList ? "void" : ""}>
+                        {this.state.forumList}
+                    </div>
+                </Menu.Menu>
+            </Menu.Item>
         );
     }
 }
