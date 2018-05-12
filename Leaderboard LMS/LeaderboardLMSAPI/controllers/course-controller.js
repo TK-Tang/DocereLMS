@@ -146,14 +146,14 @@ exports.insertCourse = function(req, res){
 exports.updateCourse = function(req, res){
     const course_id = parseInt(req.params.course_id, 10);
     const name = req.body.name;
-    const description = req.body.name;
+    const description = req.body.description;
     const coordinator = req.body.coordinator;
     const pictureLink = req.body.pictureLink;
     const allowInvitations = req.body.allowInvitations;
 
     Models.Courses.updateCourse(course_id, name, description, coordinator, pictureLink, allowInvitations, Models).then(function(course){
         if(!course){
-            Responses.fail(res, "Course could not be updated", null);
+            Responses.fail(res, "This course could not be updated, try again later perhaps", null);
         } else {
             Responses.success(res, "Course updated", course);
         }

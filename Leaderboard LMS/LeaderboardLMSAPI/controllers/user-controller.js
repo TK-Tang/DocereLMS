@@ -73,9 +73,9 @@ exports.updateUser = function(req, res){
 
     Models.Users.updateUser(user_id, email, username, profilePictureLink).then(function(user){
         if (!user){
-            Responses.fail(res, "Error updating user", null);
+            Responses.fail(res, "Profile update failed", null);
         } else {
-            Responses.success(res, "User updated successfully", user);
+            Responses.success(res, "Profile updated", user);
         }
     });
 };

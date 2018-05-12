@@ -2,6 +2,7 @@ import React from "react";
 import {Modal, Menu, Button, Image, Header, Segment} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
+import CourseUpdateModal from "./course-update-modal";
 
 export default class CourseModal extends React.Component {
     constructor(props){
@@ -10,6 +11,7 @@ export default class CourseModal extends React.Component {
         this.state = {
             modal: false,
             loading: true,
+            course: null,
             name: "Loading...",
             description: "",
             coordinator: "",
@@ -27,6 +29,7 @@ export default class CourseModal extends React.Component {
     getCourseData(course_id){
         CourseAPI.get_course(course_id).then((res) => {
             if (res.status === "success"){
+                this.setState({course: res.payload});
                 this.setState({name: res.payload.name});
                 this.setState({description: res.payload.description});
                 this.setState({coordinator: res.payload.coordinator});
@@ -80,6 +83,7 @@ export default class CourseModal extends React.Component {
                             <Header>Description</Header>
                             <p>{this.state.description}</p>
                             <Header>Coordinator</Header>
+                            <p>{this.state.coordinator}</p>
                         </Segment>
 
                         <Segment>
@@ -97,8 +101,8 @@ export default class CourseModal extends React.Component {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button color="red" floated="left">Delete</Button>
-                    <Button primary>Edit</Button>
-                    <Button onClick={this.closeModal}>Close</Button>
+                    <CourseUpdateModal course_id={this.props.course_id} course={this.state.course} closeModal={this.closeModal} />
+                    <Button onClick={this.closeModal} >Close</Button>
                 </Modal.Actions>
             </Modal>
         )

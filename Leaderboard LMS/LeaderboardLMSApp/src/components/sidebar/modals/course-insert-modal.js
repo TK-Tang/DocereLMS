@@ -96,7 +96,7 @@ export default class CourseInsertModal extends React.Component {
                         src={!this.state.pictureLink ? "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png" : this.state.pictureLink}
                     />
 
-                    <Modal.Description style={{width: "60%"}}>
+                    <Modal.Description style={{width: "70%"}}>
                         <Form>
                             <Form.Field width="16">
                                 <Label>Name:</Label>
@@ -108,7 +108,7 @@ export default class CourseInsertModal extends React.Component {
                             </Form.Field>
                             <Form.Field width="16">
                                 <Label>Description:</Label>
-                                <Input onChange={this.updateDescription.bind(this)} value={this.state.description} placeholder="Description of your new course" />
+                                <Form.TextArea rows="7" onChange={this.updateDescription.bind(this)} value={this.state.description} placeholder="Description of your new course" />
                             </Form.Field>
                             <Form.Field width="16">
                                 <Label>Icon Link:</Label>

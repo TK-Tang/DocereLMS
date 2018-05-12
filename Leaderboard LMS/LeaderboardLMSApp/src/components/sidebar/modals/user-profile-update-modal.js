@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Image, Header, Label, Form, Input, Segment } from "semantic-ui-react";
+import {Modal, Button, Image, Header, Label, Form, Input, Segment} from "semantic-ui-react";
 
 import UserAPI from "../../../services/user-api";
 
@@ -28,7 +28,7 @@ export default class UserProfileUpdateModal extends React.Component {
         this.setState({profilePictureLink: e.target.value});
     }
 
-    updateUserProfile(){
+    updateUser(){
         var  userInfo = {
             email: this.state.email,
             username: this.state.username,
@@ -37,14 +37,14 @@ export default class UserProfileUpdateModal extends React.Component {
 
         UserAPI.post_updateUser(this.props.user.id, userInfo).then((res) => {
             if (res.status === "success"){
-                this.setState({successMessage:"Changes saved"})
+                this.setState({successMessage: res.message});
             } else if (res.status === "fail"){
-                this.setState({errorMessage:"You could not edit this profile"})
+                this.setState({errorMessage: res.message});
             }
         });
     }
 
-    render() {
+    render(){
         return (
             <Modal
                 closeIcon
@@ -89,7 +89,7 @@ export default class UserProfileUpdateModal extends React.Component {
                 <Modal.Actions>
                     {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
                     {this.state.successMessage ? <Label basic color="green" pointing="right">{this.state.successMessage}</Label> : ""}
-                    <Button primary onClick={this.updateUserProfile.bind(this)}>Save</Button>
+                    <Button primary onClick={this.updateUser.bind(this)}>Save</Button>
                 </Modal.Actions>
             </Modal>
         )

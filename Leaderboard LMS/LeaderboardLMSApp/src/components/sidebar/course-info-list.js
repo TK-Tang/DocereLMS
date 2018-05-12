@@ -30,6 +30,9 @@ export default class CourseInfoList extends React.Component {
                     <Menu.Item className="course-info-menu">
                         Students
                     </Menu.Item>
+                    <Menu.Item className="course-info-menu">
+                        Invitations
+                    </Menu.Item>
                 </div>
             </Menu.Item>
         )
