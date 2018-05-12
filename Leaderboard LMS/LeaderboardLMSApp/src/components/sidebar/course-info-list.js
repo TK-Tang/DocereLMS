@@ -1,6 +1,8 @@
 import React from "react";
 import {Menu, Icon} from "semantic-ui-react";
 
+import CourseModal from "./modals/course-modal";
+
 export default class CourseInfoList extends React.Component {
     constructor(props){
         super(props);
@@ -20,18 +22,14 @@ export default class CourseInfoList extends React.Component {
             <Menu.Item>
                 <div className="course-menu-category" onClick={this.toggleCourseInfoListDisplay.bind(this)}><Icon name="chevron right" />  COURSE INFO <Icon disabled name="newspaper" /></div>
                 <br/>
-                <div className={this.state.hideCourseInfoList ? "void" : ""}>
-                    <div>
-                        <Menu.Item className="course-info-menu">
-                            Course Details
-                        </Menu.Item>
-                        <Menu.Item className="course-info-menu">
-                            Admins
-                        </Menu.Item>
-                        <Menu.Item className="course-info-menu">
-                            Students
-                        </Menu.Item>
-                    </div>
+                <div className={(this.state.hideCourseInfoList || this.props.course_id === 0) ? "void" : ""}>
+                    <CourseModal course_id={this.props.course_id}/>
+                    <Menu.Item className="course-info-menu">
+                        Admins
+                    </Menu.Item>
+                    <Menu.Item className="course-info-menu">
+                        Students
+                    </Menu.Item>
                 </div>
             </Menu.Item>
         )

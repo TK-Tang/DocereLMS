@@ -7,7 +7,7 @@ exports.getCourse = function(req, res){
 
     Models.Courses.getCourse(course_id).then(function(courses){
         if (!courses){
-            Responses.fail(res, "Course not found", null);
+            Responses.fail(res, "Course information could not be loaded", null);
         } else {
             Responses.success(res, "Courses found", courses);
         }

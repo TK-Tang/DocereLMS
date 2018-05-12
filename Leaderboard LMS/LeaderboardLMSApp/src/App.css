@@ -470,3 +470,7 @@
 .course-info-menu:hover{
   background-color: #4e5156 !important;
 }
+
+.img-link{
+  word-wrap: break-word;
+}

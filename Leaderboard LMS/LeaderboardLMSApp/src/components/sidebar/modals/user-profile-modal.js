@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Image, Header, Segment } from "semantic-ui-react";
+import {Modal, Button, Image, Header, Segment} from "semantic-ui-react";
 
 import UserPopupInfo from "../popups/user-popup-info";
 import UserProfileUpdateModal from "./user-profile-update-modal"

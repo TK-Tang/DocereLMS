@@ -69,6 +69,7 @@ export default class Landing extends React.Component {
                                 <DownloadList course_id={this.state.course_id} />
                                 <Divider />
                                 <CourseInfoList course_id={this.state.course_id} />
+                                <Divider />
                             </Menu>
                         </Sidebar>
 

@@ -121,7 +121,7 @@ export default class CourseInsertModal extends React.Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
+                    {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
                     <Button primary onClick={this.insertCourse.bind(this)}>Create</Button>
                 </Modal.Actions>
             </Modal>
