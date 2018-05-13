@@ -188,6 +188,19 @@ var course_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
+    post_setUserAsStudent(course_id, user_id){
+        var url = api_domain + "/course/" + course_id + "/student/" + user_id;
+
+        var req = {
+            method: "POST",
+            headers: headers,
+            credentials: "include",
+            body: {}
+        };
+
+        return fetch(url, req).then((res) => res.json());
+    },
+
     delete_kickUser(course_id, user_id){
         var url = api_domain + "/course/" + course_id + "/user/" + user_id;
 

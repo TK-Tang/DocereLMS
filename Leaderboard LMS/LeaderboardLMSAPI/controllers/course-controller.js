@@ -186,7 +186,20 @@ exports.setUserAsAdmin = function(req, res){
         if(!course){
             Responses.fail(res, "User could not be set as course admin", null);
         } else {
-            Responses.success(res, "User successfully set as admin of course " + course.name, course);
+            Responses.success(res, "User successfully set as admin of the course " + course.name, course);
+        }
+    });
+}
+
+exports.setUserAsStudent = function(req, res){
+    const course_id = parseInt(req.params.course_id, 10);
+    const user_id = parseInt(req.params.user_id, 10);
+
+    Models.Courses.setUserAsStudent(course_id, user_id, Models).then(function(course){
+        if(!course){
+            Responses.fail(res, "User could not be set as student", null);
+        } else {
+            Responses.success(res, "User successfully set as student" + course.name, course);
         }
     });
 }

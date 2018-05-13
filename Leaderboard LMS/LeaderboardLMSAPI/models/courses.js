@@ -240,6 +240,25 @@ module.exports = function(sequelize, Sequelize){
         return await this.findOne({ where: { course_id: course_id }});
     };
 
+    Courses.setUserAsStudent = async function(course_id, user_id, models){
+        const user = await models.Users.findOne({
+            where: { user_id: user_id }
+        });
+
+        if (!user){ return null; }
+        
+        const role = await models.Roles.findOne({
+            where: { 
+                user_id: user_id,
+                course_id: course_id
+            }
+        });
+        if (!role){ return null; }
+
+        await role.updateAttributes({ rank: "student"});
+        return await this.findOne({ where: { course_id: course_id }});
+    };
+
     Courses.kickUser = async function(course_id, user_id, models){
         const t = await sequelize.transaction();
         const user = await models.Users.findOne({

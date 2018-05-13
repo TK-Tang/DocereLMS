@@ -19,6 +19,7 @@ module.exports = function(app){
     app.post("/course/:course_id", AuthService.isAdminForCourse, CourseController.updateCourse);
     app.post("/course/:course_id/archive", AuthService.isAdminForCourse, CourseController.toggleActivation);
     app.post("/course/:course_id/admin/:user_id", AuthService.isAdminForCourse, CourseController.setUserAsAdmin);
+    app.post("/course/:course_id/student/:user_id", AuthService.isAdminForCourse, CourseController.setUserAsStudent);
 
     app.delete("/course/:course_id/user/:user_id", AuthService.isAdminForCourse, CourseController.kickUser);
 }
