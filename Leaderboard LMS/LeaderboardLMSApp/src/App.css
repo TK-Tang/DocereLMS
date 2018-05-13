@@ -474,3 +474,7 @@
 .img-link{
   word-wrap: break-word;
 }
+
+.avatar-list {
+  margin-right: 20px !important;
+}

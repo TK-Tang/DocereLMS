@@ -26,7 +26,7 @@ export default class CourseModal extends React.Component {
 
     closeModal = () => this.setState({modal: false});
 
-    getCourseData(course_id){
+    getCourse(course_id){
         CourseAPI.get_course(course_id).then((res) => {
             if (res.status === "success"){
                 this.setState({course: res.payload});
@@ -48,12 +48,12 @@ export default class CourseModal extends React.Component {
 
     componentWillMount(){
         if (this.props.course_id === 0){ return; }
-        this.getCourseData(this.props.course_id);
+        this.getCourse(this.props.course_id);
     }
 
     componentWillReceiveProps(props){
         if (props.course_id === 0){ return; }
-        this.getCourseData(props.course_id);
+        this.getCourse(props.course_id);
     }
 
     render(){
