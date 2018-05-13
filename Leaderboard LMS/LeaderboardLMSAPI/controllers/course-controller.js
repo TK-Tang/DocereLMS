@@ -151,6 +151,11 @@ exports.updateCourse = function(req, res){
     const pictureLink = req.body.pictureLink;
     const allowInvitations = req.body.allowInvitations;
 
+    if (!name){
+        Responses.fail(res, "Name of the course cannot be blank", null)
+        return;
+    }
+
     Models.Courses.updateCourse(course_id, name, description, coordinator, pictureLink, allowInvitations, Models).then(function(course){
         if(!course){
             Responses.fail(res, "This course could not be updated, try again later perhaps", null);

@@ -486,3 +486,7 @@
 .div-avatar-list {
   padding-top: 5px !important;
 }
+
+.cursor-pointer {
+  cursor: pointer
+}

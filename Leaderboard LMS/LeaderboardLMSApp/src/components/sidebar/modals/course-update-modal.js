@@ -44,6 +44,12 @@ export default class CourseUpdateModal extends React.Component {
     }
 
     updateCourse(){
+        if (!this.state.name){
+            this.setState({errorMessage: "Your course needs a name"});
+            this.setState({successMessage: ""});
+            return;
+        }
+
         var courseInfo = {
             name: this.state.name,
             description: this.state.description,
@@ -54,6 +60,7 @@ export default class CourseUpdateModal extends React.Component {
 
         CourseAPI.post_updateCourse(this.props.course.id, courseInfo).then((res) => {
             if (res.status === "success"){
+                this.setState({errorMessage: ""});
                 this.setState({successMessage: res.message});
             } else if (res.status === "fail"){
                 this.setState({errorMessage: res.message});

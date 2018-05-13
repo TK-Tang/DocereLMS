@@ -17,6 +17,7 @@ exports.isPublicPage = function (req, res, next){
         case "/auth/signin":
         case "/auth/signup":
         case "/auth/signout":
+        case "/auth/user":
             return next();
             break;
     }
@@ -27,8 +28,13 @@ exports.isPublicPage = function (req, res, next){
             break;
     }
 
-    if (req.isAuthenticated()){ return next(); }
-    Responses.fail(res, "Authentication failure: Not authenticated for non-public data");
+    if (req.method === "OPTIONS"){ return next();}
+
+    if (req.isAuthenticated()){ 
+        return next(); 
+    } else {
+        Responses.error(res, "Authentication failure: Not authenticated for non-public data", null);
+    }
 }
 
 // For updating profiles

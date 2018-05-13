@@ -194,7 +194,8 @@ var course_api = {
         var req = {
             method: "DELETE",
             headers: headers,
-            credentials: "include"
+            credentials: "include",
+            body: {}
         };
 
         return fetch(url, req).then((res) => res.json());
