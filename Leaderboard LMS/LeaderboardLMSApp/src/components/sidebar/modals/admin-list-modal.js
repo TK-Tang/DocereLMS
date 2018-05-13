@@ -1,7 +1,8 @@
 import React from "react";
-import {Modal, Menu, Image, Segment, Button, Grid} from "semantic-ui-react";
+import {Modal, Menu, Image, Segment, Button, Grid, Label} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
+import AdminListItem from "../list-item/admin-list-item";
 
 export default class AdminListModal extends React.Component {
     constructor(props){
@@ -10,13 +11,26 @@ export default class AdminListModal extends React.Component {
         this.state = {
             modal: false,
             courseName: "",
-            adminsList: []
+            adminsList: [],
+            errorMessage: "",
+            successMessage: ""
         }
     }
 
     openModal = () => this.setState({modal: true});
 
     closeModal = () => this.setState({modal: false});
+
+    setErrorMessage(m){
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: m});
+    }
+
+    setSuccessMessage(m){
+        this.setState({successMessage: m});
+        this.setState({errorMessage: ""});
+    }
+
 
     getAdminList(course_id){
         this.state.adminsList = [];
@@ -26,25 +40,13 @@ export default class AdminListModal extends React.Component {
 
                 for (var i = 0 ; i < res.payload[0].Users.length ; i++){
                     let admin = (
-                        <div key={i} className="div-avatar-list">
-                            <Segment>
-                                <Grid columns={2} divided>
-                                    <Grid.Column>
-                                        <Image
-                                            src={res.payload[0].Users[i].profilePictureLink}
-                                            avatar
-                                            width="50px"
-                                            height="50px"
-                                            className="avatar-list"
-                                        />
-                                        <span>{res.payload[0].Users[i].username ? res.payload[0].Users[i].username : res.payload[0].Users[i].email}</span>
-                                    </Grid.Column>
-                                    <Grid.Column className="avatar-list-text-padding">
-                                        <span>Joined: <i>{res.payload[0].Users[i].Roles.created_at.substring(0, 10) + " " + res.payload[0].Users[i].Roles.created_at.substring(11,19)}</i></span>
-                                    </Grid.Column>
-                                </Grid>
-                            </Segment>
-                        </div>
+                        <AdminListItem
+                            user={res.payload[0].Users[i]}
+                            course_id={res.payload[0].id}
+                            key={i}
+                            setErrorMessage={this.setErrorMessage.bind(this)}
+                            setSuccessMessage={this.setSuccessMessage.bind(this)}
+                        />
                     )
                     this.state.adminsList.push(admin);
                 } 
@@ -86,6 +88,8 @@ export default class AdminListModal extends React.Component {
             </Modal.Content>
 
             <Modal.Actions>
+                {this.state.errorMessage ? <Label basic color="red">{this.state.errorMessage}</Label> : "" }
+                {this.state.successMessage ? <Label basic color="green">{this.state.successMessage}</Label> : ""}
                 <Button onClick={this.closeModal} >Close</Button>
             </Modal.Actions>
         </Modal>

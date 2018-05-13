@@ -14,19 +14,8 @@ export default class StudentListItem extends React.Component {
         }
     }
 
-    setUserAsAdmin(){
-        CourseAPI.post_setUserAsAdmin(this.props.course_id, this.props.user.user_id).then((res) => {
-            if (res.status === "success"){
-                this.setState({visibility: !this.state.visibility});
-                this.props.setSuccessMessage(res.message);
-            } else {
-                this.props.setErrorMessage(res.message);
-            }
-        });
-    }
-
-    kickUser(){
-        CourseAPI.delete_kickUser(this.props.course_id, this.props.user.user_id).then((res) => {
+    setUserAsStudent(){
+        CourseAPI.post_setUserAsStudent(this.props.course_id, this.props.user.user_id).then((res) => {
             if (res.status === "success"){
                 this.setState({visibility: !this.state.visibility});
                 this.props.setSuccessMessage(res.message);
@@ -46,7 +35,7 @@ export default class StudentListItem extends React.Component {
                 <div className="div-avatar-list">
                     <Segment>
                         <Grid columns={3} divided>
-                            <Grid.Column width={6}>
+                            <Grid.Column width={7}>
                                 <Image
                                     src={this.props.user.profilePictureLink}
                                     avatar
@@ -60,9 +49,8 @@ export default class StudentListItem extends React.Component {
                                 <span>Joined: <i>{this.props.user.Roles.created_at.substring(0, 10) + " " + this.props.user.Roles.created_at.substring(11,19)}</i></span>
                                 
                             </Grid.Column>
-                            <Grid.Column width={3} className="avatar-list-text-padding">
-                                <span><Icon color="blue" name="toggle up" size="large" className="cursor-pointer" onClick={this.setUserAsAdmin.bind(this)} /></span>
-                                <span><Icon color="red" name="delete" size="large" className="cursor-pointer" onClick={this.kickUser.bind(this)}/></span>
+                            <Grid.Column width={2} className="avatar-list-text-padding">
+                                <span><Icon color="red" name="toggle down" size="large" className="cursor-pointer" onClick={this.setUserAsStudent.bind(this)} /></span>
                             </Grid.Column>
                         </Grid>
                     </Segment>

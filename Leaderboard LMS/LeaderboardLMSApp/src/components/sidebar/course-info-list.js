@@ -10,7 +10,7 @@ export default class CourseInfoList extends React.Component {
         super(props);
 
         this.state = {
-            hideCourseInfoList: false,
+            hideCourseInfoList: true,
             courseInfoList: []
         }
     }

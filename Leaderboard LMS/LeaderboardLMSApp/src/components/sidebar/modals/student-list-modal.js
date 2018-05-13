@@ -21,13 +21,13 @@ export default class StudentListModal extends React.Component {
 
     closeModal = () => this.setState({modal: false});
 
-    setErrorMessage(){
+    setErrorMessage(m){
         this.setState({successMessage: ""});
-        this.setState({errorMessage: "You do not have permission to kick this student"});
+        this.setState({errorMessage: m});
     }
 
-    setSuccessMessage(){
-        this.setState({successMessage: "Student kicked. Bye bye!"});
+    setSuccessMessage(m){
+        this.setState({successMessage: m});
         this.setState({errorMessage: ""});
     }
 

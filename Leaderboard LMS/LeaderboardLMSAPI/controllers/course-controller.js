@@ -186,7 +186,7 @@ exports.setUserAsAdmin = function(req, res){
         if(!course){
             Responses.fail(res, "User could not be set as course admin", null);
         } else {
-            Responses.success(res, "User successfully set as admin of the course " + course.name, course);
+            Responses.success(res, "User set as admin of " + course.name, course);
         }
     });
 }
@@ -199,7 +199,7 @@ exports.setUserAsStudent = function(req, res){
         if(!course){
             Responses.fail(res, "User could not be set as student", null);
         } else {
-            Responses.success(res, "User successfully set as student" + course.name, course);
+            Responses.success(res, "User set as student of" + course.name, course);
         }
     });
 }
