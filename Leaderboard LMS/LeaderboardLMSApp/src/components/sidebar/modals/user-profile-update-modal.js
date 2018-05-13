@@ -38,6 +38,8 @@ export default class UserProfileUpdateModal extends React.Component {
         UserAPI.post_updateUser(this.props.user.id, userInfo).then((res) => {
             if (res.status === "success"){
                 this.setState({successMessage: res.message});
+                setTimeout(function(){ this.props.loadUser(); }.bind(this), 500);
+                setTimeout(function(){ this.props.loadCourses(); }.bind(this), 1000);
             } else if (res.status === "fail"){
                 this.setState({errorMessage: res.message});
             }

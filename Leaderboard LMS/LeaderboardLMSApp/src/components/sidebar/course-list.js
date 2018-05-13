@@ -32,7 +32,9 @@ export default class CourseList extends React.Component {
                 <Menu.Item>
                     <UserProfileModal 
                         user={this.props.user} 
-                        signout={this.signout.bind(this)} 
+                        signout={this.signout.bind(this)}
+                        loadUser={this.props.loadUser}
+                        loadCourses={this.loadCourses.bind(this)}
                     />
                 </Menu.Item>
             </div>

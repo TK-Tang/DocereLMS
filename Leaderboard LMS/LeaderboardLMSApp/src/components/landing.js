@@ -20,7 +20,7 @@ export default class Landing extends React.Component {
         };
     }
 
-    componentWillMount(){
+    loadUser(){
         AuthAPI.get_currentUser().then(res =>  {
             if (res.status !== "success"){
                 this.props.history.replace('/');
@@ -29,6 +29,10 @@ export default class Landing extends React.Component {
             }
             this.setState({ user: res.payload });
         });
+    }
+
+    componentWillMount(){
+        this.loadUser();
     }
 
     signout(){
@@ -50,7 +54,7 @@ export default class Landing extends React.Component {
             <div>
                 <Sidebar.Pushable as={Segment}>
                     <Sidebar as={Menu} visible={true} icon="labeled" vertical inverted>
-                        {this.state.user.email ? <CourseList user={this.state.user} signout={this.signout.bind(this)} selectCourse={this.selectCourse.bind(this)} /> : <Menu.Item>loading...</Menu.Item>}
+                        {this.state.user.email ? <CourseList user={this.state.user} signout={this.signout.bind(this)} loadUser={this.loadUser.bind(this)} selectCourse={this.selectCourse.bind(this)} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>
                     <Sidebar.Pusher className="main">
                         <Sidebar as={Menu} visible={true} icon="labeled" className="course-menu" vertical inverted>

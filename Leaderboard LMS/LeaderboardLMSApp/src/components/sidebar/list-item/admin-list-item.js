@@ -10,8 +10,8 @@ export default class StudentListItem extends React.Component {
         this.state = {
             visibility: true,
             animation: "fade",
-            duration: 200,
-        }
+            duration: 200
+        };
     }
 
     setUserAsStudent(){
