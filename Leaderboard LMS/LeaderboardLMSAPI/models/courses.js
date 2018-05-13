@@ -64,7 +64,7 @@ module.exports = function(sequelize, Sequelize){
                     attributes: ["user_id", "username", "email", "profilePictureLink", "status"],
                     required: false,
                     through: { 
-                        attributes: ["id", "rank", "user_id", "course_id"]
+                        attributes: ["id", "rank", "user_id", "course_id", "created_at"]
                     }
                 }
             ]
@@ -83,7 +83,7 @@ module.exports = function(sequelize, Sequelize){
                         [ "username", "DESC"]
                     ],
                     through: { 
-                        attributes: ["id", "rank", "user_id", "course_id"],
+                        attributes: ["id", "rank", "user_id", "course_id", "created_at"],
                         where: { rank: rank }
                     }
                 }

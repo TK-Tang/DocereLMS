@@ -2,7 +2,8 @@ import React from "react";
 import {Menu, Icon} from "semantic-ui-react";
 
 import CourseModal from "./modals/course-modal";
-import AdminListModal from "./modals/admin-modal";
+import AdminListModal from "./modals/admin-list-modal";
+import StudentListModal from "./modals/student-list-modal";
 
 export default class CourseInfoList extends React.Component {
     constructor(props){
@@ -26,9 +27,7 @@ export default class CourseInfoList extends React.Component {
                 <div className={(this.state.hideCourseInfoList || this.props.course_id === 0) ? "void" : ""}>
                     <CourseModal course_id={this.props.course_id} />
                     <AdminListModal course_id={this.props.course_id} />
-                    <Menu.Item className="course-info-menu">
-                        Students
-                    </Menu.Item>
+                    <StudentListModal course_id={this.props.course_id} />
                     <Menu.Item className="course-info-menu">
                         Invitations
                     </Menu.Item>
