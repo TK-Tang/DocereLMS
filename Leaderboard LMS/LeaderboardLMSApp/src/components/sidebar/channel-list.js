@@ -3,19 +3,19 @@ import {Menu, Icon} from "semantic-ui-react";
 
 import CourseAPI from "../../services/course-api";
 
-export default class ChatList extends React.Component {
+export default class ChannelList extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            hideChatList: false,
+            hideChannelList: false,
             channelList: []
         }
     }
 
     
-    toggleChatListDisplay(){
-        this.setState({hideChatList: !this.state.hideChatList});
+    toggleChannelListDisplay(){
+        this.setState({hideChannelList: !this.state.hideChannelList});
     }
 
     componentWillReceiveProps(props) {
@@ -46,8 +46,8 @@ export default class ChatList extends React.Component {
     render() {
         return (
             <Menu.Item>
-                <div className="course-menu-category" onClick={this.toggleChatListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
-                <Menu.Menu className={this.state.hideChatList ? "void" : ""}>
+                <div className="course-menu-category" onClick={this.toggleChannelListDisplay.bind(this)}><Icon name="chevron right" />  CHAT CHANNELS <Icon disabled name="comments" /></div>
+                <Menu.Menu className={this.state.hideChannelList ? "void" : ""}>
                     <div>
                         {this.state.channelList}
                     </div>

@@ -1,14 +1,18 @@
 import React from "react";
-import { Sidebar, Segment, Menu, Icon, Input, Divider } from "semantic-ui-react";
+import {Sidebar, Segment, Menu, Icon, Input, Divider} from "semantic-ui-react";
+import {Route, Switch} from "react-router-dom";
 
 import AuthAPI from "../services/authentication-api.js";
 
 import CourseList from "./sidebar/course-list.js";
 import LeaderboardList from "./sidebar/leaderboard-list.js";
-import ChatList from "./sidebar/chat-list.js";
+import ChannelList from "./sidebar/channel-list.js";
 import ForumList from "./sidebar/forum-list.js";
 import DownloadList from "./sidebar/download-list.js";
 import CourseInfoList from "./sidebar/course-info-list.js";
+
+import Leaderboard from "./leaderboard/leaderboard.js";
+import Channel from "./channel/channel.js"
 
 export default class Landing extends React.Component {
     constructor(props){
@@ -16,23 +20,9 @@ export default class Landing extends React.Component {
         this.state = {
             user: {},
             course_id: 0,
-            
+            leaderboard_id: 0,
+            channel_id: 0
         };
-    }
-
-    loadUser(){
-        AuthAPI.get_currentUser().then(res =>  {
-            if (res.status !== "success"){
-                this.props.history.replace('/');
-                let message = "You're not signed in on Leaderboard LMS, you need to sign in mate.";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
-            }
-            this.setState({ user: res.payload });
-        });
-    }
-
-    componentWillMount(){
-        this.loadUser();
     }
 
     signout(){
@@ -45,9 +35,36 @@ export default class Landing extends React.Component {
         });
     }
 
+
+    loadUser(){
+        AuthAPI.get_currentUser().then(res =>  {
+            if (res.status !== "success"){
+                this.props.history.replace('/');
+                let message = "You're not signed in on Leaderboard LMS, you need to sign in mate.";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
+            }
+            this.setState({ user: res.payload });
+        });
+    }
+
+    selectLeaderboard(i){
+        this.setState({leaderboard_id: i});
+        this.state.history.replace("/leaderboard/" + i);
+    }
+
+    selectChannel(i){
+        this.setState({channel_id: i});
+        this.state.history.replace("/channel/" + i);
+    }
+
     selectCourse(i){
         this.setState({course_id: i});
     }
+
+    componentWillMount(){
+        this.loadUser();
+    }
+
 
     render() {
         return (
@@ -64,9 +81,12 @@ export default class Landing extends React.Component {
                                     <Input placeholder='Search...' />
                                 </Menu.Item>
                                 <Divider/>
-                                <LeaderboardList course_id={this.state.course_id} />   
+                                <LeaderboardList 
+                                    course_id={this.state.course_id} 
+                                    selectLeaderboard={this.selectLeaderboard.bind(this)} 
+                                />   
                                 <Divider />
-                                <ChatList course_id={this.state.course_id} />
+                                <ChannelList course_id={this.state.course_id} />
                                 <Divider />
                                 <ForumList course_id={this.state.course_id}/>
                                 <Divider />
@@ -77,11 +97,11 @@ export default class Landing extends React.Component {
                             </Menu>
                         </Sidebar>
 
-                        <Sidebar.Pusher>
-                            <Segment basic>
-                                <div style={{height: "100vh"}}>
-                                </div>
-                            </Segment>
+                        <Sidebar.Pusher style={{height: "100vh"}}>
+                            <Switch>
+                                <Route path="/landing/leaderboard/:leaderboard_id" component={Leaderboard} />
+                                <Route path="/landing/channel/:channel_id" component={Channel} />
+                            </Switch>
                         </Sidebar.Pusher>
                         
                     </Sidebar.Pusher>

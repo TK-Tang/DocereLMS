@@ -9,12 +9,18 @@ export default class LeaderboardList extends React.Component {
 
         this.state = {
             hideLeaderboardList: false,
-            leaderboardList: []
+            leaderboardList: [],
+            selectedLeaderboard: 0
         }
     }
 
     toggleLeaderboardListDisplay(){
         this.setState({hideLeaderboardList: !this.state.hideLeaderboardList});
+    }
+    
+    selectLeaderboard(e){
+        this.setState({selectedLeaderboard: e.currentTarget.id});
+        this.props.selectLeaderboard(e.currentTarget.id);
     }
 
     componentWillReceiveProps(props) {
@@ -44,7 +50,7 @@ export default class LeaderboardList extends React.Component {
         return (
             <Menu.Item>
                 <div className="course-menu-category" onClick={this.toggleLeaderboardListDisplay.bind(this)}><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
-                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""}>
+                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""} onClick={this.selectLeaderboard.bind(this)}>
                         <div>
                             {this.state.leaderboardList}
                         </div>
