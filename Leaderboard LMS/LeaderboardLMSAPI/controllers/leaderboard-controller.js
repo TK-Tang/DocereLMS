@@ -43,6 +43,7 @@ exports.insertLeaderboard = function(req, res){
     const course_id = req.params.course_id;
     const name = req.body.name;
     const blurb = req.body.blurb;
+    const weight = req.body.weighting;
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
@@ -59,6 +60,7 @@ exports.updateLeaderboard = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
     const name = req.body.name;
     const blurb = req.body.blurb;
+    const weighting = req.body.weight;
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
