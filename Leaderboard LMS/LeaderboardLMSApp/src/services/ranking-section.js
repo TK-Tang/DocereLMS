@@ -8,9 +8,9 @@ let headers = {
     "Content-Type": "application/json"
 };
 
-var ranking_api = {
-    get_ranking(course_id, ranking_id){
-        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_d;
+var ranking_section_api = {
+    get_rankingAllSections(course_id, leaderboard_id){
+        var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/rankingsection";
 
         var req = {
             method: "GET",
@@ -21,12 +21,11 @@ var ranking_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    put_ranking(course_id, leaderboard_id, rankingInfo){
-        var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/ranking";
+    put_rankingSection(course_id, leaderboard_id, rankingSectionInfo){
+        var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/rankingsection";
 
         let body = {
-            "note": rankingInfo.note,
-            "mark": rankingInfo.mark
+            "name": rankingSectionInfo.name
         };
 
         var req = {
@@ -39,12 +38,11 @@ var ranking_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    post_ranking(course_id, ranking_id, rankingInfo){
-        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id;
+    post_rankingSection(course_id, leaderboard_id, ranking_section_id, rankingSectionInfo){
+        var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/rankingsection/" + ranking_section_id;
 
         let body = {
-            "note": rankingInfo.note,
-            "mark": rankingInfo.mark
+            "name": rankingSectionInfo.name
         };
 
         var req = {
@@ -57,8 +55,8 @@ var ranking_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    delete_ranking(course_id, ranking_id){
-        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id;
+    delete_rankingSection(){
+        var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/rankingsection/" + ranking_section_id;
 
         var req = {
             method: "DELETE",
@@ -70,4 +68,4 @@ var ranking_api = {
     }
 }
 
-export default ranking_api;
+export default ranking_section_api;

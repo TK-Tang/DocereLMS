@@ -11,6 +11,7 @@ let headers = {
 var course_api = {
     get_course(course_id){
         var url = api_domain + "/course/" + course_id;
+        
         var req = {
             method: "GET",
             headers: headers,
