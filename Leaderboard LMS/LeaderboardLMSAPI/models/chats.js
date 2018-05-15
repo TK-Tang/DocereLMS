@@ -16,7 +16,7 @@ module.exports = function(sequelize, Sequelize){
             type: Sequelize.BOOLEAN,
             defaultValue: false
         }
-    }, { underscored: true});
+    }, {underscored: true});
 
     return Chats;
 }
