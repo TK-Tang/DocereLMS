@@ -19,9 +19,7 @@ export default class Landing extends React.Component {
         super(props);
         this.state = {
             user: {},
-            course_id: 0,
-            leaderboard_id: 0,
-            channel_id: 0
+            course_id: 0
         };
     }
 
@@ -48,13 +46,11 @@ export default class Landing extends React.Component {
     }
 
     selectLeaderboard(i){
-        this.setState({leaderboard_id: i});
-        this.state.history.replace("/leaderboard/" + i);
+        this.props.history.replace("/landing/leaderboard/" + i);
     }
 
     selectChannel(i){
-        this.setState({channel_id: i});
-        this.state.history.replace("/channel/" + i);
+        this.props.history.replace("/landing/channel/" + i);
     }
 
     selectCourse(i){
@@ -99,7 +95,7 @@ export default class Landing extends React.Component {
 
                         <Sidebar.Pusher style={{height: "100vh"}}>
                             <Switch>
-                                <Route path="/landing/leaderboard/:leaderboard_id" component={Leaderboard} />
+                                <Route path="/landing/leaderboard/:leaderboard_id" render={(props) => <Leaderboard course_id={this.state.course_id} {...props}/>} />
                                 <Route path="/landing/channel/:channel_id" component={Channel} />
                             </Switch>
                         </Sidebar.Pusher>

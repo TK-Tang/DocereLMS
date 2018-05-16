@@ -51,6 +51,9 @@ module.exports = function(sequelize, Sequelize){
                 {
                     model: models.RankingSections
                 }
+            ],
+            order: [
+                [ models.Rankings, "mark", "DESC" ]
             ]
         });
     }

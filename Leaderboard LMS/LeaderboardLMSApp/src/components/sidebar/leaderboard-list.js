@@ -31,7 +31,7 @@ export default class LeaderboardList extends React.Component {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Leaderboards.length; i++){
                     let leaderboard = (
-                        <Menu.Item key={i} className="leaderboard-menu">
+                        <Menu.Item key={i} id={res.payload.Leaderboards[i].id} className="leaderboard-menu" onClick={this.selectLeaderboard.bind(this)}>
                             {res.payload.Leaderboards[i].name}
                         </Menu.Item>
                     );
@@ -50,7 +50,7 @@ export default class LeaderboardList extends React.Component {
         return (
             <Menu.Item>
                 <div className="course-menu-category" onClick={this.toggleLeaderboardListDisplay.bind(this)}><Icon name="chevron right" /> LEADERBOARDS <Icon disabled name="chart line" /></div>
-                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""} onClick={this.selectLeaderboard.bind(this)}>
+                    <Menu.Menu className={this.state.hideLeaderboardList ? "void" : ""} >
                         <div>
                             {this.state.leaderboardList}
                         </div>
