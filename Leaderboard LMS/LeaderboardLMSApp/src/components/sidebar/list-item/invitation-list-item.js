@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Image, Label, Form, Input, Icon, Checkbox, Menu, Grid, Transition, Segment} from "semantic-ui-react";
+import {Icon, Grid, Transition, Segment} from "semantic-ui-react";
 
 import InvitationAPI from "../../../services/invitation-api";
 
@@ -43,7 +43,7 @@ export default class InvitationListItem extends React.Component {
                                 
                             </Grid.Column>
                             <Grid.Column width={1} className="avatar-list-text-padding">
-                                <Icon color="red" name="delete" size="large" className="cursor-pointer" onClick={this.deleteInvitation.bind(this)}/>
+                                <Icon name="delete" size="large" className="cursor-pointer maroon-hover icon-red" onClick={this.deleteInvitation.bind(this)}/>
                             </Grid.Column>
                         </Grid>
                     </Segment>

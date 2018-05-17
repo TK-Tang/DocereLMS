@@ -48,11 +48,11 @@ exports.deleteRankingSection = function(req, res){
     const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
     if (isNaN(ranking_section_id)){ Responses.error(res, "Ranking section ID is not a number", null); }
 
-    Models.RankingSections.deleteRankingSection(ranking_section_id).then(function(numberOfRankingSectionDeleted){
+    Models.RankingSections.deleteRankingSection(ranking_section_id, Models).then(function(numberOfRankingSectionDeleted){
         if(numberOfRankingSectionDeleted != 1){
             Responses.error(res, "Error with deleting ranking section", null);
         } else {
-            Responses.success(res, "Invitation deleted ranking section", numberOfRankingSectionDeleted);
+            Responses.success(res, "Successfully deleted ranking section", numberOfRankingSectionDeleted);
         }
     });
 }

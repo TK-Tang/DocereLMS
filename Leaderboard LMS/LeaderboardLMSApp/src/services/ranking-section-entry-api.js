@@ -25,7 +25,7 @@ var ranking_section_entry_api = {
         var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id + "/rankingsectionentry";
 
         let body = {
-            "mark": rankingSectionInfo.mark,
+            "mark": rankingSectionEntryInfo.mark,
             "ranking_section_id": rankingSectionEntryInfo.ranking_section_id
         };
 
@@ -39,7 +39,7 @@ var ranking_section_entry_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    post_rankingSectionEntry(course_id, ranking_id, ranking_section_entry_id){
+    post_rankingSectionEntry(course_id, ranking_id, ranking_section_entry_id, rankingSectionEntryInfo){
         var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id + "/rankingsectionentry" + ranking_section_entry_id;
 
         let body = {

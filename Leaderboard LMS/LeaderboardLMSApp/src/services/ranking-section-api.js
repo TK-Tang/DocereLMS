@@ -55,7 +55,7 @@ var ranking_section_api = {
         return fetch(url, req).then((res) => res.json());
     },
 
-    delete_rankingSection(){
+    delete_rankingSection(course_id, leaderboard_id, ranking_section_id){
         var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/rankingsection/" + ranking_section_id;
 
         var req = {

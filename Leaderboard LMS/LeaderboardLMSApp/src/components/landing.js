@@ -1,5 +1,5 @@
 import React from "react";
-import {Sidebar, Segment, Menu, Icon, Input, Divider} from "semantic-ui-react";
+import {Sidebar, Segment, Menu, Input, Divider} from "semantic-ui-react";
 import {Route, Switch} from "react-router-dom";
 
 import AuthAPI from "../services/authentication-api.js";
@@ -12,7 +12,7 @@ import DownloadList from "./sidebar/download-list.js";
 import CourseInfoList from "./sidebar/course-info-list.js";
 
 import Leaderboard from "./leaderboard/leaderboard.js";
-import Channel from "./channel/channel.js"
+import Channel from "./channel/channel.js";
 
 export default class Landing extends React.Component {
     constructor(props){
@@ -93,7 +93,7 @@ export default class Landing extends React.Component {
                             </Menu>
                         </Sidebar>
 
-                        <Sidebar.Pusher style={{height: "100vh"}}>
+                        <Sidebar.Pusher style={{height: "100vh", width: "80%" }}>
                             <Switch>
                                 <Route path="/landing/leaderboard/:leaderboard_id" render={(props) => <Leaderboard course_id={this.state.course_id} {...props}/>} />
                                 <Route path="/landing/channel/:channel_id" component={Channel} />

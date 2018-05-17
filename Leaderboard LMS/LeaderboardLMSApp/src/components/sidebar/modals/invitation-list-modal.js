@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Image, Label, Form, Input, Icon, Checkbox, Menu} from "semantic-ui-react";
+import {Modal, Button, Label, Menu} from "semantic-ui-react";
 
 import InvitationAPI from "../../../services/invitation-api";
 import InvitationListItem from "../list-item/invitation-list-item";

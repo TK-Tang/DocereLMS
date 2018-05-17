@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Menu, Image, Header, Segment, Button, Grid, Icon, Label} from "semantic-ui-react";
+import {Modal, Menu, Button, Label} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
 import StudentListItem from "../list-item/student-list-item";

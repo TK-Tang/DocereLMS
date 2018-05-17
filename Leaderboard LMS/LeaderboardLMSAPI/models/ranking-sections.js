@@ -39,7 +39,13 @@ module.exports = function(sequelize, Sequelize){
         return updatedRankingSection;
     };
 
-    RankingSections.deleteRankingSection = async function(ranking_section_id){
+    RankingSections.deleteRankingSection = async function(ranking_section_id, models){
+        await models.RankingSectionEntries.destroy({
+            where: {
+                ranking_section_id: ranking_section_id
+            }
+        });
+
         return await this.destroy({
             where: {
                 ranking_section_id: ranking_section_id

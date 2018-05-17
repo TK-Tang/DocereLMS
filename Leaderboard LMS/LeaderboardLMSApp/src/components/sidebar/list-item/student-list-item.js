@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Segment, Button, Grid, Icon, Transition} from "semantic-ui-react";
+import { Image, Segment, Grid, Icon, Transition} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
 
@@ -61,8 +61,8 @@ export default class StudentListItem extends React.Component {
                                 
                             </Grid.Column>
                             <Grid.Column width={3} className="avatar-list-text-padding">
-                                <span><Icon color="blue" name="toggle up" size="large" className="cursor-pointer" onClick={this.setUserAsAdmin.bind(this)} /></span>
-                                <span><Icon color="red" name="delete" size="large" className="cursor-pointer" onClick={this.kickUser.bind(this)}/></span>
+                                <span><Icon name="toggle up" size="large" className="cursor-pointer teal-hover icon-blue" onClick={this.setUserAsAdmin.bind(this)} /></span>
+                                <span><Icon name="delete" size="large" className="cursor-pointer maroon-hover icon-red" onClick={this.kickUser.bind(this)}/></span>
                             </Grid.Column>
                         </Grid>
                     </Segment>

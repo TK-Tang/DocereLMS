@@ -490,3 +490,19 @@
 .cursor-pointer {
   cursor: pointer
 }
+
+.icon-blue {
+  color: #005c99;
+}
+
+.icon-red {
+  color: #e00000;
+}
+
+.teal-hover:hover {
+  color: #008080 !important;
+}
+
+.maroon-hover:hover {
+  color: #aa0000 !important;
+}

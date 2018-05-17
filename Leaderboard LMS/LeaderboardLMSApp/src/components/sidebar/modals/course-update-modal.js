@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Image, Header, Label, Form, Input, Segment, Checkbox} from "semantic-ui-react";
+import {Modal, Button, Image, Label, Form, Input, Segment, Checkbox} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
 
