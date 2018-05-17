@@ -3,6 +3,7 @@ import {Segment, Grid, Header, Divider, Table, Icon} from "semantic-ui-react";
 
 import LeaderboardAPI from "../../services/leaderboard-api";
 import RankingSectionModal from "./modals/ranking-section-modal.js";
+import AnonymityModal from "./modals/anonymity-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -41,7 +42,7 @@ export default class Leaderboard extends React.Component {
                                 <RankingSectionModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
                             </Table.Cell>
                             <Table.Cell width={1}>
-                                <Icon name="cogs" className="icon-blue teal-hover cursor-pointer" size="large"/>
+                                <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={newProps.course_id} ranking_id={r.id} />
                             </Table.Cell>
                         </Table.Row>
                     );

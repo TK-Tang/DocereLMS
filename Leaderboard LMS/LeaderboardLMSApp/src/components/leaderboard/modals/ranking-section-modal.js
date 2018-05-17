@@ -44,7 +44,7 @@ export default class RankingSectionModal extends React.Component {
                 onClose={this.closeModal}
                 size="small"
                 open={this.state.modal}
-                trigger = {
+                trigger={
                     <Icon name="tasks" className="cursor-pointer teal-hover icon-blue" size="large" onClick={this.openModal}/>
                 }
             >
