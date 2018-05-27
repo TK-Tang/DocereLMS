@@ -39,6 +39,7 @@ module.exports = function(sequelize, Sequelize){
                 {
                     model: models.Chats,
                     where: { channel_id: channel_id },
+                    required: false,
                     include: [
                         {
                             model: models.Users,

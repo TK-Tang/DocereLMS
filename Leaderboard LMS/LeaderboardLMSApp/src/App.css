@@ -506,3 +506,7 @@
 .maroon-hover:hover {
   color: #aa0000 !important;
 }
+
+.scrollable {
+  overflow-y: scroll;
+}

@@ -87,7 +87,10 @@ export default class Landing extends React.Component {
                                     selectLeaderboard={this.selectLeaderboard.bind(this)} 
                                 />   
                                 <Divider />
-                                <ChannelList course_id={this.state.course_id} />
+                                <ChannelList 
+                                    course_id={this.state.course_id} 
+                                    selectChannel={this.selectChannel.bind(this)}
+                                />
                                 <Divider />
                                 <ForumList course_id={this.state.course_id}/>
                                 <Divider />
@@ -105,7 +108,7 @@ export default class Landing extends React.Component {
                             <Switch>
                                 <Route path="/landing/leaderboard/:leaderboard_id" render={(props) => <Leaderboard course_id={this.state.course_id} {...props}/>} />
                                 <Route path="/landing/download/:category_id" render={(props) => <Download course_id={this.state.course_id} {...props} />} />
-                                <Route path="/landing/channel/:channel_id" component={Channel} />
+                                <Route path="/landing/channel/:channel_id" render={(props) => <Channel course_id={this.state.course_id} {...props} />} />
                             </Switch>
                         </Sidebar.Pusher>
                         

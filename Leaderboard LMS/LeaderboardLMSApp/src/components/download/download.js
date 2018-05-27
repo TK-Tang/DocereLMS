@@ -13,31 +13,12 @@ export default class Download extends React.Component {
         }
     }
 
-    componentWillMount(){
-        if (!this.props.course_id){ return; }
-
-        var category_id = this.props.match.params.category_id;
-        this.state.downloadList = [];
-
-        this.retrieveDownloads(this.props.course_id, category_id);
-    }
-
-    componentWillReceiveProps(newProps){
-        if (!newProps.course_id){ return; }
-
-        var category_id = newProps.match.params.category_id;
-        this.state.downloadList = [];
-
-        this.retrieveDownloads(newProps.course_id, category_id);
-    }
-
     retrieveDownloads(course_id, category_id){
         ResourceAPI.get_resources(course_id, category_id).then((res) => {
             if (res.status === "success"){
-
                 this.setState({download: res.payload});
 
-                for (var i = 0; i < res.payload.length ; i++){
+                for (var i = 0; i < res.payload.length; i++){
                     let r = res.payload[i];
                     
                     let resource = (
@@ -64,6 +45,24 @@ export default class Download extends React.Component {
                 this.forceUpdate();
             }
         });
+    }
+
+    componentWillMount(){
+        if (!this.props.course_id){ return; }
+
+        var category_id = this.props.match.params.category_id;
+        this.state.downloadList = [];
+
+        this.retrieveDownloads(this.props.course_id, category_id);
+    }
+
+    componentWillReceiveProps(newProps){
+        if (!newProps.course_id){ return; }
+
+        var category_id = newProps.match.params.category_id;
+        this.state.downloadList = [];
+
+        this.retrieveDownloads(newProps.course_id, category_id);
     }
 
     render(){

@@ -13,9 +13,13 @@ export default class ChannelList extends React.Component {
         }
     }
 
-    
     toggleChannelListDisplay(){
         this.setState({hideChannelList: !this.state.hideChannelList});
+    }
+
+    selectChannel(e){
+        this.setState({selectedChanel: e.currentTarget.id});
+        this.props.selectChannel(e.currentTarget.id);
     }
 
     componentWillReceiveProps(props) {
@@ -26,7 +30,7 @@ export default class ChannelList extends React.Component {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Channels.length; i++){
                     let channel = (
-                        <Menu.Item key={i} className="sub-menu">
+                        <Menu.Item key={i} id={res.payload.Channels[i].channel_id} className="sub-menu" onClick={this.selectChannel.bind(this)}>
                             {"# " + res.payload.Channels[i].name.toLowerCase()}
                         </Menu.Item>
                     )

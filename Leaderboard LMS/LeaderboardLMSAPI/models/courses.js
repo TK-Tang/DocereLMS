@@ -97,7 +97,7 @@ module.exports = function(sequelize, Sequelize){
             include: [
                 {
                     model: models.Channels,
-                    attributes: ["name", "description", "adminChannelOnly", "viewChannelOnly", "order"],
+                    attributes: ["channel_id", "name", "description", "adminChannelOnly", "viewChannelOnly", "order"],
                     required: false,
                     order: [[ "order", "DESC" ]]
                 }
