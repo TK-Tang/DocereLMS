@@ -9,7 +9,7 @@ var authentication_api = {
         var url = api_domain + "/auth/user";
         let headers = {
             "Content-Type": "application/json"
-        }
+        };
 
         var req = {
             method: "GET",
@@ -30,7 +30,7 @@ var authentication_api = {
             method: "GET",
             headers: headers,
             credentials: "include"
-        }
+        };
 
         return fetch(url, req).then((res) => res.json());
     },
@@ -59,7 +59,7 @@ var authentication_api = {
         let body = {
             "email": signupInfo.email,
             "password": signupInfo.password
-        }
+        };
 
         var req = {
             method: "PUT",
@@ -81,7 +81,7 @@ var authentication_api = {
         let body = {
             "email": signinInfo.email,
             "password": signinInfo.password
-        }
+        };
 
         var req = {
             method: "POST",

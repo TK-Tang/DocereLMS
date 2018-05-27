@@ -62,7 +62,7 @@ export default class CourseList extends React.Component {
         UserAPI.get_userIncludingCourses(this.props.user.email).then((res) => {
             for (var i = 0; i < res.payload.Courses.length; i++){
                 let courseIcon = (
-                    <div key={i} onClick={this.selectCourse.bind(this)} id={res.payload.Courses[i].id} className={this.state.selectedCourse == res.payload.Courses[i].id ? "selected-course" : ""}>
+                    <div key={i} onClick={this.selectCourse.bind(this)} id={res.payload.Courses[i].id} className={this.state.selectedCourse === res.payload.Courses[i].id ? "selected-course" : ""}>
                         <Menu.Item> 
                             <CoursePopupInfo course={res.payload.Courses[i]} />
                         </Menu.Item>

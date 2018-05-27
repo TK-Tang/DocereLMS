@@ -12,6 +12,7 @@ import DownloadList from "./sidebar/download-list.js";
 import CourseInfoList from "./sidebar/course-info-list.js";
 
 import Leaderboard from "./leaderboard/leaderboard.js";
+import Download from "./download/download.js";
 import Channel from "./channel/channel.js";
 
 export default class Landing extends React.Component {
@@ -47,6 +48,10 @@ export default class Landing extends React.Component {
 
     selectLeaderboard(i){
         this.props.history.replace("/landing/leaderboard/" + i);
+    }
+
+    selectDownload(i){
+        this.props.history.replace("/landing/download/" + i);
     }
 
     selectChannel(i){
@@ -86,7 +91,10 @@ export default class Landing extends React.Component {
                                 <Divider />
                                 <ForumList course_id={this.state.course_id}/>
                                 <Divider />
-                                <DownloadList course_id={this.state.course_id} />
+                                <DownloadList 
+                                    course_id={this.state.course_id} 
+                                    selectDownload={this.selectDownload.bind(this)}
+                                />
                                 <Divider />
                                 <CourseInfoList course_id={this.state.course_id} />
                                 <Divider />
@@ -96,6 +104,7 @@ export default class Landing extends React.Component {
                         <Sidebar.Pusher style={{height: "100vh", width: "80%" }}>
                             <Switch>
                                 <Route path="/landing/leaderboard/:leaderboard_id" render={(props) => <Leaderboard course_id={this.state.course_id} {...props}/>} />
+                                <Route path="/landing/download/:category_id" render={(props) => <Download course_id={this.state.course_id} {...props} />} />
                                 <Route path="/landing/channel/:channel_id" component={Channel} />
                             </Switch>
                         </Sidebar.Pusher>

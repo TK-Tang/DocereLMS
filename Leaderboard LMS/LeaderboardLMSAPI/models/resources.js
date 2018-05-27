@@ -30,5 +30,11 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
+    Resources.getResources = async function(category_id){
+        return await this.findAll({
+            where: {category_id: category_id}
+        });
+    }
+
     return Resources;
 }

@@ -8,12 +8,18 @@ export default class DownloadList extends React.Component {
         super(props);
 
         this.state = {
-            downloadList: []
+            downloadList: [],
+            selectedDownload: 0
         }
     }
 
     toggleDownloadListDisplay(){
         this.setState({hideDownloadList: !this.state.hideDownloadList});
+    }
+
+    selectDownload(e){
+        this.setState({selectedDownload: e.currentTarget.id});
+        this.props.selectDownload(e.currentTarget.id);
     }
 
     componentWillReceiveProps(props) {
@@ -24,7 +30,7 @@ export default class DownloadList extends React.Component {
             if (res.status === "success"){
                 for (var i = 0; i < res.payload.Categories.length; i++){
                     let download = (
-                        <Menu.Item key={i} className="download-menu">
+                        <Menu.Item key={i} id={res.payload.Categories[i].category_id} className="download-menu" onClick={this.selectDownload.bind(this)}>
                             {res.payload.Categories[i].name.toUpperCase()}
                         </Menu.Item>
                     );

@@ -58,7 +58,7 @@ export default class RankingSectionModal extends React.Component {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {this.state.rankingSectionList.length != 0 ? this.state.rankingSectionList : 
+                            {this.state.rankingSectionList.length !== 0 ? this.state.rankingSectionList : 
                                 <Table.Row>
                                     <Table.Cell width={16}>
                                         This student has choosen to remain to keep their marks hidden.

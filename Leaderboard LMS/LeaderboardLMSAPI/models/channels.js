@@ -32,5 +32,23 @@ module.exports = function(sequelize, Sequelize){
         }
     }, { underscored: true });
 
+    Channels.getChannel = async function(channel_id, models){
+        return await this.findOne({
+            where: { channel_id: channel_id },
+            include: [
+                {
+                    model: models.Chats,
+                    where: { channel_id: channel_id },
+                    include: [
+                        {
+                            model: models.Users,
+                            attributes: ["id", "username", "profilePictureLink", "status"]
+                        }
+                    ]
+                }
+            ]
+        });
+    }
+
     return Channels;
 }

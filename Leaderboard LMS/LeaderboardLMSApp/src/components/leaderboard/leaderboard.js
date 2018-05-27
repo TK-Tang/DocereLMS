@@ -17,13 +17,26 @@ export default class Leaderboard extends React.Component {
         }
     }
 
+    componentWillMount(){
+        if (!this.props.course_id){ return; }
+
+        this.state.rankings = [];
+        var leaderboard_id = this.props.match.params.leaderboard_id;
+
+        this.retrieveLeaderboard(this.props.course_id, leaderboard_id);
+    }
+
     componentWillReceiveProps(newProps){
         if (!newProps.course_id){ return; }
 
         this.state.rankings = [];
         var leaderboard_id = newProps.match.params.leaderboard_id;
 
-        LeaderboardAPI.get_leaderboardIncludingRankings(newProps.course_id, leaderboard_id).then((res) => {
+        this.retrieveLeaderboard(newProps.course_id, leaderboard_id);
+    }
+
+    retrieveLeaderboard(course_id, leaderboard_id){
+        LeaderboardAPI.get_leaderboardIncludingRankings(course_id, leaderboard_id).then((res) => {
             if (res.status === "success"){
 
                 let totalMarks = 0;
@@ -42,7 +55,7 @@ export default class Leaderboard extends React.Component {
                                 <RankingSectionModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
                             </Table.Cell>
                             <Table.Cell width={1}>
-                                <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={newProps.course_id} ranking_id={r.id} />
+                                <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={course_id} ranking_id={r.id} />
                             </Table.Cell>
                         </Table.Row>
                     );
@@ -58,8 +71,6 @@ export default class Leaderboard extends React.Component {
     }
 
     render() {
-        var leaderboard_id = this.props.match.params.leaderboard_id;
-
         if (!this.state.leaderboard){ return(""); }
 
         return(

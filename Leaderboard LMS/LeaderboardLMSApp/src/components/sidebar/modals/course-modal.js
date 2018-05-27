@@ -3,6 +3,7 @@ import {Modal, Menu, Button, Image, Header, Segment} from "semantic-ui-react";
 
 import CourseAPI from "../../../services/course-api";
 import CourseUpdateModal from "./course-update-modal";
+import DeleteCourseModal from "./delete-course-modal";
 
 export default class CourseModal extends React.Component {
     constructor(props){
@@ -100,7 +101,7 @@ export default class CourseModal extends React.Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color="red" floated="left">Delete</Button>
+                    <DeleteCourseModal />
                     <CourseUpdateModal course_id={this.props.course_id} course={this.state.course} closeModal={this.closeModal} />
                     <Button onClick={this.closeModal} >Close</Button>
                 </Modal.Actions>

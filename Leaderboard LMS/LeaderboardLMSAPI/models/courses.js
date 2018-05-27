@@ -125,7 +125,7 @@ module.exports = function(sequelize, Sequelize){
             include: [
                 {
                     model: models.Categories,
-                    attributes: ["name", "description", "adminOnly", "order"],
+                    attributes: ["category_id", "name", "description", "adminOnly", "order"],
                     required: false,
                     order: [
                         "name", "DESC"
