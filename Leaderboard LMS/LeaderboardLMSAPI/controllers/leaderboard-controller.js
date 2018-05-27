@@ -19,10 +19,11 @@ exports.getLeaderboardIncludingRankings = function(req, res){
                 break;
             }
 
-            if (r.StudentAnonymitySetting.revealLeaderboardName === false){
+            if (r.StudentAnonymitySetting.revealLeaderboardName === false && req.user.email !== r.User.email){
                 r.User.id = 0
                 r.User.email = "Anonymous",
-                r.User.username = "Anonymous"
+                r.User.username = "Anonymous",
+                r.User.profilePictureLink = "https://www.uts.edu.au/sites/default/files/styles/wysiwyg_generic_large_x1/public/2018-01/sci-advanced-tissue-unknown-female.jpg"
             }
     
             if (r.StudentAnonymitySetting.revealRankingSections === false){

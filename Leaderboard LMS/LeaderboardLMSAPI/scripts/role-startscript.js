@@ -27,19 +27,19 @@ module.exports.startScript = function(){
 
     roleList.user003course002 = {
         user_id: 3,
-        course_id: 2,
+        course_id: 1,
         rank: "student"
     };
 
     roleList.user004course002 = {
         user_id: 4,
-        course_id: 2,
+        course_id: 1,
         rank: "student"
     };
 
     roleList.user005course002 = {
         user_id: 5,
-        course_id: 2,
+        course_id: 1,
         rank: "student"
     }
 
@@ -47,6 +47,12 @@ module.exports.startScript = function(){
         user_id: 6,
         course_id: 2,
         rank: "admin"
+    }
+
+    roleList.user006course002 = {
+        user_id: 6,
+        course_id: 1,
+        rank: "student"
     }
 
     return roleList;

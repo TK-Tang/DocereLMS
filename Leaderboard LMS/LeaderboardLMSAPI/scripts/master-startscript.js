@@ -101,7 +101,7 @@ module.exports.startScript = function (){
 
     for (var key in rankingList){
         var ranking = rankingList[key];
-        Models.Rankings.insertRanking(ranking.leaderboard_id, ranking.user_id, ranking.note, ranking.mark, Models);
+        Models.Rankings.insertRankingDefaultPublicAnonymity(ranking.leaderboard_id, ranking.user_id, ranking.note, ranking.mark, Models);
     }
 
     for (var key in rankingSectionEntryList){

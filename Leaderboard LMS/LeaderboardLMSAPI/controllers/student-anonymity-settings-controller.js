@@ -20,12 +20,13 @@ exports.updateStudentAnonymitySettings = async function(req, res){
     const revealLeaderboardName = req.body.revealLeaderboardName;
     const revealRankingSections = req.body.revealRankingSections;
 
-    if (isNaN(ranking_id)){ Responses.fail(res, "Ranking ID is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.fail(res, "Ranking ID is not a number", null); return; }
 
     var ranking = await Models.Rankings.getRankingIncludingStudentAnonymitySettings(ranking_id, Models);
 
     if (req.user.id !== ranking.User.id){
         Responses.fail(res, "You cannot edit this student's anonymity settings", null);
+        return;
     }
 
     Models.StudentAnonymitySettings.updateStudentAnonymitySettings(ranking_id, revealLeaderboardName, revealRankingSections).then(function(studentAnonymitySettings){

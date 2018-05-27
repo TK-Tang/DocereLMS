@@ -50,6 +50,27 @@ module.exports = function(sequelize, Sequelize){
         return newRanking;
     }
 
+    Rankings.insertRankingDefaultPublicAnonymity = async function(leaderboard_id, user_id, note, mark, models){
+        const ranking = {
+            leaderboard_id: leaderboard_id,
+            user_id: user_id,
+            note: note,
+            mark: mark
+        };
+
+        var newRanking = await this.create(ranking);
+
+        const studentAnonymitySettings = {
+            ranking_id: newRanking.id,
+            revealLeaderboardName: true,
+            revealRankingSections: true
+        }
+
+        models.StudentAnonymitySettings.create(studentAnonymitySettings);
+
+        return newRanking;
+    }
+
     Rankings.updateRanking = async function(ranking_id, note, mark){
         const rankingDetails = {
             note: note,
