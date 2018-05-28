@@ -83,7 +83,7 @@ export default class Leaderboard extends React.Component {
                             <Segment color="blue"><Header>{this.state.leaderboard.name}</Header></Segment>
                             <Segment color="blue"> 
                                 <p><b>Weighting: {this.state.leaderboard.weighting}%</b></p>
-                                <p><b>Average Mark: {this.state.averageMark}</b></p>
+                                <p><b>Average Mark: {Math.round(this.state.averageMark)}</b></p>
                                 <p><b>Total Rankings: {this.state.totalRankings}</b></p>
 
                             </Segment>
