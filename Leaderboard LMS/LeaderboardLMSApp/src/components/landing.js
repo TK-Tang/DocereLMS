@@ -68,7 +68,7 @@ export default class Landing extends React.Component {
     render() {
         return (
             <div>
-                <Sidebar.Pushable as={Segment}>
+                <Sidebar.Pushable>
                     <Sidebar as={Menu} visible={true} icon="labeled" vertical inverted>
                         {this.state.user.email ? <CourseList user={this.state.user} signout={this.signout.bind(this)} loadUser={this.loadUser.bind(this)} selectCourse={this.selectCourse.bind(this)} /> : <Menu.Item>loading...</Menu.Item>}
                     </Sidebar>

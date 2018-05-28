@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Grid, Divider, Icon, Button} from "semantic-ui-react";
+import {Segment, Grid, Divider, Icon, Button, Sidebar, Menu, Header} from "semantic-ui-react";
 
 import ResourceAPI from "../../services/resource-api";
 
@@ -24,18 +24,23 @@ export default class Download extends React.Component {
                     let resource = (
                         <Grid.Row key={i}>
                             <Grid.Column width={3}>
-                                <Segment color="teal">
+                                <Segment color="teal" style={{height: "45px"}}>
                                     <Icon name="file text outline" size="large"/>
                                     <b>{r.name}</b>
                                 </Segment>
                             </Grid.Column>
                             <Grid.Column width={9}>
-                                <Segment color="blue">{r.description}</Segment>
+                                <Segment color="blue" style={{height: "45px"}}>{r.description}</Segment>
                             </Grid.Column>
-                            <Button primary style={{height: "50px"}}>
+                            <Button primary style={{height: "40px"}}>
                                 <Icon name="download" size="large"/>
                                 Download
                             </Button>
+                            <Button color="red" style={{height: "40px"}}>
+                                <Icon name="trash outline" size="large"/>
+                                Delete
+                            </Button>
+
                         </Grid.Row>
                     );
 
@@ -82,9 +87,12 @@ export default class Download extends React.Component {
         return (
             <div>
                 <Divider />
-                <Grid>
-                    {this.state.downloadList}
-                </Grid>
+                    <Grid>
+                        {this.state.downloadList}
+                    </Grid>
+                <Divider />
+                <Button color="green">Upload New File</Button>
+                <Button color="green">Create New Submission Point</Button>
             </div>
         );
     }

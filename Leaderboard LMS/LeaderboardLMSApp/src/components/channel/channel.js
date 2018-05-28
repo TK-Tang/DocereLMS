@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Comment, Header, Divider, Grid, Form, TextArea} from "semantic-ui-react";
+import {Segment, Comment, Header, Divider, Grid, Form, TextArea, Sticky, Sidebar, Container, Menu, Icon} from "semantic-ui-react";
 
 import ChannelAPI from "../../services/channel-api";
 
@@ -76,6 +76,11 @@ export default class Channel extends React.Component {
                     <Segment basic textAlign="center">
                         No chat messages in this channel. Be the first one to say something here.
                     </Segment>
+
+                    <Form>
+                        <TextArea placeholder="Message this channel" />
+                    </Form>
+                    <Divider />
                 </Grid.Column>
             </Grid>
         )};
@@ -91,7 +96,6 @@ export default class Channel extends React.Component {
                                 {this.state.channel.description}
                             </Segment>
                             <Comment.Group>
-                                
                                 {this.state.chatList}
                             </Comment.Group>
 

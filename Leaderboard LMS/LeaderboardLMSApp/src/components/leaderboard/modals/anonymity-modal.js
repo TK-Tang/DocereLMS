@@ -78,7 +78,7 @@ export default class AnonymityModal extends React.Component {
                 size="tiny"
                 open={this.state.modal}
                 trigger={
-                    <Icon name="cogs" className="icon-blue teal-hover cursor-pointer" size="large" onClick={this.openModal}/>
+                    <Icon name="hide" className="icon-blue teal-hover cursor-pointer" size="large" onClick={this.openModal}/>
                 }
             >
                 <Modal.Header>Anonymity Settings</Modal.Header>

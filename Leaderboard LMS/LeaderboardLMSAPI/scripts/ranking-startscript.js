@@ -11,7 +11,7 @@ module.exports.startScript = function(){
     rankingList.ranking002 = {
         leaderboard_id: 1,
         user_id: 3,
-        note: "<3",
+        note: "1st",
         mark: 95
     }
 
@@ -53,7 +53,7 @@ module.exports.startScript = function(){
     rankingList.ranking008 = {
         leaderboard_id: 2,
         user_id: 3,
-        note: "<3",
+        note: "1st",
         mark: 100
     }
 
