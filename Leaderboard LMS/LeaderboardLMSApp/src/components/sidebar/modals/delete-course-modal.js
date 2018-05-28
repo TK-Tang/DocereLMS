@@ -1,11 +1,7 @@
 import React from "react";
-import {Segment, Grid, Header, Divider, Table, Icon, Button, Modal} from "semantic-ui-react";
+import {Header, Icon, Button, Modal} from "semantic-ui-react";
 
 export default class DeleteCourseModal extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <Modal

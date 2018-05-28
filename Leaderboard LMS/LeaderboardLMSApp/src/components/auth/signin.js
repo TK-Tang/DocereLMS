@@ -14,20 +14,6 @@ export default class Signin extends React.Component {
         };
     }
 
-    componentWillMount(){
-        AuthAPI.get_currentUser().then((res) => {
-            if (res.status === "success"){
-                let message = "You are already signed in " +  res.payload.username + "!";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
-                
-                this.setState({ signinComplete: true });
-                setTimeout(function(){
-                    this.props.history.replace('/landing');
-                }.bind(this), 4000);
-            }
-        });
-    }
-
     signin(){
         let signinInfo = {
             email: this.state.email,
@@ -43,6 +29,20 @@ export default class Signin extends React.Component {
             } else {
                 let message = "Sign in failed. Check your email and password please.";
                 window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
+            }
+        });
+    }
+
+    componentWillMount(){
+        AuthAPI.get_currentUser().then((res) => {
+            if (res.status === "success"){
+                let message = "You are already signed in " +  res.payload.username + "!";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                
+                this.setState({ signinComplete: true });
+                setTimeout(function(){
+                    this.props.history.replace('/landing');
+                }.bind(this), 4000);
             }
         });
     }

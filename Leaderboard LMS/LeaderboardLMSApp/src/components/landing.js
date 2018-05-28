@@ -34,12 +34,11 @@ export default class Landing extends React.Component {
         });
     }
 
-
     loadUser(){
         AuthAPI.get_currentUser().then(res =>  {
             if (res.status !== "success"){
                 this.props.history.replace('/');
-                let message = "You're not signed in on Leaderboard LMS, you need to sign in mate.";
+                let message = "You're not signed in on Leaderboard LMS, you need to sign in.";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 2000 });
             }
             this.setState({ user: res.payload });
@@ -65,7 +64,6 @@ export default class Landing extends React.Component {
     componentWillMount(){
         this.loadUser();
     }
-
 
     render() {
         return (

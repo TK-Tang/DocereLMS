@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Icon, Table, Grid, Label} from "semantic-ui-react";
+import {Modal, Button, Icon, Grid, Label} from "semantic-ui-react";
 
 import AnonymityAPI from "../../../services/student-anonymity-settings-api";
 

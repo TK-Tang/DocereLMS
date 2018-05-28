@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Grid, Header, Divider, Table, Icon, Image} from "semantic-ui-react";
+import {Segment, Grid, Header, Divider, Table, Image} from "semantic-ui-react";
 
 import LeaderboardAPI from "../../services/leaderboard-api";
 import RankingSectionModal from "./modals/ranking-section-modal.js";
@@ -39,12 +39,12 @@ export default class Leaderboard extends React.Component {
         LeaderboardAPI.get_leaderboardIncludingRankings(course_id, leaderboard_id).then((res) => {
             if (res.status === "success"){
 
-                let totalMarks = 0;
+                var totalMarks = 0;
                 this.setState({leaderboard: res.payload});
                 
                 for (var i = 0; i < res.payload.Rankings.length; i++){
                     let r = res.payload.Rankings[i];
-                    let totalMarks = totalMarks + r.mark;
+                    totalMarks = totalMarks + r.mark;
 
                     let ranking = (
                         <Table.Row key={i}>
@@ -83,7 +83,7 @@ export default class Leaderboard extends React.Component {
                             <Segment color="blue"><Header>{this.state.leaderboard.name}</Header></Segment>
                             <Segment color="blue"> 
                                 <p><b>Weighting: {this.state.leaderboard.weighting}%</b></p>
-                                <p><b>Average Mark: {this.state.averageMarks}</b></p>
+                                <p><b>Average Mark: {this.state.averageMark}</b></p>
                                 <p><b>Total Rankings: {this.state.totalRankings}</b></p>
 
                             </Segment>

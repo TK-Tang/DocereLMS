@@ -16,34 +16,33 @@ export default class Signup extends React.Component {
         }
     }
 
-    componentDidMount() {
-        var invitation = this.props.match.params.invitation;
-        AuthAPI.get_signup(invitation).then((res) => {
-            console.log(res);
+    loadUser(){
+        AuthAPI.get_currentUser().then((res) => {
             if (res.status === "success"){
-                let message = "You have been invited to join an academic server on LeaderboardLMS. You will need to sign up first.";
-                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
-                this.setState({ invitationValidity: true})
-                return;
-            } else if (res.status === "fail"){
-                let message = "This invitation is not invalid. It may have been deleted or expired.";
-                window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
-                this.setState({ invitationValidity: false})
-                return;
+                var invitation = this.props.match.params.invitation;
+                let signupInfo = {
+                    email: res.payload.email,
+                    password: "asdf"
+                };
+
+                AuthAPI.put_signup(signupInfo, invitation).then((res) => {
+                    if (res.status === "success"){
+                        let message = "You've successfully registered to a new course!";
+                        window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+        
+                        this.setState({ signupComplete: true });
+                        setTimeout(function(){ this.props.history.replace("/landing"); }.bind(this), 4000);
+                    } else if (res.status === "fail") {
+                        let message = "You are already registered to this course";
+                        window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                        this.props.history.replace('/');
+                    } else {
+                        let message = "There was an issue with registering you"
+                        window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                    }
+                });
             }
         });
-    }
-    
-    updateEmail(e){
-        this.setState({email: e.target.value});
-    }
-
-    updatePassword(e){
-        this.setState({password: e.target.value});
-    }
-
-    updatePasswordCheck(e){
-        this.setState({passwordCheck: e.target.value});
     }
 
     signin(){
@@ -77,7 +76,41 @@ export default class Signup extends React.Component {
                 let message = "There was an issue with signing up"
                 window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
             }
-        })
+        });
+    }
+
+    updateEmail(e){
+        this.setState({email: e.target.value});
+    }
+
+    updatePassword(e){
+        this.setState({password: e.target.value});
+    }
+
+    updatePasswordCheck(e){
+        this.setState({passwordCheck: e.target.value});
+    }
+
+    componentWillMount(){
+        this.loadUser();
+    }
+
+    componentDidMount() {
+        var invitation = this.props.match.params.invitation;
+        AuthAPI.get_signup(invitation).then((res) => {
+            console.log(res);
+            if (res.status === "success"){
+                let message = "You have been invited to join an academic server on LeaderboardLMS. You will need to sign up first.";
+                window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                this.setState({ invitationValidity: true})
+                return;
+            } else if (res.status === "fail"){
+                let message = "This invitation is not invalid. It may have been deleted or expired.";
+                window.Alert.error(message, {position: "top", effect: "stackslide", timeout: 4000 });
+                this.setState({ invitationValidity: false})
+                return;
+            }
+        });
     }
 
     render(){

@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Grid, Header, Divider, Table, Icon, Button} from "semantic-ui-react";
+import {Segment, Grid, Divider, Icon, Button} from "semantic-ui-react";
 
 import ResourceAPI from "../../services/resource-api";
 

@@ -27,14 +27,13 @@ module.exports = function(passportApp, userModel){
         function(req, email, password, done){
 
             Promise.all([Models.Invitations.getByLink(req.params.link), userModel.getUser(null, email, Models)]).then(([link, user]) => {
-                var generateHash = function(password){ return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); };
                 
                 if (!link){ return done("Invalid invitation link", false); }
 
                 if (req.user != null){
                     Models.Courses.getCourseIncludeUser(link.course_id, null, req.user.email, Models).then(function(course){
                         if (course && course.Users[0].email == req.user.email){
-                            return done("Sorry, but this email address is already in use by somebody.", null);
+                            return done("You are already registered here", null);
                         } else {
                             Models.Roles.insert(link.course_id, req.user.id, "student").then(function(role){
                                 if (!role){
@@ -60,6 +59,7 @@ module.exports = function(passportApp, userModel){
                                 }
                             });
                         } else {
+                            var generateHash = function(password){ return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); };
                             var userPassword = generateHash(password);
                             var data = { email: email, password: userPassword };
         
