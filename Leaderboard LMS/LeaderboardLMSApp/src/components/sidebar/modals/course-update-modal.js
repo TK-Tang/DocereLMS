@@ -102,11 +102,11 @@ export default class CourseUpdateModal extends React.Component {
                             <Form>
                                 <Form.Field width="16">
                                     <Label>Name:</Label>
-                                    <Input  onChange={this.updateName.bind(this)} value={this.state.name} />
+                                    <Input onChange={this.updateName.bind(this)} value={this.state.name} />
                                 </Form.Field>
                                 <Form.Field width="16">
                                     <Label>Coordinator:</Label>
-                                    <Input  onChange={this.updateCoordinator.bind(this)} value={this.state.coordinator} />
+                                    <Input onChange={this.updateCoordinator.bind(this)} value={this.state.coordinator} />
                                 </Form.Field>
                                 <Form.Field width="16">
                                     <Label>Description:</Label>
@@ -130,6 +130,6 @@ export default class CourseUpdateModal extends React.Component {
                     <Button onClick={this.props.closeModal}>Close</Button>
                 </Modal.Actions>
             </Modal>
-        )
+        );
     }
 }

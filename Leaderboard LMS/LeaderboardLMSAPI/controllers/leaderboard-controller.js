@@ -63,6 +63,8 @@ exports.updateLeaderboard = function(req, res){
     const blurb = req.body.blurb;
     const weighting = req.body.weight;
 
+    if (isNaN(weighting)){ Responses.error(res, "Weighting is not a number", null); return; }
+
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 
     Models.Leaderboards.updateLeaderboard(leaderboard_id, name, blurb, weighting).then(function(leaderboard){

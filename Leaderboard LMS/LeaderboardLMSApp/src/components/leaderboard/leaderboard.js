@@ -2,8 +2,10 @@ import React from "react";
 import {Segment, Grid, Header, Divider, Table, Image, Button, Icon} from "semantic-ui-react";
 
 import LeaderboardAPI from "../../services/leaderboard-api";
+
 import RankingSectionModal from "./modals/ranking-section-modal.js";
 import AnonymityModal from "./modals/anonymity-modal.js";
+import LeaderboardUpdateModal from "./modals/leaderboard-update-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -136,10 +138,7 @@ export default class Leaderboard extends React.Component {
                     <Icon name="area chart" />
                     Charts
                 </Button>
-                <Button >
-                    <Icon name="edit" />
-                    Edit Leaderboard
-                </Button>
+                <LeaderboardUpdateModal leaderboard={this.state.leaderboard} />
                 <Button >
                     <Icon name="plus square outline" />
                     Add Ranking
