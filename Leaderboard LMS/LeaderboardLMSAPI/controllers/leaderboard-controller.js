@@ -61,7 +61,7 @@ exports.updateLeaderboard = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
     const name = req.body.name;
     const blurb = req.body.blurb;
-    const weighting = req.body.weight;
+    const weighting = parseInt(req.body.weighting, 10);
 
     if (isNaN(weighting)){ Responses.error(res, "Weighting is not a number", null); return; }
 

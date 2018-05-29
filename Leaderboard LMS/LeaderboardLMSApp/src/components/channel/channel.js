@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Comment, Header, Divider, Grid, Form, TextArea, Sticky, Sidebar, Container, Menu, Icon} from "semantic-ui-react";
+import {Segment, Comment, Header, Divider, Grid, Form, TextArea} from "semantic-ui-react";
 
 import ChannelAPI from "../../services/channel-api";
 

@@ -1,7 +1,10 @@
 import React from "react";
-import {Segment, Grid, Divider, Icon, Button, Sidebar, Menu, Header} from "semantic-ui-react";
+import {Segment, Grid, Divider, Icon, Button} from "semantic-ui-react";
 
 import ResourceAPI from "../../services/resource-api";
+
+import DeleteDownloadModal from "./modals/delete-download-modal";
+import CreateUploadModal from "./modals/create-upload-modal";
 
 export default class Download extends React.Component {
     constructor(props){
@@ -36,11 +39,8 @@ export default class Download extends React.Component {
                                 <Icon name="download" size="large"/>
                                 Download
                             </Button>
-                            <Button color="red" style={{height: "40px"}}>
-                                <Icon name="trash outline" size="large"/>
-                                Delete
-                            </Button>
-
+                            
+                            <DeleteDownloadModal />
                         </Grid.Row>
                     );
 
@@ -92,7 +92,7 @@ export default class Download extends React.Component {
                     </Grid>
                 <Divider />
                 <Button color="green">Upload New File</Button>
-                <Button color="green">Create New Submission Point</Button>
+                <CreateUploadModal />
             </div>
         );
     }
