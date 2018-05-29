@@ -5,6 +5,7 @@ import ResourceAPI from "../../services/resource-api";
 
 import DeleteDownloadModal from "./modals/delete-download-modal";
 import CreateUploadModal from "./modals/create-upload-modal";
+import CreateDownloadModal from "./modals/create-download-modal";
 
 export default class Download extends React.Component {
     constructor(props){
@@ -91,7 +92,7 @@ export default class Download extends React.Component {
                         {this.state.downloadList}
                     </Grid>
                 <Divider />
-                <Button color="green">Upload New File</Button>
+                <CreateDownloadModal />
                 <CreateUploadModal />
             </div>
         );
