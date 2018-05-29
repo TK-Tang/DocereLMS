@@ -6,6 +6,7 @@ import LeaderboardAPI from "../../services/leaderboard-api";
 import RankingSectionModal from "./modals/ranking-section-modal.js";
 import AnonymityModal from "./modals/anonymity-modal.js";
 import LeaderboardUpdateModal from "./modals/leaderboard-update-modal.js";
+import DeleteLeaderboardModal from "./modals/delete-leaderboard-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -48,9 +49,10 @@ export default class Leaderboard extends React.Component {
 
                     let ranking = (
                         <Table.Row key={i}>
+                            <Table.Cell width={1}>#{i + 1}</Table.Cell>
                             <Table.Cell width={1}><Image src={r.User.profilePictureLink} size="mini"/></Table.Cell>
                             <Table.Cell width={3}>{r.User.username ? r.User.username : r.User.email}</Table.Cell>
-                            <Table.Cell width={8}>{r.note}</Table.Cell>
+                            <Table.Cell width={7}>{r.note}</Table.Cell>
                             <Table.Cell width={1}>{r.mark}</Table.Cell>
                             <Table.Cell width={1}>
                                 <RankingSectionModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
@@ -115,6 +117,7 @@ export default class Leaderboard extends React.Component {
                             <Table singleLine>
                                 <Table.Header>
                                     <Table.Row>
+                                        <Table.HeaderCell>Rank</Table.HeaderCell>
                                         <Table.HeaderCell></Table.HeaderCell>
                                         <Table.HeaderCell>Username</Table.HeaderCell>
                                         <Table.HeaderCell>Notes</Table.HeaderCell>
@@ -142,11 +145,7 @@ export default class Leaderboard extends React.Component {
                         <Icon name="plus square outline" />
                         Add Ranking
                     </Button>
-                    <Button basic color="red">
-                        <Icon name="trash"/>
-                        Delete Leaderboard
-                    </Button>
-
+                    <DeleteLeaderboardModal />
                     <Divider/>
                 </div>
             </div>

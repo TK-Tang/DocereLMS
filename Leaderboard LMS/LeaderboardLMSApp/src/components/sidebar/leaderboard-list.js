@@ -2,6 +2,7 @@ import React from "react";
 import {Menu, Icon} from "semantic-ui-react";
 
 import CourseAPI from "../../services/course-api";
+import InsertLeaderboardModal from "./modals/insert-leaderboard-modal";
 
 export default class LeaderboardList extends React.Component {
     constructor(props){
@@ -37,6 +38,11 @@ export default class LeaderboardList extends React.Component {
 
                     this.state.leaderboardList.push(leaderboard);
                 }
+
+                this.state.leaderboardList.push(
+                    <InsertLeaderboardModal key={i + 1} />
+                );
+
                 this.forceUpdate();
             } else {
                 let message = "Leaderboards could not be loaded at this time";

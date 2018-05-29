@@ -125,6 +125,6 @@ export default class CourseInsertModal extends React.Component {
                     <Button primary onClick={this.insertCourse.bind(this)}>Create</Button>
                 </Modal.Actions>
             </Modal>
-        )
+        );
     }
 }
