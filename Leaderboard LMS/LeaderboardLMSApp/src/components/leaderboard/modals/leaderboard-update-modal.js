@@ -53,6 +53,12 @@ export default class LeaderboardUpdateModal extends React.Component {
     }
 
     updateLeaderboard(){
+
+        if(!this.state.name){
+            this.setState({errorMessage: "Your leaderboard needs a name"});
+            return;
+        }
+
         let leaderboardInfo = {
             name: this.state.name,
             blurb: this.state.blurb,

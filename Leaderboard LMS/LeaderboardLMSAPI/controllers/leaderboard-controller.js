@@ -44,7 +44,7 @@ exports.insertLeaderboard = function(req, res){
     const course_id = req.params.course_id;
     const name = req.body.name;
     const blurb = req.body.blurb;
-    const weight = req.body.weighting;
+    const weighting = parseInt(req.body.weighting, 10);
 
     if (!name){ Responses.error(res, "Name of the leaderboard cannot be blank", null); }
 

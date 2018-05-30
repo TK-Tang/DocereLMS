@@ -1,7 +1,7 @@
 import React from "react";
 import {Modal, Button, Image, Label, Form, Input, Icon, Menu} from "semantic-ui-react";
 
-import CourseAPI from "../../../services/leaderboard-api";
+import LeaderboardAPI from "../../../services/leaderboard-api";
 
 export default class InsertLeaderboardModal extends React.Component {
     constructor(props){
@@ -21,6 +21,16 @@ export default class InsertLeaderboardModal extends React.Component {
 
     closeModal = () => this.setState({modal: false});
 
+    setErrorMessage(m){
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: m});
+    }
+
+    setSuccessMessage(m){
+        this.setState({successMessage: m});
+        this.setState({errorMessage: ""});
+    }
+
     updateName(e){
         this.setState({name: e.target.value});
     }
@@ -36,7 +46,24 @@ export default class InsertLeaderboardModal extends React.Component {
     insertLeaderboard(){
         if(!this.state.name){
             this.setState({errorMessage: "Your leaderboard needs a name"});
+            return;
         }
+
+        let leaderboardInfo = {
+            name: this.state.name,
+            blurb: this.state.blurb,
+            weighting: this.state.weighting
+        };
+
+        LeaderboardAPI.put_leaderboard(this.props.course_id, leaderboardInfo).then((res) => {
+            if (res.status === "success"){
+                this.setSuccessMessage(res.message);
+                this.closeModal();
+                this.props.getLeaderboardList();
+            } else {
+                this.setErrorMessage(res.message);
+            }
+        });
     }
 
     render(){

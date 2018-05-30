@@ -25,6 +25,10 @@ export default class LeaderboardList extends React.Component {
 
     componentWillReceiveProps(props) {
         if (props.course_id === 0){ return; };
+        this.getLeaderboardList(props)
+    }
+
+    getLeaderboardList(props){
         this.setState({ leaderboardList: []});
 
         CourseAPI.get_courseLeaderboards(props.course_id).then((res) => {
@@ -40,7 +44,7 @@ export default class LeaderboardList extends React.Component {
                 }
 
                 this.state.leaderboardList.push(
-                    <InsertLeaderboardModal key={i + 1} />
+                    <InsertLeaderboardModal key={i + 1} course_id={props.course_id} getLeaderboardList={this.getLeaderboardList.bind(this)}/>
                 );
 
                 this.forceUpdate();
