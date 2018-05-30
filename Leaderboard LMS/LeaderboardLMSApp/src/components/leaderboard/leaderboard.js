@@ -7,6 +7,7 @@ import RankingSectionModal from "./modals/ranking-section-modal.js";
 import AnonymityModal from "./modals/anonymity-modal.js";
 import LeaderboardUpdateModal from "./modals/leaderboard-update-modal.js";
 import DeleteLeaderboardModal from "./modals/delete-leaderboard-modal.js";
+import InsertRankingModal from "./modals/insert-ranking-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -76,7 +77,7 @@ export default class Leaderboard extends React.Component {
         });
     }
 
-    render() {
+    render(){
         if (!this.state.leaderboard){ return(""); }
 
         return(
@@ -141,10 +142,7 @@ export default class Leaderboard extends React.Component {
                         Charts
                     </Button>
                     <LeaderboardUpdateModal leaderboard={this.state.leaderboard} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)}/>
-                    <Button >
-                        <Icon name="plus square outline" />
-                        Add Ranking
-                    </Button>
+                    <InsertRankingModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
                     <DeleteLeaderboardModal />
                     <Divider/>
                 </div>

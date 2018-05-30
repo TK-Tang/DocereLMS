@@ -10,7 +10,7 @@ let headers = {
 
 var ranking_api = {
     get_ranking(course_id, ranking_id){
-        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_d;
+        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id;
 
         var req = {
             method: "GET",
@@ -25,6 +25,7 @@ var ranking_api = {
         var url = api_domain + "/course/" + course_id + "/leaderboard/" + leaderboard_id + "/ranking";
 
         let body = {
+            "email": rankingInfo.email,
             "note": rankingInfo.note,
             "mark": rankingInfo.mark
         };

@@ -50,10 +50,24 @@ module.exports = function(sequelize, Sequelize) {
         return await this.create(user);
     }
 
-    Users.getUser = async function(user_id, email, models){
+    Users.getUser = async function(user_id, email){
         return await this.findOne({
             where: Sequelize.or({ user_id: user_id }, { email: email }),
             attributes: ["id", "email", "username", "profilePictureLink", "status", "activation", "created_at", "updated_at"]
+        });
+    }
+
+    Users.getUserInCourse = async function(email, course_id, models){
+        return await this.findOne({
+            where: {
+                email: email,
+            },
+            include: [
+                { 
+                    model: models.Roles,
+                    where: { course_id: course_id }
+                }
+            ]
         });
     }
 

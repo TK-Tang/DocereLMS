@@ -30,15 +30,22 @@ exports.getRanking = function(req, res){
     });
 }
 
-exports.insertRanking = function(req, res){
+exports.insertRanking = async function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
-    const user_id = req.body.user_id;
+    const course_id = parseInt(req.params.course_id, 10);
+    const email = req.body.email;
     const note = req.body.note;
-    const mark = req.body.mark;
+    const mark = parseInt(req.body.mark, 10);
 
-    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); }
+    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard ID is not a number", null); return; }
+    if (!email){ Responses.error(res, "Email must not be blank", null); return; }
+    if (!mark){ Responses.error(res, "Mark must have a value", null); return; }
 
-    Models.Rankings.insertRanking(leaderboard_id, user_id, note, mark, Models).then(function(ranking){
+    var user = await Models.Users.getUserInCourse(email, course_id, Models);
+    if (!user){ Responses.fail(res, "This user's email does not exist", null); return; }
+    if (!user.Role){ Responses.fail(res, "This user is not registered to your course", null); }
+
+    Models.Rankings.insertRanking(leaderboard_id, user.id, note, mark, Models).then(function(ranking){
         if(!ranking){
             Responses.fail(res, "Ranking could not be inserted to this leaderboard");
         } else {

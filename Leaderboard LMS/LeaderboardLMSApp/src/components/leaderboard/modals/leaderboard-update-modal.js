@@ -45,15 +45,7 @@ export default class LeaderboardUpdateModal extends React.Component {
         this.setState({weighting: e.target.value});
     }
 
-    componentWillMount(){
-        this.setState({leaderboard_id: this.props.leaderboard.id});
-        this.setState({name: this.props.leaderboard.name});
-        this.setState({blurb: this.props.leaderboard.blurb});
-        this.setState({weighting: this.props.leaderboard.weighting});
-    }
-
     updateLeaderboard(){
-
         if(!this.state.name){
             this.setState({errorMessage: "Your leaderboard needs a name"});
             return;
@@ -68,11 +60,18 @@ export default class LeaderboardUpdateModal extends React.Component {
         LeaderboardAPI.post_leaderboard(this.props.course_id, this.state.leaderboard_id, leaderboardInfo).then((res) => {
             if (res.status === "success"){
                 this.setSuccessMessage(res.message);
-                this.props.retrieveLeaderboard(this.props.course_id, this.state.leaderboard_id);
+                setTimeout(this.props.retrieveLeaderboard(this.props.course_id, this.state.leaderboard_id), 2000);
             } else {
                 this.setErrorMessage(res.message);
             }
         });
+    }
+
+    componentWillMount(){
+        this.setState({leaderboard_id: this.props.leaderboard.id});
+        this.setState({name: this.props.leaderboard.name});
+        this.setState({blurb: this.props.leaderboard.blurb});
+        this.setState({weighting: this.props.leaderboard.weighting});
     }
 
     render(){
@@ -90,21 +89,16 @@ export default class LeaderboardUpdateModal extends React.Component {
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        <Segment>
-                            <Form>
-                                <Form.Group>
-                                    <Form.Input width={14} label="Name:" onChange={this.updateName.bind(this)} value={this.state.name} />
-                                    <Form.Input width={2} label="Weighting:" onChange={this.updateWeighting.bind(this)} value={this.state.weighting} />
-                                </Form.Group>
-                                <Form.Field>
-                                    <Label>Blurb:</Label>
-                                    <TextArea onChange={this.updateBlurb.bind(this)} value={this.state.blurb} />
-                                </Form.Field>
-                                <Form.Field width="2">
-                                   
-                                </Form.Field>
-                            </Form>
-                        </Segment>
+                        <Form>
+                            <Form.Group>
+                                <Form.Input width={14} label="Name:" onChange={this.updateName.bind(this)} value={this.state.name} />
+                                <Form.Input width={2} label="Weighting:" onChange={this.updateWeighting.bind(this)} value={this.state.weighting} />
+                            </Form.Group>
+                            <Form.Field>
+                                <Label>Blurb:</Label>
+                                <TextArea onChange={this.updateBlurb.bind(this)} value={this.state.blurb} />
+                            </Form.Field>
+                        </Form>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>

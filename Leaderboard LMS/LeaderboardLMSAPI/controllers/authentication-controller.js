@@ -3,7 +3,7 @@ const Models = require("../models");
 
 exports.getCurrentUser = function(req, res){
     if (req.user.email){
-        Models.Users.getUser(req.user.id, req.user.email, Models).then(function(user){
+        Models.Users.getUser(req.user.id, req.user.email).then(function(user){
             if (!user){
                 Responses.fail(res, "No user found", null);
             } else {
