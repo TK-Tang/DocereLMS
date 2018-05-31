@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Image, Label, Form, Input, Icon, Menu} from "semantic-ui-react";
+import {Modal, Button, Label, Form, Menu} from "semantic-ui-react";
 
 import LeaderboardAPI from "../../../services/leaderboard-api";
 

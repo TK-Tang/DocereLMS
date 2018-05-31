@@ -16,16 +16,24 @@ export default class RankingSectionModal extends React.Component {
     closeModal = () => this.setState({modal: false});
 
     componentWillMount(){
-        for (var i = 0; i < this.props.RankingSections.length ; i++){
-            for (var j = 0; j < this.props.Ranking.RankingSectionEntries.length; j++){
-                if (this.props.RankingSections[i].id === this.props.Ranking.RankingSectionEntries[j].ranking_section_id){
+        this.getRankingSectionEntries(this.props);
+    }
+
+    componentWillReceiveProps(props){
+        this.getRankingSectionEntries(props);
+    }
+
+    getRankingSectionEntries(props){
+        for (var i = 0; i < props.RankingSections.length ; i++){
+            for (var j = 0; j < props.Ranking.RankingSectionEntries.length; j++){
+                if (props.RankingSections[i].id === props.Ranking.RankingSectionEntries[j].ranking_section_id){
                     let rankingSection = (
                         <Table.Row key={i}>
                             <Table.Cell width={8}>
-                                {this.props.RankingSections[i].name}
+                                {props.RankingSections[i].name}
                             </Table.Cell>
                             <Table.Cell width={8}>
-                                {this.props.Ranking.RankingSectionEntries[j].mark}
+                                {props.Ranking.RankingSectionEntries[j].mark}
                             </Table.Cell>
                         </Table.Row>
                     );
@@ -61,7 +69,7 @@ export default class RankingSectionModal extends React.Component {
                             {this.state.rankingSectionList.length !== 0 ? this.state.rankingSectionList : 
                                 <Table.Row>
                                     <Table.Cell width={16}>
-                                        This student has choosen to remain to keep their marks hidden.
+                                        This student has choosen to remain to keep their marks hidden or there are no ranking sections added
                                     </Table.Cell>
                                 </Table.Row>
                             }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Sidebar, Segment, Menu, Input, Divider} from "semantic-ui-react";
+import {Sidebar, Menu, Input, Divider} from "semantic-ui-react";
 import {Route, Switch} from "react-router-dom";
 
 import AuthAPI from "../services/authentication-api.js";

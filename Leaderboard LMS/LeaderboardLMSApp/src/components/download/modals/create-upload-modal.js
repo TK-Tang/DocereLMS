@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Label, Form, Segment, Icon, Input, TextArea} from "semantic-ui-react";
+import {Modal, Button, Form, Icon} from "semantic-ui-react";
 
 
 export default class CreateUploadModal extends React.Component {
