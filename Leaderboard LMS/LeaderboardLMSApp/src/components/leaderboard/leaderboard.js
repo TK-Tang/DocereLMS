@@ -8,6 +8,7 @@ import AnonymityModal from "./modals/anonymity-modal.js";
 import LeaderboardUpdateModal from "./modals/leaderboard-update-modal.js";
 import DeleteLeaderboardModal from "./modals/delete-leaderboard-modal.js";
 import InsertRankingModal from "./modals/insert-ranking-modal.js";
+import UpdateRankingModal from "./modals/update-ranking-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -62,7 +63,7 @@ export default class Leaderboard extends React.Component {
                                 <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={course_id} ranking_id={r.id} />
                             </Table.Cell>
                             <Table.Cell width={1}>
-                                <Icon name="cogs" className="icon-blue teal-hover cursor-pointer" size="large"/>
+                               <UpdateRankingModal course_id={course_id} ranking_id={r.id} />
                             </Table.Cell>
                         </Table.Row>
                     );
