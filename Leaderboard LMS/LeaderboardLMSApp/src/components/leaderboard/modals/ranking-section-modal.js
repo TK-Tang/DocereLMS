@@ -47,6 +47,28 @@ export default class RankingSectionModal extends React.Component {
     }
 
     render() {
+
+        if (this.state.rankingSectionList.length === 0 ) {
+            return(
+                <Modal
+                    onClose={this.closeModal}
+                    size="small"
+                    open={this.state.modal}
+                    trigger={
+                        <Icon name="tasks" className="cursor-pointer teal-hover icon-blue" size="large" onClick={this.openModal}/>
+                    }
+                >
+                    <Modal.Header>{this.props.LeaderboardName}</Modal.Header>
+                    <Modal.Content>
+                        <div>This student has choosen to remain to keep their marks hidden or there's no ranking sections added</div>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button onClick={this.closeModal}>Close</Button>
+                    </Modal.Actions>
+                </Modal>
+            );
+        }
+
         return (
             <Modal
                 onClose={this.closeModal}
@@ -66,13 +88,7 @@ export default class RankingSectionModal extends React.Component {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {this.state.rankingSectionList.length !== 0 ? this.state.rankingSectionList : 
-                                <Table.Row>
-                                    <Table.Cell width={16}>
-                                        This student has choosen to remain to keep their marks hidden or there are no ranking sections added
-                                    </Table.Cell>
-                                </Table.Row>
-                            }
+                            {this.state.rankingSectionList}
                         </Table.Body>
                     </Table>
                 </Modal.Content>
@@ -80,6 +96,6 @@ export default class RankingSectionModal extends React.Component {
                     <Button onClick={this.closeModal}>Close</Button>
                 </Modal.Actions>
             </Modal>
-        )
+        );
     }
 }
