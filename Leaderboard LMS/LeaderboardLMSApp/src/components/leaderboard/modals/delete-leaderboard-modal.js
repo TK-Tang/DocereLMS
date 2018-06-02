@@ -7,7 +7,7 @@ export default class DeleteLeaderboardModal extends React.Component {
             <Modal
                 basic
                 size="small"
-                trigger={<Button basic color="red"><Icon name="trash"/>Delete Leaderboard</Button>}
+                trigger={<Button floated="right" basic color="red"><Icon name="trash"/>Delete Leaderboard</Button>}
             >
              <Header icon="trash outline" content="Delete File"/>
                 <Modal.Content>

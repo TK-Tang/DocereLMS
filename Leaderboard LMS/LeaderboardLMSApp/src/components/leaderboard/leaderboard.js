@@ -3,12 +3,13 @@ import {Segment, Grid, Header, Divider, Table, Image, Button, Icon} from "semant
 
 import LeaderboardAPI from "../../services/leaderboard-api";
 
-import RankingSectionModal from "./modals/ranking-section-modal.js";
+import RankingSectionEntryModal from "./modals/ranking-section-entry-modal.js";
 import AnonymityModal from "./modals/anonymity-modal.js";
 import LeaderboardUpdateModal from "./modals/leaderboard-update-modal.js";
 import DeleteLeaderboardModal from "./modals/delete-leaderboard-modal.js";
 import InsertRankingModal from "./modals/insert-ranking-modal.js";
 import UpdateRankingModal from "./modals/update-ranking-modal.js";
+import RankingSectionModal from "./modals/ranking-section-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -17,6 +18,7 @@ export default class Leaderboard extends React.Component {
         this.state = {
             course_id: 0,
             leaderboard: null,
+            rankingSections: [],
             rankings: [],
             averageMark: 0,
             totalRankings: 0
@@ -44,6 +46,7 @@ export default class Leaderboard extends React.Component {
 
                 var totalMarks = 0;
                 this.setState({leaderboard: res.payload});
+                this.setState({rankingSections: res.payload.RankingSections});
                 
                 for (var i = 0; i < res.payload.Rankings.length; i++){
                     let r = res.payload.Rankings[i];
@@ -57,7 +60,7 @@ export default class Leaderboard extends React.Component {
                             <Table.Cell width={7}>{r.note}</Table.Cell>
                             <Table.Cell width={1}>{r.mark}</Table.Cell>
                             <Table.Cell width={1}>
-                                <RankingSectionModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
+                                <RankingSectionEntryModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
                             </Table.Cell>
                             <Table.Cell width={1}>
                                 <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={course_id} ranking_id={r.id} />
@@ -138,13 +141,18 @@ export default class Leaderboard extends React.Component {
                     </Grid>
                     <Divider />
 
-                    <Button >
-                        <Icon name="area chart" />
-                        Charts
-                    </Button>
-                    <LeaderboardUpdateModal leaderboard={this.state.leaderboard} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)}/>
-                    <InsertRankingModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
-                    <DeleteLeaderboardModal />
+                    <Grid>
+                        <Grid.Column width={15}>
+                            <InsertRankingModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
+                            <RankingSectionModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} rankingSections={this.state.rankingSections} />
+
+                            <DeleteLeaderboardModal />
+                            <LeaderboardUpdateModal floated="right" leaderboard={this.state.leaderboard} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
+                            <Button floated="right" ><Icon name="area chart" />Charts</Button>
+                        </Grid.Column>
+                    </Grid>
+
+                    
                     <Divider/>
                 </div>
             </div>

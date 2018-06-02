@@ -32,7 +32,6 @@ export default class LeaderboardUpdateModal extends React.Component {
         this.setState({errorMessage: ""});
     }
 
-
     updateName(e){
         this.setState({name: e.target.value});
     }
@@ -82,7 +81,7 @@ export default class LeaderboardUpdateModal extends React.Component {
                 size="small"
                 dimmer={true}
                 open={this.state.modal}
-                trigger={<Button onClick={this.openModal}><Icon name="edit"/> Edit Leaderboard</Button>}
+                trigger={<Button floated="right" onClick={this.openModal}><Icon name="edit"/> Edit Leaderboard</Button>}
             >
                 <Modal.Header>
                     Update Leaderboard
