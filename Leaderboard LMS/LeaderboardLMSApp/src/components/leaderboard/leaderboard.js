@@ -63,7 +63,7 @@ export default class Leaderboard extends React.Component {
                                 <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={course_id} ranking_id={r.id} />
                             </Table.Cell>
                             <Table.Cell width={1}>
-                               <UpdateRankingModal course_id={course_id} ranking_id={r.id} />
+                               <UpdateRankingModal leaderboard_id={this.state.leaderboard.id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} course_id={course_id} ranking={r}/>
                             </Table.Cell>
                         </Table.Row>
                     );

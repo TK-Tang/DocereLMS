@@ -43,7 +43,7 @@ exports.insertRanking = async function(req, res){
 
     var user = await Models.Users.getUserInCourse(email, course_id, Models);
     if (!user){ Responses.fail(res, "This user's email does not exist", null); return; }
-    if (!user.Role){ Responses.fail(res, "This user is not registered to your course", null); }
+    if (!user.Roles){ Responses.fail(res, "This user is not registered to your course", null); }
 
     Models.Rankings.insertRanking(leaderboard_id, user.id, note, mark, Models).then(function(ranking){
         if(!ranking){
@@ -59,7 +59,8 @@ exports.updateRanking = function(req, res){
     const note = req.body.note;
     const mark = req.body.mark;
 
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); return; }
+    if (isNaN(parseInt(mark, 10))){ Responses.error(res, "Mark is not a number", null); return; }
 
     Models.Rankings.updateRanking(ranking_id, note, mark).then(function(ranking){
         if(!ranking){

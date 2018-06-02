@@ -2,6 +2,7 @@ import React from "react";
 import {Menu, Icon} from "semantic-ui-react";
 
 import CourseAPI from "../../services/course-api";
+import InsertChannelModal from "./modals/insert-channel-modal"
 
 export default class ChannelList extends React.Component {
     constructor(props){
@@ -37,6 +38,10 @@ export default class ChannelList extends React.Component {
 
                     this.state.channelList.push(channel);
                 }
+
+                this.state.channelList.push(
+                    <InsertChannelModal key={i + 1} />
+                );
 
                 this.forceUpdate();
             } else {

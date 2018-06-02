@@ -1,5 +1,7 @@
 import React from "react";
-import {Form, Header, Divider, Button, Icon, Modal, Label, TextArea} from "semantic-ui-react";
+import {Form, Button, Icon, Modal, Label, TextArea} from "semantic-ui-react";
+
+import RankingAPI from "../../../services/ranking-api";
 
 export default class UpdateRankingModal extends React.Component {
     constructor(props){
@@ -16,6 +18,8 @@ export default class UpdateRankingModal extends React.Component {
 
     componentWillMount(){
         if(!this.props.course_id){ return; }
+        this.setState({note: this.props.ranking.note});
+        this.setState({mark: this.props.ranking.mark});
     }
 
     openModal = () => this.setState({modal: true});
@@ -50,6 +54,15 @@ export default class UpdateRankingModal extends React.Component {
             note: this.state.note,
             mark: this.state.mark
         }
+
+        RankingAPI.post_ranking(this.props.course_id, this.props.ranking.id, rankingInfo).then((res) => {
+            if(res.status === "success"){
+                this.setSuccessMessage(res.message);
+                setTimeout(this.props.retrieveLeaderboard(this.props.course_id, this.props.leaderboard_id), 2000);
+            } else {
+                this.setErrorMessage(res.message);
+            }
+        });
     }
 
     render(){
@@ -63,7 +76,7 @@ export default class UpdateRankingModal extends React.Component {
                 trigger={<Icon name="cogs" onClick={this.openModal} className="icon-blue teal-hover cursor-pointer" size="large"/>}
             >
                 <Modal.Header>
-                    Add Ranking
+                    Update Ranking
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
