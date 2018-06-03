@@ -40,7 +40,7 @@ var ranking_section_entry_api = {
     },
 
     post_rankingSectionEntry(course_id, ranking_id, ranking_section_entry_id, rankingSectionEntryInfo){
-        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id + "/rankingsectionentry" + ranking_section_entry_id;
+        var url = api_domain + "/course/" + course_id + "/ranking/" + ranking_id + "/rankingsectionentry/" + ranking_section_entry_id;
 
         let body = {
             "mark": rankingSectionEntryInfo.mark

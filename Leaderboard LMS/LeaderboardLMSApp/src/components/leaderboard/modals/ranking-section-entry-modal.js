@@ -60,7 +60,11 @@ export default class RankingSectionEntryModal extends React.Component {
                         <div>This student has choosen to remain to keep their marks hidden or there's no ranking sections added</div>
                     </Modal.Content>
                     <Modal.Actions>
-                        <UpsertRankingSectionEntryModal rankingSections={this.props.rankingSections} />
+                        <UpsertRankingSectionEntryModal 
+                            rankingSections={this.props.rankingSections} 
+                            course_id={this.props.course_id} 
+                            ranking_id={this.props.ranking.id}
+                        />
                         <Button onClick={this.closeModal}>Close</Button>
                     </Modal.Actions>
                 </Modal>
@@ -91,7 +95,12 @@ export default class RankingSectionEntryModal extends React.Component {
                     </Table>
                 </Modal.Content>
                 <Modal.Actions>
-                    <UpsertRankingSectionEntryModal rankingSections={this.props.rankingSections} rankingSectionEntries={this.props.ranking.RankingSectionEntries} />
+                    <UpsertRankingSectionEntryModal 
+                        rankingSections={this.props.rankingSections} 
+                        course_id={this.props.course_id} 
+                        ranking_id={this.props.ranking.id} 
+                        rankingSectionEntries={this.props.ranking.RankingSectionEntries}
+                    />
                     <Button onClick={this.closeModal}>Close</Button>
                 </Modal.Actions>
             </Modal>

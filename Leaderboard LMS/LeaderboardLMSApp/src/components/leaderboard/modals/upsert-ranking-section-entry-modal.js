@@ -53,7 +53,7 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
     generateRankingSectionEntryForms(props){
         this.state.rankingSectionEntryFormList = [];
         this.state.rankingSectionEntryList = [];
-        if (!props.rankingSections ){ 
+        if (!props.rankingSections){ 
             this.state.rankingSectionEntryFormList.push(<div>No assessment sections</div>);
             this.forceUpdate();
             return;
@@ -106,17 +106,44 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
     }
 
     insertRankingSectionEntry(){
+        for(var i = 0; i < this.state.rankingSectionEntryList.length ; i++){
+            var r = this.state.rankingSectionEntryList[i];
+            if (r.ranking_section_entry_id === 0){
+                var rankingSectionEntryInfo = {
+                    mark: r.mark,
+                    ranking_section_id: r.ranking_section_id
+                };
 
-        
-        console.log(this.state.rankingSectionEntryFormList);
-        console.log(this.state.rankingSectionEntryList);
+                RankingSectionEntryAPI.put_rankingSectionEntry(this.props.course_id, r.ranking_id, rankingSectionEntryInfo).then((res) => {
+                    if (res.status === "success"){
+                        this.setSuccessMessage(res.message);
+                        this.closeModal;
+                    } else {
+                        this.setErrorMessage(res.message);
+                    }
+                });
+            } else {
+                var rankingSectionEntryInfo = {
+                    mark: r.mark
+                };
+
+                RankingSectionEntryAPI.post_rankingSectionEntry(this.props.course_id, this.props.ranking_id, r.ranking_section_entry_id, rankingSectionEntryInfo).then((res) => {
+                    if (res.status === "success"){
+                        this.setSuccessMessage(res.message);
+                        this.closeModal;
+                    } else {
+                        this.setErrorMessage(res.message);
+                    }
+                });
+            }
+        }
     }
 
     render(){
         return(
             <Modal
                 onClose={this.closeModal}
-                size="mini"
+                size="tiny"
                 dimmer={false}
                 open={this.state.modal}
                 trigger={<Button onClick={this.openModal} primary>Update</Button>}
