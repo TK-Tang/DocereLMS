@@ -33,7 +33,7 @@ export default class RankingSectionEntryModal extends React.Component {
         this.setState({name: e.target.value});
     }
 
-    insertRankingSectionEntry(){
+    insertRankingSection(){
         let rankingSectionInfo = {
             name: this.state.name
         }
@@ -47,7 +47,7 @@ export default class RankingSectionEntryModal extends React.Component {
     }
 
     render(){
-        return (
+        return(
             <Modal
                 onClose={this.closeModal}
                 size="tiny"
@@ -70,7 +70,7 @@ export default class RankingSectionEntryModal extends React.Component {
                 <Modal.Actions>
                     {this.state.errorMessage ? <Label basic color="red" pointing="right">{this.state.errorMessage}</Label> : "" }
                     {this.state.successMessage ? <Label basic color="green" pointing="right">{this.state.successMessage}</Label> : ""}
-                    <Button primary onClick={this.insertRankingSectionEntry.bind(this)}>Save</Button>
+                    <Button primary onClick={this.insertRankingSection.bind(this)}>Save</Button>
                 </Modal.Actions>
             </Modal>
         );

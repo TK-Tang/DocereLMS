@@ -3,7 +3,7 @@ const Models = require("../models");
 
 exports.getAllRankingSections = function(req, res){
     const leaderboard_id = parseInt(req.params.leaderboard_id, 10);
-    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard Id is not a number", null); }
+    if (isNaN(leaderboard_id)){ Responses.error(res, "Leaderboard Id is not a number", null); return; }
 
     Models.RankingSections.getAllRankingSections(leaderboard_id).then(function(rankingSections){
         if (!rankingSections){
@@ -18,7 +18,7 @@ exports.insertRankingSection = function(req, res){
     const name = req.body.name;
     const leaderboard_id= parseInt(req.params.leaderboard_id, 10);
 
-    if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
+    if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); return; }
 
     Models.RankingSections.insertRankingSection(leaderboard_id, name).then(function(rankingSection){
         if(!rankingSection){
@@ -33,7 +33,7 @@ exports.updateRankingSection = function(req, res){
     const name = req.body.name;
     const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
 
-    if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); }
+    if (!name){ Responses.error(res, "Name of the assigment/rank section cannot be blank", null); return; }
 
     Models.RankingSections.updateRankingSection(ranking_section_id, name).then(function(rankingSection){
         if(!rankingSection){
@@ -46,7 +46,7 @@ exports.updateRankingSection = function(req, res){
 
 exports.deleteRankingSection = function(req, res){
     const ranking_section_id = parseInt(req.params.ranking_section_id, 10);
-    if (isNaN(ranking_section_id)){ Responses.error(res, "Ranking section ID is not a number", null); }
+    if (isNaN(ranking_section_id)){ Responses.error(res, "Ranking section ID is not a number", null); return; }
 
     Models.RankingSections.deleteRankingSection(ranking_section_id, Models).then(function(numberOfRankingSectionDeleted){
         if(numberOfRankingSectionDeleted != 1){

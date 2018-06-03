@@ -44,7 +44,7 @@ module.exports = function(sequelize, Sequelize){
                         },
                         {
                             model: models.RankingSectionEntries,
-                            attributes: ["mark", "ranking_section_id", "ranking_id"]
+                            attributes: [ "id", "mark", "ranking_section_id", "ranking_id"]
                         }
                     ]
                 },

@@ -1,6 +1,8 @@
 import React from "react";
 import {Modal, Button, Icon, Table} from "semantic-ui-react";
 
+import UpsertRankingSectionEntryModal from "./upsert-ranking-section-entry-modal";
+
 export default class RankingSectionEntryModal extends React.Component {
     constructor(props){
         super(props);
@@ -19,21 +21,17 @@ export default class RankingSectionEntryModal extends React.Component {
         this.getRankingSectionEntries(this.props);
     }
 
-    componentWillReceiveProps(props){
-        this.getRankingSectionEntries(props);
-    }
-
     getRankingSectionEntries(props){
-        for (var i = 0; i < props.RankingSections.length ; i++){
-            for (var j = 0; j < props.Ranking.RankingSectionEntries.length; j++){
-                if (props.RankingSections[i].id === props.Ranking.RankingSectionEntries[j].ranking_section_id){
+        for (var i = 0; i < props.rankingSections.length ; i++){
+            for (var j = 0; j < props.ranking.RankingSectionEntries.length; j++){
+                if (props.rankingSections[i].id === props.ranking.RankingSectionEntries[j].ranking_section_id){
                     let rankingSectionEntry = (
                         <Table.Row key={i}>
                             <Table.Cell width={8}>
-                                {props.RankingSections[i].name}
+                                {props.rankingSections[i].name}
                             </Table.Cell>
-                            <Table.Cell width={8}>
-                                {props.Ranking.RankingSectionEntries[j].mark}
+                            <Table.Cell width={8}>                                
+                                {props.ranking.RankingSectionEntries[j].mark}
                             </Table.Cell>
                         </Table.Row>
                     );
@@ -57,11 +55,12 @@ export default class RankingSectionEntryModal extends React.Component {
                         <Icon name="tasks" className="cursor-pointer teal-hover icon-blue" size="large" onClick={this.openModal}/>
                     }
                 >
-                    <Modal.Header>{this.props.LeaderboardName}</Modal.Header>
+                    <Modal.Header>{this.props.leaderboardName}</Modal.Header>
                     <Modal.Content>
                         <div>This student has choosen to remain to keep their marks hidden or there's no ranking sections added</div>
                     </Modal.Content>
                     <Modal.Actions>
+                        <UpsertRankingSectionEntryModal rankingSections={this.props.rankingSections} />
                         <Button onClick={this.closeModal}>Close</Button>
                     </Modal.Actions>
                 </Modal>
@@ -77,7 +76,7 @@ export default class RankingSectionEntryModal extends React.Component {
                     <Icon name="tasks" className="cursor-pointer teal-hover icon-blue" size="large" onClick={this.openModal}/>
                 }
             >
-                <Modal.Header>{this.props.LeaderboardName}</Modal.Header>
+                <Modal.Header>{this.props.leaderboardName}</Modal.Header>
                 <Modal.Content>
                     <Table singleLine>
                         <Table.Header>
@@ -92,6 +91,7 @@ export default class RankingSectionEntryModal extends React.Component {
                     </Table>
                 </Modal.Content>
                 <Modal.Actions>
+                    <UpsertRankingSectionEntryModal rankingSections={this.props.rankingSections} rankingSectionEntries={this.props.ranking.RankingSectionEntries} />
                     <Button onClick={this.closeModal}>Close</Button>
                 </Modal.Actions>
             </Modal>

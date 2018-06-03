@@ -60,7 +60,7 @@ export default class Leaderboard extends React.Component {
                             <Table.Cell width={7}>{r.note}</Table.Cell>
                             <Table.Cell width={1}>{r.mark}</Table.Cell>
                             <Table.Cell width={1}>
-                                <RankingSectionEntryModal Ranking={r} RankingSections={res.payload.RankingSections} LeaderboardName={res.payload.name}/>
+                                <RankingSectionEntryModal ranking={r} rankingSections={res.payload.RankingSections} leaderboardName={res.payload.name}/>
                             </Table.Cell>
                             <Table.Cell width={1}>
                                 <AnonymityModal Anonymity={r.StudentAnonymitySetting} course_id={course_id} ranking_id={r.id} />
