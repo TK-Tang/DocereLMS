@@ -81,7 +81,7 @@ export default class LeaderboardUpdateModal extends React.Component {
                 size="small"
                 dimmer={true}
                 open={this.state.modal}
-                trigger={<Button floated="right" onClick={this.openModal}><Icon name="edit"/> Edit Leaderboard</Button>}
+                trigger={<Button floated="left" onClick={this.openModal}><Icon name="edit"/> Edit Leaderboard</Button>}
             >
                 <Modal.Header>
                     Update Leaderboard

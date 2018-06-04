@@ -82,7 +82,7 @@ export default class InsertRankingModal extends React.Component {
                 size="small"
                 dimmer={true}
                 open={this.state.modal}
-                trigger={<Button onClick={this.openModal}><Icon name="plus square outline" />Add Ranking</Button>}
+                trigger={<Button onClick={this.openModal} floated="right"><Icon name="plus square outline" />Add Ranking</Button>}
             >
                 <Modal.Header>
                     Add Ranking

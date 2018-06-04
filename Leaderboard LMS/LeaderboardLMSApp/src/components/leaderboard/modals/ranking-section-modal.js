@@ -87,7 +87,7 @@ export default class RankingSectionModal extends React.Component {
                 size="tiny"
                 dimmer={true}
                 open={this.state.modal}
-                trigger={<Button onClick={this.openModal}><Icon name="tasks"/>Assessment Sections</Button>}
+                trigger={<Button onClick={this.openModal} floated="right"><Icon name="tasks"/>Assessment Sections</Button>}
             >
                 <Modal.Header>
                     Assement Sections

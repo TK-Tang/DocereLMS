@@ -10,6 +10,7 @@ import DeleteLeaderboardModal from "./modals/delete-leaderboard-modal.js";
 import InsertRankingModal from "./modals/insert-ranking-modal.js";
 import UpdateRankingModal from "./modals/update-ranking-modal.js";
 import RankingSectionModal from "./modals/ranking-section-modal.js";
+import ChartModal from "./modals/charts-modal.js";
 
 export default class Leaderboard extends React.Component {
     constructor(props){
@@ -143,16 +144,15 @@ export default class Leaderboard extends React.Component {
 
                     <Grid>
                         <Grid.Column width={15}>
-                            <InsertRankingModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
-                            <RankingSectionModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} rankingSections={this.state.rankingSections} />
+                            <ChartModal leaderboard={this.state.leaderboard} />
+                            <LeaderboardUpdateModal leaderboard={this.state.leaderboard} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
+
 
                             <DeleteLeaderboardModal />
-                            <LeaderboardUpdateModal floated="right" leaderboard={this.state.leaderboard} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
-                            <Button floated="right" ><Icon name="area chart" />Charts</Button>
+                            <InsertRankingModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} />
+                            <RankingSectionModal leaderboard_id={this.state.leaderboard.id} course_id={this.props.course_id} retrieveLeaderboard={this.retrieveLeaderboard.bind(this)} rankingSections={this.state.rankingSections} />
                         </Grid.Column>
                     </Grid>
-
-                    
                     <Divider/>
                 </div>
             </div>
