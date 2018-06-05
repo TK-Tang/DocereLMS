@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Icon, Table, Form, Label} from "semantic-ui-react";
+import {Modal, Button, Icon, Table, Label} from "semantic-ui-react";
 
 import InsertRankingSectionModal from "./insert-ranking-section-modal.js";
 

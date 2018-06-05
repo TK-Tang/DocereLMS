@@ -1,5 +1,5 @@
 import React from "react";
-import {Segment, Grid, Header, Divider, Table, Image, Button, Icon} from "semantic-ui-react";
+import {Segment, Grid, Header, Divider, Table, Image} from "semantic-ui-react";
 
 import LeaderboardAPI from "../../services/leaderboard-api";
 

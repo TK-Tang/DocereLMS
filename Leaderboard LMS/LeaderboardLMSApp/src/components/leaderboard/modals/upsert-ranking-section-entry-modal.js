@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Icon, Table, Form, Label} from "semantic-ui-react";
+import {Modal, Button, Form, Label} from "semantic-ui-react";
 
 import RankingSectionEntryAPI from "../../../services/ranking-section-entry-api";
 
@@ -117,7 +117,7 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
                 RankingSectionEntryAPI.put_rankingSectionEntry(this.props.course_id, r.ranking_id, rankingSectionEntryInfo).then((res) => {
                     if (res.status === "success"){
                         this.setSuccessMessage(res.message);
-                        this.closeModal;
+                        this.closeModal();
                     } else {
                         this.setErrorMessage(res.message);
                     }
@@ -130,7 +130,7 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
                 RankingSectionEntryAPI.post_rankingSectionEntry(this.props.course_id, this.props.ranking_id, r.ranking_section_entry_id, rankingSectionEntryInfo).then((res) => {
                     if (res.status === "success"){
                         this.setSuccessMessage(res.message);
-                        this.closeModal;
+                        this.closeModal();
                     } else {
                         this.setErrorMessage(res.message);
                     }

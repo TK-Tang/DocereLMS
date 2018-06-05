@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Icon, Table, Form, Label} from "semantic-ui-react";
+import {Modal, Button, Icon, Form, Label} from "semantic-ui-react";
 
 import RankingSectionAPI from "../../../services/ranking-section-api";
 

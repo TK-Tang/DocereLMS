@@ -1,9 +1,7 @@
 import React from "react";
-import {Modal, Button, Icon, Table, Form, Label} from "semantic-ui-react";
+import {Modal, Button, Icon} from "semantic-ui-react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-
-import LineChart from "./charts-modal.js";
 
 export default class ChartModal extends React.Component {
     constructor(props){
@@ -12,10 +10,17 @@ export default class ChartModal extends React.Component {
         this.state = {
             modal: false,
             options: {
-                title: {
-                  text: 'My chart'
+                title: { text: "Mark Distribution" },
+                xAxis: {
+                    categories: []
                 },
-                series: [{data: [1, 2, 3]}]
+                series:[
+                    {
+                        type: "line",
+                        name: "Students",
+                        data: []
+                    }
+                ]
             }
         }
     }
@@ -24,7 +29,28 @@ export default class ChartModal extends React.Component {
 
     closeModal = () => this.setState({modal: false});
 
+    componentWillMount(){
+        var marks = [];
+        var username = [];
+
+        for (var i = 0; i < this.props.leaderboard.Rankings.length; i++){
+            marks.push(this.props.leaderboard.Rankings[i].mark);
+            if (!this.props.leaderboard.Rankings[i].User.username){
+                username.push(this.props.leaderboard.Rankings[i].User.username);
+            } else {
+                username.push(this.props.leaderboard.Rankings[i].User.email);
+            }
+            
+        }
+        
+        var options = this.state.options;
+        options.series[0].data = marks.reverse();
+        options.xAxis.categories = username;
+        this.setState({options: options});
+    }
+
     render(){
+        console.log(this.props.leaderboard);
         return (
             <Modal
                 closeIcon
