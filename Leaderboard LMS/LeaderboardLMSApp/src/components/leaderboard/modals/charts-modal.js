@@ -9,7 +9,7 @@ export default class ChartModal extends React.Component {
 
         this.state = {
             modal: false,
-            options: {
+            lineChartOptions: {
                 title: { text: "Mark Distribution" },
                 xAxis: {
                     categories: []
@@ -18,6 +18,27 @@ export default class ChartModal extends React.Component {
                     {
                         type: "line",
                         name: "Students",
+                        data: []
+                    }
+                ]
+            },
+            barChartOptions: {
+                title: { text: "Mark Distribution"},
+                xAxis: {
+                    categories: []
+                },
+                xAxis: {
+                    categories: [10, 20, 30, 40, 50, 60, 70, 80, 90]
+                },
+                yAxis: [{
+                    title: {
+                        text: "Number of Students"
+                    }
+                }],
+                series:[
+                    {
+                        type: "column",
+                        name: "Marks",
                         data: []
                     }
                 ]
@@ -32,21 +53,49 @@ export default class ChartModal extends React.Component {
     componentWillMount(){
         var marks = [];
         var username = [];
+        var distribution = [0, 0 ,0, 0, 0, 0, 0, 0, 0, 0];
 
         for (var i = 0; i < this.props.leaderboard.Rankings.length; i++){
-            marks.push(this.props.leaderboard.Rankings[i].mark);
+            var m = this.props.leaderboard.Rankings[i].mark;
+            marks.push(m);
             if (!this.props.leaderboard.Rankings[i].User.username){
                 username.push(this.props.leaderboard.Rankings[i].User.username);
             } else {
                 username.push(this.props.leaderboard.Rankings[i].User.email);
             }
             
+            // bar chart
+            if (m <= 10){
+                distribution[0] = distribution[0] + 1;
+            } else if (m > 10 && m <= 20){
+                distribution[1] = distribution[1] + 1;
+            } else if (m > 20 && m <= 30){
+                distribution[2] = distribution[2] + 1;
+            } else if (m > 30 && m <= 40){
+                distribution[3] = distribution[3] + 1;
+            } else if (m > 40 && m <= 50){
+                distribution[4] = distribution[4] + 1;
+            } else if (m > 50 && m <= 60){
+                distribution[5] = distribution[5] + 1;
+            } else if (m > 60 && m <= 70){
+                distribution[6] = distribution[6] + 1;
+            } else if (m > 70 && m <= 80){
+                distribution[7] = distribution[7] + 1;
+            } else if (m > 80 && m <= 90){
+                distribution[8] = distribution[8] + 1;
+            } else if (m > 90){
+                distribution[9] = distribution[9] + 1;
+            }
         }
+
+        var barChartOptions = this.state.barChartOptions;
+        barChartOptions.series[0].data = distribution;
+        this.setState({barChartOptions: barChartOptions});
         
-        var options = this.state.options;
-        options.series[0].data = marks.reverse();
-        options.xAxis.categories = username;
-        this.setState({options: options});
+        var lineChartOptions = this.state.lineChartOptions;
+        lineChartOptions.series[0].data = marks.reverse();
+        lineChartOptions.xAxis.categories = username;
+        this.setState({options: lineChartOptions});
     }
 
     render(){
@@ -67,7 +116,11 @@ export default class ChartModal extends React.Component {
                     <Modal.Description>
                         <HighchartsReact
                             highcharts={Highcharts}
-                            options={this.state.options}
+                            options={this.state.lineChartOptions}
+                        />
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={this.state.barChartOptions}
                         />
                     </Modal.Description>
                 </Modal.Content>
