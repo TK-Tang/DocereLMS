@@ -21,7 +21,11 @@ export default class InsertRankingModal extends React.Component {
         if(!this.props.course_id){ return; }
     }
 
-    openModal = () => this.setState({modal: true});
+    openModal = () => {
+        this.setState({modal: true});
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: ""});
+    };
 
     closeModal = () => this.setState({modal: false});
 

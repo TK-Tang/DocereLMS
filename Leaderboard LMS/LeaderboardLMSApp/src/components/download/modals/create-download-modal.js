@@ -11,7 +11,11 @@ export default class CreateDownloadModal extends React.Component {
         }
     }
 
-    openModal = () => this.setState({modal: true});
+    openModal = () => {
+        this.setState({modal: true});
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: ""});
+    };
 
     closeModal = () => this.setState({modal: false});
 

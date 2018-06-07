@@ -11,14 +11,17 @@ export default class LeaderboardUpdateModal extends React.Component {
             modal: false,
             errorMessage: "",
             successMessage: "",
-            leaderboard_id: 0,
             name: "",
             blurb: "",
             weighting: 0
         }
     }
 
-    openModal = () => this.setState({modal: true});
+    openModal = () => {
+        this.setState({modal: true});
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: ""});
+    };
 
     closeModal = () => this.setState({modal: false});
 
@@ -28,8 +31,8 @@ export default class LeaderboardUpdateModal extends React.Component {
     }
 
     setSuccessMessage(m){
-        this.setState({successMessage: m});
         this.setState({errorMessage: ""});
+        this.setState({successMessage: m});
     }
 
     updateName(e){
@@ -56,10 +59,10 @@ export default class LeaderboardUpdateModal extends React.Component {
             weighting: this.state.weighting
         };
 
-        LeaderboardAPI.post_leaderboard(this.props.course_id, this.state.leaderboard_id, leaderboardInfo).then((res) => {
+        LeaderboardAPI.post_leaderboard(this.props.course_id, this.props.leaderboard.id, leaderboardInfo).then((res) => {
             if (res.status === "success"){
                 this.setSuccessMessage(res.message);
-                setTimeout(this.props.retrieveLeaderboard(this.props.course_id, this.state.leaderboard_id), 2000);
+                setTimeout(this.props.retrieveLeaderboard(this.props.course_id, this.props.leaderboard.id), 2000);
             } else {
                 this.setErrorMessage(res.message);
             }
@@ -67,7 +70,6 @@ export default class LeaderboardUpdateModal extends React.Component {
     }
 
     componentWillMount(){
-        this.setState({leaderboard_id: this.props.leaderboard.id});
         this.setState({name: this.props.leaderboard.name});
         this.setState({blurb: this.props.leaderboard.blurb});
         this.setState({weighting: this.props.leaderboard.weighting});
