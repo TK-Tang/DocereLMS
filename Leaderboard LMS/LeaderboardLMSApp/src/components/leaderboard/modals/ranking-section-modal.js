@@ -90,7 +90,7 @@ export default class RankingSectionModal extends React.Component {
                 trigger={<Button onClick={this.openModal} floated="right"><Icon name="tasks"/>Assessment Sections</Button>}
             >
                 <Modal.Header>
-                    Assement Sections
+                    Assessment Sections
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>

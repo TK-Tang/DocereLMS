@@ -59,7 +59,7 @@ export default class InsertLeaderboardModal extends React.Component {
             if (res.status === "success"){
                 this.setSuccessMessage(res.message);
                 this.closeModal();
-                this.props.getLeaderboardList();
+                this.props.getLeaderboardList(this.props);
             } else {
                 this.setErrorMessage(res.message);
             }

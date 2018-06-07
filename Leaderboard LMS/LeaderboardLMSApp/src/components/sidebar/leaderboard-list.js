@@ -30,6 +30,7 @@ export default class LeaderboardList extends React.Component {
 
     getLeaderboardList(props){
         this.setState({ leaderboardList: []});
+        if(props.course_id){}
 
         CourseAPI.get_courseLeaderboards(props.course_id).then((res) => {
             if (res.status === "success"){

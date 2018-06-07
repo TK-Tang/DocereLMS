@@ -59,8 +59,8 @@ require("./routers/category-router.js")(App);
 
 require("./routers/channel-router.js")(App);
 
-Models.sequelizeCredentials.sync({ force: true }).then(() => {
-    startScript.startScript();
+Models.sequelizeCredentials.sync({ force: false }).then(() => {
+    // startScript.startScript();
 
     App.listen(11000, () => {
         console.log("Leaderboard LMS API active on port 11000!");
