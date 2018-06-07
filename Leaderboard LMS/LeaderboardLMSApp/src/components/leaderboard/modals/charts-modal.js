@@ -103,7 +103,6 @@ export default class ChartModal extends React.Component {
     }
 
     render(){
-        console.log(this.props.leaderboard);
         return (
             <Modal
                 closeIcon

@@ -98,7 +98,6 @@ export default class Signup extends React.Component {
     componentDidMount() {
         var invitation = this.props.match.params.invitation;
         AuthAPI.get_signup(invitation).then((res) => {
-            console.log(res);
             if (res.status === "success"){
                 let message = "You have been invited to join an academic server on LeaderboardLMS. You will need to sign up first.";
                 window.Alert.success(message, {position: "top", effect: "stackslide", timeout: 4000 });

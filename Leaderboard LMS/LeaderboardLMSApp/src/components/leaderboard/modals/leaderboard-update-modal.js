@@ -71,9 +71,16 @@ export default class LeaderboardUpdateModal extends React.Component {
 
     componentWillMount(){
         this.setState({name: this.props.leaderboard.name});
-        this.setState({blurb: this.props.leaderboard.blurb});
+        this.setState({blurb: this.props.leaderboard.description});
         this.setState({weighting: this.props.leaderboard.weighting});
     }
+
+    componentWillReceiveProps(props){
+        this.setState({name: props.leaderboard.name});
+        this.setState({blurb: props.leaderboard.blurb});
+        this.setState({weighting: props.leaderboard.weighting});
+    }
+
 
     render(){
         return (
