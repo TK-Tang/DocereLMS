@@ -63,7 +63,7 @@ module.exports = function(sequelize, Sequelize){
             course_id: course_id,
             name: name,
             blurb: blurb,
-            weight: weighting
+            weighting: weighting
         };
 
         return await this.create(leaderboard);
@@ -73,7 +73,7 @@ module.exports = function(sequelize, Sequelize){
         leaderboardDetails = {
             name: name,
             blurb: blurb,
-            weight: weighting
+            weighting: weighting
         }
 
         const t = await sequelize.transaction();
