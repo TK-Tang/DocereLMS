@@ -8,6 +8,7 @@ export default class UserProfileUpdateModal extends React.Component {
         super(props);
 
         this.state = {
+            modal: false,
             email: this.props.user.email,
             username: this.props.user.username,
             profilePictureLink: this.props.user.profilePictureLink,
@@ -15,6 +16,14 @@ export default class UserProfileUpdateModal extends React.Component {
             errorMessage: ""
         }
     }
+
+    openModal = () => {
+        this.setState({modal: true});
+        this.setState({successMessage: ""});
+        this.setState({errorMessage: ""});
+    };
+
+    closeModal = () => this.setState({modal: false});
 
     updateEmail(e){
         this.setState({email: e.target.value});
@@ -52,7 +61,7 @@ export default class UserProfileUpdateModal extends React.Component {
                 closeIcon
                 size="small"
                 dimmer={false}
-                trigger={<Button primary>Edit</Button>}
+                trigger={<Button primary onClick={this.openModal}> Edit</Button>}
             >
                 <Modal.Header>
                     {(this.props.user.username) ? this.props.user.username +"'s" : "Your" } Profile

@@ -79,7 +79,7 @@ export default class StudentListModal extends React.Component {
         return (
         <Modal
             onClose={this.closeModal}
-            size="tiny"
+            size="small"
             open={this.state.modal}
             trigger = {
                 <Menu.Item className="course-info-menu" onClick={this.openModal}>

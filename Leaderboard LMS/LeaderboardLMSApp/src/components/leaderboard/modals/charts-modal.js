@@ -25,10 +25,7 @@ export default class ChartModal extends React.Component {
             barChartOptions: {
                 title: { text: "Mark Distribution"},
                 xAxis: {
-                    categories: []
-                },
-                xAxis: {
-                    categories: [10, 20, 30, 40, 50, 60, 70, 80, 90]
+                    categories: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
                 },
                 yAxis: [{
                     title: {
@@ -69,7 +66,7 @@ export default class ChartModal extends React.Component {
             }
             
             // bar chart
-            if (m <= 10){
+            if (m <= 20){
                 distribution[0] = distribution[0] + 1;
             } else if (m > 10 && m <= 20){
                 distribution[1] = distribution[1] + 1;
@@ -98,7 +95,7 @@ export default class ChartModal extends React.Component {
         
         var lineChartOptions = this.state.lineChartOptions;
         lineChartOptions.series[0].data = marks.reverse();
-        lineChartOptions.xAxis.categories = username;
+        lineChartOptions.xAxis.categories = username.reverse();
         this.setState({options: lineChartOptions});
     }
 

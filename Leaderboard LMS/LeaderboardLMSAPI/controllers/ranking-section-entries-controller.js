@@ -3,7 +3,7 @@ const Models = require("../models");
 
 exports.getRankingSectionEntries = function(req, res){
     const ranking_id = parseInt(req.params.ranking_id, 10);
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); }
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); return; }
 
     Models.RankingSectionEntries.getRankingSectionEntries(ranking_id, Models).then(function(rankingSectionEntry){
         if(!rankingSectionEntry){
@@ -16,7 +16,7 @@ exports.getRankingSectionEntries = function(req, res){
 
 exports.insertRankingSectionEntry = function(req, res){
     const ranking_id = parseInt(req.params.ranking_id, 10);
-    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); } 
+    if (isNaN(ranking_id)){ Responses.error(res, "Ranking ID is not a number", null); return; } 
 
     const mark = req.body.mark;
     const ranking_section_id = req.body.ranking_section_id

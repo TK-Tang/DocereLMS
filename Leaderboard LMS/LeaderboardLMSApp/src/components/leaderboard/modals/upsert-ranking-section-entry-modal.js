@@ -72,6 +72,7 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
                 );
     
                 this.state.rankingSectionEntryFormList.push(rankingSectionEntryForm);
+                this.state.rankingSectionEntryList.push({ranking_section_entry_id: 0, mark: 0, ranking_section_id: props.rankingSections[i].id, });
                 this.forceUpdate();
             }
             return;
@@ -95,13 +96,13 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
             }
 
             if (!hasRankingSectionEntry){
-                this.state.rankingSectionEntryList.push({ranking_section_entry_id: 0, mark: 0, ranking_section_id: props.rankingSections[i].id, });
                 var rankingSectionEntryForm = (
                     <Form.Group key={i}>
                         <Form.Input width={16} label={props.rankingSections[i].name} id={props.rankingSections[i].id} onChange={this.updateMark.bind(this)} />
                     </Form.Group>
                 );
 
+                this.state.rankingSectionEntryList.push({ranking_section_entry_id: 0, mark: 0, ranking_section_id: props.rankingSections[i].id, });
                 this.state.rankingSectionEntryFormList.push(rankingSectionEntryForm);
             }
         }
@@ -118,7 +119,7 @@ export default class UpsertRankingSectionEntryModal extends React.Component {
                     ranking_section_id: r.ranking_section_id
                 };
 
-                RankingSectionEntryAPI.put_rankingSectionEntry(this.props.course_id, r.ranking_id, rankingSectionEntryInfo).then((res) => {
+                RankingSectionEntryAPI.put_rankingSectionEntry(this.props.course_id, this.props.ranking_id, rankingSectionEntryInfo).then((res) => {
                     if (res.status === "success"){
                         this.setSuccessMessage(res.message);
                         this.closeModal();

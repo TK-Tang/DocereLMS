@@ -46,7 +46,7 @@ export default class StudentListItem extends React.Component {
                 <div className="div-avatar-list">
                     <Segment>
                         <Grid columns={3} divided>
-                            <Grid.Column width={6}>
+                            <Grid.Column width={8}>
                                 <Image
                                     src={this.props.user.profilePictureLink}
                                     avatar
@@ -56,7 +56,7 @@ export default class StudentListItem extends React.Component {
                                 />
                                 <span>{this.props.user.username ? this.props.user.username : this.props.user.email}</span>
                             </Grid.Column>
-                            <Grid.Column className="avatar-list-text-padding" width={7}>
+                            <Grid.Column className="avatar-list-text-padding" width={5}>
                                 <span>Joined: <i>{this.props.user.Roles.created_at.substring(0, 10) + " " + this.props.user.Roles.created_at.substring(11,19)}</i></span>
                                 
                             </Grid.Column>
